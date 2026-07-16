@@ -37,18 +37,14 @@ fitHero();
 window.addEventListener('resize', fitHero);
 
 // ─────────────────────────────────────────
-// 视频将要结束时（差 100ms）触发回调，无痕切换
-// 视频真正结束时主动 pause 并回退极短一段，
-// 避免部分浏览器在末帧解码时反复重绘导致画面抖动
+// 视频结束时显式 pause，让画面停留在真正的最终帧
+// （之前会 seek 回退 0.04s 试图避开异常末帧，
+//  但会让画面停在稍早的帧上，Home 页 ui-overlay 移除后能明显看到）
 // ─────────────────────────────────────────
 function freezeAtEnd(video) {
   try {
     video.pause();
-    if (Number.isFinite(video.duration) && video.duration > 0) {
-      // 回退 0.04s 定位到一个稳定的关键帧附近，避免恰好停在异常末帧
-      video.currentTime = Math.max(0, video.duration - 0.04);
-    }
-  } catch (_) { /* 忽略 seek 权限异常 */ }
+  } catch (_) { /* noop */ }
 }
 
 function onVideoNearEnd(video, hero, cb) {

@@ -68,11 +68,7 @@
       <video class="hero__video" id="video-2" src="Video-2.mp4"
         muted playsinline preload="auto" aria-hidden="true"></video>
 
-      <!-- About 结束后的静态背景图：video-2 结束后显示 -->
-      <img class="hero__ui-image" src="background.png"
-        alt="" aria-hidden="true" draggable="false" />
-
-      <!-- About 内容叠层：video-2 结束后显示 -->
+      <!-- About 内容叠层：video-2 结束后显示，直接叠在视频最终帧之上 -->
       <section class="about-overlay" aria-label="About 内容">
         <div class="about-content">
 
@@ -160,7 +156,7 @@
 
         <!-- 床上小猫附近 → 点点生图模板（标签左置，一般大小） -->
         <button class="marker marker--left" type="button"
-          data-gallery="ditu" style="top: 47%; left: 83%;"
+          data-gallery="ditu" style="top: 50%; left: 83%;"
           aria-label="点点生图模板">
           <span class="marker__dot"></span>
           <span class="marker__label">点点生图模板</span>
