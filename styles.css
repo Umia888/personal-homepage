@@ -6,14 +6,14 @@
 
 /* ─────────────────────────────────────────
    全局尺寸变量：用于精确控制画面 letterbox
-   --hero-h  ：hero 实际占用高度（min(视口宽*9/21, 视口高)）
-   --band-h  ：单侧黑条高度 = (视口高 - hero高) / 2
-   --nav-h   ：nav / footer 条带高度（黑条撑不开时使用最小值）
+   --nav-h   ：nav / footer 贴条高度
+   ⚠️ 必须是"纯像素"固定值，绝不能含 vh/vw：
+   任何视口相关单位都会因浏览器 UI 微调、滚动条隐显、
+   Retina 亚像素舍入而每帧微变，进而让 hero 的 max-height/max-width
+   持续重算 → 视频 object-fit + scale 每帧重采样 → 视觉抖动/频闪
 ───────────────────────────────────────── */
 :root {
-  --hero-h: min(calc(100vw * 9 / 21), 100vh);
-  --band-h: calc((100vh - var(--hero-h)) / 2);
-  --nav-h: max(56px, var(--band-h));
+  --nav-h: 52px;
 }
 
 html,
@@ -54,30 +54,35 @@ body {
 }
 
 /* ─────────────────────────────────────────
-   英雄容器：固定 21:9，且不超出视口高度
-   --crop-scale：放大倍数，用于裁掉顶部导航栏与左右少量边缘
-   transform-origin 锁定底部，放大时顶部被裁、底部对齐
+   英雄容器：严格整数像素 21:9 画幅
+   宽高由 JS fitHero() 计算后写入 --hero-w / --hero-h，
+   避免 aspect-ratio + 100vw + max-height 产生浮点尺寸
+   而在亚像素渲染时导致的边缘抖动
+   --crop-scale：暂设为 1（不放大裁切），确认边缘稳定后再考虑
 ───────────────────────────────────────── */
 .hero {
-  --crop-scale: 1.14;
+  --crop-scale: 1;
   position: relative;
-  width: 100vw;
-  aspect-ratio: 21 / 9;
-  max-height: 100vh;
-  max-width: calc(100vh * 21 / 9); /* 视口过宽时按高度反算宽度，保持 21:9 完整可见 */
+  width: var(--hero-w, 100vw);
+  height: var(--hero-h, calc(100vw * 9 / 21));
   overflow: hidden;
   background: #000;
 }
 
 /* ─────────────────────────────────────────
-   视频：cover 铺满 + 放大裁切顶部导航栏
+   视频：cover 铺满
+   ⚠️ 关键防抖：视频略微溢出 hero 边界（各方向 +3px），
+   由 hero 的 overflow:hidden 硬裁掉最外圈。
+   这样视频四周的编码伪影 / 亚像素采样抖动都发生在 hero 外，
+   用户实际看到的画面永远是稳定的中心区域
 ───────────────────────────────────────── */
 .hero__video {
   position: absolute;
-  inset: 0;
+  left: -3px;
+  top: -3px;
   z-index: 0;
-  width: 100%;
-  height: 100%;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
   object-fit: cover;
   object-position: center bottom;
   transform: scale(var(--crop-scale));
@@ -90,11 +95,12 @@ body {
 ───────────────────────────────────────── */
 .hero__ui-image {
   position: absolute;
-  inset: 0;
+  left: -3px;
+  top: -3px;
   z-index: 1;
   display: block;
-  width: 100%;
-  height: 100%;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
   object-fit: cover;
   object-position: center bottom;
   transform: scale(var(--crop-scale));
@@ -102,7 +108,6 @@ body {
   pointer-events: none;
   user-select: none;
   opacity: 0;
-  will-change: opacity;
   transition: opacity 60ms linear;
 }
 
@@ -951,7 +956,8 @@ body {
    BLOG 页面
 ═══════════════════════════════════════════ */
 
-/* 引导点击电脑屏幕：默认隐藏，video-4 结束后显示 */
+/* 引导点击电脑屏幕：默认隐藏，video-4 结束后显示
+   同样提升为独立合成层，隔离脉冲动画的 repaint 影响 */
 .blog-trigger {
   position: absolute;
   z-index: 3;
@@ -1208,20 +1214,6 @@ body {
   margin-top: 6px;
   font-size: clamp(12px, 0.9vw, 14px);
   color: rgba(255, 255, 255, 0.6);
-  font-style: italic;
-}
-
-/* 歌词块：整段左侧一道细白线，字体略轻，营造引文感 */
-.blog-post__lyrics {
-  margin: clamp(10px, 1.4vh, 16px) 0 clamp(8px, 1.1vh, 12px);
-  padding: clamp(8px, 1.2vh, 14px) clamp(14px, 1.4vw, 20px);
-  border-left: 2px solid rgba(255, 255, 255, 0.32);
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 0 10px 10px 0;
-  font-size: clamp(13px, 0.98vw, 16px);
-  line-height: 2;
-  color: rgba(255, 255, 255, 0.9);
-  letter-spacing: 0.02em;
   font-style: italic;
 }
 

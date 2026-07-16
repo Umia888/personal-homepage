@@ -1,19 +1,74 @@
 // ─────────────────────────────────────────
-// 视频将要结束时（差 100ms）触发回调，无痕切换
+// 精确尺寸计算：把 hero 锁定为"整数像素" 21:9 画幅
+// aspect-ratio + 100vw + max-height 的自适应布局会产生浮点尺寸，
+// 亚像素渲染下四周边缘每帧微微浮动 → 视觉上就是"越靠近四周越明显的抖动"
+// 通过 JS 在 resize 时算出整数像素并写入 CSS 变量彻底消除
 // ─────────────────────────────────────────
+const NAV_H = 52; // 与 CSS --nav-h 保持一致
+
+function fitHero() {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const maxH = vh - NAV_H * 2;
+  const dpr = window.devicePixelRatio || 1;
+
+  let heroW, heroH;
+  // 判断视口是"高瘦"还是"矮扁"（相对 21:9 而言）
+  if (vw * 9 <= maxH * 21) {
+    // 视口更瘦，按宽度算：宽度 = 100vw，高度 = 宽 × 9/21
+    heroW = vw;
+    heroH = vw * 9 / 21;
+  } else {
+    // 视口更宽，按高度算：高度 = maxH，宽度 = 高 × 21/9
+    heroH = maxH;
+    heroW = maxH * 21 / 9;
+  }
+
+  // 关键：把 CSS 像素对齐到设备物理像素的整数倍（消除亚像素舍入抖动）
+  heroW = Math.floor(heroW * dpr) / dpr;
+  heroH = Math.floor(heroH * dpr) / dpr;
+
+  const root = document.documentElement;
+  root.style.setProperty('--hero-w', heroW + 'px');
+  root.style.setProperty('--hero-h', heroH + 'px');
+}
+
+fitHero();
+window.addEventListener('resize', fitHero);
+
+// ─────────────────────────────────────────
+// 视频将要结束时（差 100ms）触发回调，无痕切换
+// 视频真正结束时主动 pause 并回退极短一段，
+// 避免部分浏览器在末帧解码时反复重绘导致画面抖动
+// ─────────────────────────────────────────
+function freezeAtEnd(video) {
+  try {
+    video.pause();
+    if (Number.isFinite(video.duration) && video.duration > 0) {
+      // 回退 0.04s 定位到一个稳定的关键帧附近，避免恰好停在异常末帧
+      video.currentTime = Math.max(0, video.duration - 0.04);
+    }
+  } catch (_) { /* 忽略 seek 权限异常 */ }
+}
+
 function onVideoNearEnd(video, hero, cb) {
   // 用 hero--ended 类作为幂等标志（而非一次性闭包），
   // 这样视频被重播（replay）时，播放结束后仍能重新触发回调。
-  const check = () => {
-    if (video.duration > 0 &&
-        video.currentTime >= video.duration - 0.1 &&
-        !hero.classList.contains('hero--ended')) {
+  let hasEnded = false;
+  
+  video.addEventListener('ended', () => {
+    if (!hasEnded && !hero.classList.contains('hero--ended')) {
+      hasEnded = true;
       cb();
     }
-  };
-  video.addEventListener('timeupdate', check);
-  video.addEventListener('ended', () => {
-    if (!hero.classList.contains('hero--ended')) cb();
+    freezeAtEnd(video);
+  });
+  
+  // 视频重播时重置标志
+  video.addEventListener('play', () => {
+    if (video.currentTime < video.duration - 0.1) {
+      hasEnded = false;
+    }
   });
 }
 
