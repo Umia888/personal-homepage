@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>雷雨苗｜个人主页</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       全局导航：始终置顶，跨页面保持可见
+  ══════════════════════════════════════════ -->
+  <nav class="global-nav" id="global-nav" aria-label="全局导航">
+    <a class="gnav__brand" href="#" data-to="page-1">
+      My World <span class="gnav__rose" aria-hidden="true">❀</span>
+    </a>
+    <ul class="gnav__links" role="list">
+      <li><a href="#" data-to="page-1" class="gnav__link active">Home</a></li>
+      <li><a href="#" data-to="page-2" class="gnav__link">About</a></li>
+      <li><a href="#" data-to="page-3" class="gnav__link">Gallery</a></li>
+      <li><a href="#" data-to="page-4" class="gnav__link">Blog</a></li>
+      <li><a href="#" data-to="page-4" data-contact="1" class="gnav__link">Contact</a></li>
+    </ul>
+    <button class="gnav__toggle" type="button" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       PAGE 1：首页
+  ══════════════════════════════════════════ -->
+  <div class="page page--active" id="page-1">
+    <main class="hero" id="hero-1" aria-label="个人主页首页">
+
+      <video class="hero__video" id="video-1" src="1.mp4"
+        autoplay muted playsinline preload="auto" aria-hidden="true"></video>
+
+      <img class="hero__ui-image" src="ui-overlay.png"
+        alt="" aria-hidden="true" draggable="false" />
+
+      <section class="hero__overlay" aria-label="首页交互图层">
+        <!-- 主内容区热区（左侧文字 + Explore Now） -->
+        <a class="hotzone content-area" href="#" data-to="page-2" aria-label="进入 About 页面"></a>
+        <!-- 社交热区 -->
+        <a class="hotzone social-twitter"   href="#twitter"                         aria-label="Twitter"></a>
+        <a class="hotzone social-instagram" href="#instagram"                       aria-label="Instagram"></a>
+        <a class="hotzone social-email"     href="mailto:leiyumiao@xiaohongshu.com" aria-label="Email"></a>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       PAGE 2：About 关于我
+  ══════════════════════════════════════════ -->
+  <div class="page" id="page-2">
+    <main class="hero" id="hero-2" aria-label="关于我">
+
+      <video class="hero__video" id="video-2" src="2.mp4"
+        muted playsinline preload="auto" aria-hidden="true"></video>
+
+      <!-- About 内容叠层：video-2 结束后显示 -->
+      <section class="about-overlay" aria-label="About 内容">
+        <div class="about-content">
+
+          <p class="about-eyebrow">About</p>
+          <div class="about-rule"></div>
+          <h2 class="about-name">雷雨苗</h2>
+          <p class="about-role">AI 产品运营实习生 &nbsp;·&nbsp; 小红书</p>
+
+          <div class="about-bio">
+            <p>墨尔本大学法学硕士毕业。2022 年起接触 Vibe Coding，曾与深圳企业合作构建法律 AI 工具；
+            硕士阶段独立搭建了两个主要作品：
+            <em>美团美食地图</em>、<em>文风模拟器 Skills</em>。</p>
+          </div>
+
+          <div class="about-grid">
+            <div class="about-section">
+              <h3>点点生图</h3>
+              <ul>
+                <li>模型效果测评与问题归因</li>
+                <li>AI 模板制作与方向沉淀</li>
+                <li>生图问题清单整理</li>
+              </ul>
+            </div>
+            <div class="about-section">
+              <h3>点点 Skills · Alex 星骰</h3>
+              <ul>
+                <li>Knowledge 体系搭建</li>
+                <li>主 Skill 及多个子 Skill 编写</li>
+                <li>推动回答质量优化</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="about-strengths">
+            <div class="about-tags">
+              <span>Vibe Coding</span>
+              <span>模型评测</span>
+              <span>Prompt 设计</span>
+              <span>法律 AI</span>
+              <span>内容产品</span>
+              <span>用户用研</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       PAGE 3：Gallery 作品展示
+  ══════════════════════════════════════════ -->
+  <div class="page" id="page-3">
+    <main class="hero" id="hero-3" aria-label="作品展示">
+
+      <video class="hero__video" id="video-3" src="3.mp4"
+        muted playsinline preload="auto" aria-hidden="true"></video>
+
+      <!-- 引导点击标识层：video-3 结束后显示 -->
+      <section class="gallery-markers" aria-label="作品引导标识">
+        <!-- 图1 楼梯上的书 → 文风模拟器 -->
+        <button class="marker" type="button"
+          data-gallery="wenfeng" style="top: 52%; left: 8%;"
+          aria-label="文风模拟器">
+          <span class="marker__dot"></span>
+          <span class="marker__label">文风模拟器</span>
+        </button>
+
+        <!-- 圆窗旁的日历 → 点点Skills·Alex星骰功能 -->
+        <button class="marker" type="button"
+          data-gallery="alex" style="top: 30%; left: 58%;"
+          aria-label="点点Skills·Alex星骰功能">
+          <span class="marker__dot"></span>
+          <span class="marker__label">点点Skills·Alex星骰功能</span>
+        </button>
+
+        <!-- 桌上的文件 → 法律AI助手 -->
+        <button class="marker" type="button"
+          data-gallery="law" style="top: 40%; left: 40%;"
+          aria-label="法律AI助手">
+          <span class="marker__dot"></span>
+          <span class="marker__label">法律AI助手</span>
+        </button>
+
+        <!-- 床上小猫附近 → 点点生图模板（标签左置，一般大小） -->
+        <button class="marker marker--left" type="button"
+          data-gallery="ditu" style="top: 47%; left: 83%;"
+          aria-label="点点生图模板">
+          <span class="marker__dot"></span>
+          <span class="marker__label">点点生图模板</span>
+        </button>
+
+        <!-- 圆窗左侧的墙 → 美团大学城美食地图 -->
+        <button class="marker" type="button"
+          data-gallery="meituan" style="top: 14%; left: 33%;"
+          aria-label="美团大学城美食地图">
+          <span class="marker__dot"></span>
+          <span class="marker__label">美团大学城美食地图</span>
+        </button>
+      </section>
+
+      <!-- 作品详情弹窗（毛玻璃，圆角 21:9，1:3 布局；限制在 21:9 画幅内） -->
+      <div class="gallery-modal" id="gallery-modal" aria-hidden="true">
+      <div class="gallery-modal__backdrop" data-close="1"></div>
+
+      <div class="gallery-modal__panel" role="dialog" aria-modal="true" aria-label="作品详情">
+        <button class="gallery-modal__close" type="button" data-close="1" aria-label="关闭">×</button>
+
+        <!-- 左侧栏：所有标识名称（1/4） -->
+        <nav class="gallery-modal__sidebar" aria-label="作品列表">
+          <ul>
+            <li><button class="gm-item" data-gallery="ditu">点点生图</button></li>
+            <li><button class="gm-item" data-gallery="alex">点点Skills</button></li>
+            <li><button class="gm-item" data-gallery="law">法律AI助手</button></li>
+            <li><button class="gm-item" data-gallery="wenfeng">文风模拟器</button></li>
+            <li><button class="gm-item" data-gallery="meituan">美团美食地图</button></li>
+          </ul>
+        </nav>
+
+        <!-- 右侧内容区（3/4，内容稍后补充） -->
+        <div class="gallery-modal__content">
+          <div class="gm-panel" data-gallery="ditu">
+            <div class="gm-head">
+              <h2>点点生图</h2>
+              <span class="gm-subtitle">AI 生图能力在小红书场景的落地</span>
+            </div>
+
+            <section class="gm-block">
+              <h3>项目概述</h3>
+              <p>探索 AI 生图能力在小红书场景里的落地，具体功能有博主同款、任意门、大师镜头三个方向。</p>
+            </section>
+
+            <section class="gm-block">
+              <h3>我的角色</h3>
+              <p>主要负责模型能力测评、AI 模板设计与制作。一方面评估生图效果（人脸一致性、模板契合度、
+              身体比例、画质、稳定性等），把问题反馈给模型与产品侧，帮助判断哪些能力可上线、哪些需继续优化；
+              另一方面从用户兴趣、传播潜力与竞品方向出发，设计并制作适合节点传播的模板。</p>
+            </section>
+
+            <section class="gm-block">
+              <h3>主要产出</h3>
+              <ul class="gm-list">
+                <li>梳理模型生成中的关键问题（脸部不一致、身体比例异常、模板不契合等），完成大师镜头及毕业季的 prompt 设计与模型效果测评</li>
+                <li>参与并主导所有模板方向设计，竞品（醒图）采用部分同风格模板</li>
+                <li>参与项目的产品运营工作</li>
+                <li>主动设计自动化热点数据分析看板</li>
+              </ul>
+            </section>
+
+            <section class="gm-block">
+              <h3>代表模板 · 毕业季 <span class="gm-tag-inline">100% AI 创作</span></h3>
+              <div class="gm-gallery">
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/毕业季/图片生成-1784147732673.png"><img src="（代表性的）点点生图模板/毕业季/图片生成-1784147732673.png" alt="毕业季模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/毕业季/图片生成-1784147723124.png"><img src="（代表性的）点点生图模板/毕业季/图片生成-1784147723124.png" alt="毕业季模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/毕业季/图片生成-1784147741203.png"><img src="（代表性的）点点生图模板/毕业季/图片生成-1784147741203.png" alt="毕业季模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/毕业季/Image-1784147462578.png"><img src="（代表性的）点点生图模板/毕业季/Image-1784147462578.png" alt="毕业季模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/毕业季/图片生成-1784147458826.png"><img src="（代表性的）点点生图模板/毕业季/图片生成-1784147458826.png" alt="毕业季模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/毕业季/图片生成-1784147645180.png"><img src="（代表性的）点点生图模板/毕业季/图片生成-1784147645180.png" alt="毕业季模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/毕业季/图片生成-1784147639314.png"><img src="（代表性的）点点生图模板/毕业季/图片生成-1784147639314.png" alt="毕业季模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/毕业季/图片生成-1784147665530.png"><img src="（代表性的）点点生图模板/毕业季/图片生成-1784147665530.png" alt="毕业季模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/毕业季/图片生成-1784147718706.png"><img src="（代表性的）点点生图模板/毕业季/图片生成-1784147718706.png" alt="毕业季模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/毕业季/图片生成-1784147784549.png"><img src="（代表性的）点点生图模板/毕业季/图片生成-1784147784549.png" alt="毕业季模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/毕业季/图片生成-1784147793729.png"><img src="（代表性的）点点生图模板/毕业季/图片生成-1784147793729.png" alt="毕业季模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/毕业季/图片生成-1784147817367.png"><img src="（代表性的）点点生图模板/毕业季/图片生成-1784147817367.png" alt="毕业季模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/毕业季/图片生成-1784147995102.png"><img src="（代表性的）点点生图模板/毕业季/图片生成-1784147995102.png" alt="毕业季模板" loading="lazy" /></button>
+              </div>
+            </section>
+
+            <section class="gm-block">
+              <h3>代表模板 · 写真风 <span class="gm-tag-inline">100% AI 创作</span></h3>
+              <div class="gm-gallery">
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/图片生成-1779249480283-1784148074657.png"><img src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/图片生成-1779249480283-1784148074657.png" alt="写真风模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/图片生成-1784148044905.png"><img src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/图片生成-1784148044905.png" alt="写真风模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/Image-1784148107383.png"><img src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/Image-1784148107383.png" alt="写真风模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/Image-1784148103392.png"><img src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/Image-1784148103392.png" alt="写真风模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/图片生成-1784147344534.png"><img src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/图片生成-1784147344534.png" alt="写真风模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/图片生成-1784147340035.png"><img src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/图片生成-1784147340035.png" alt="写真风模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/图片生成-1784147358748.png"><img src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/图片生成-1784147358748.png" alt="写真风模板" loading="lazy" /></button>
+                <button class="media-item" type="button" data-media-type="image" data-media-src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/图片生成-1784147379183.png"><img src="（代表性的）点点生图模板/写真风（千秋绝艳图或其他灵感）/图片生成-1784147379183.png" alt="写真风模板" loading="lazy" /></button>
+              </div>
+            </section>
+          </div>
+          <div class="gm-panel" data-gallery="meituan">
+            <div class="gm-head">
+              <h2>美团大学城美食地图</h2>
+              <span class="gm-subtitle">链接在美团内部平台，无法分享</span>
+            </div>
+
+            <section class="gm-block">
+              <h3>用户洞察与产品定位</h3>
+              <p>目标用户限定为大学生，核心痛点是“吃什么”的决策困境。经用户观察，痛点根源在于：
+              平台认知负荷过高、商家供需不匹配、评价信息真实性存疑、行程规划的时间成本、
+              跨平台信息交互负担与预算约束。</p>
+            </section>
+
+            <section class="gm-block">
+              <h3>核心功能设计</h3>
+              <ul class="gm-list gm-list--num">
+                <li><strong>个性化推荐餐厅</strong>：针对认知负荷过高（平台推荐信息冗余）。不粗暴减少推送数量以免损害选择自主性，而是依据用户历史偏好优化算法，按优先级降序排列。</li>
+                <li><strong>即时评价 + 当地人评价</strong>：针对信息真实性质疑（买评论、外地人推荐）。依据过去一年 IP 地址划分本地/外地用户，在原有“碎碎念”即时评价体系中补充当地人评价，提升评价价值。</li>
+                <li><strong>好友/圈层美食地图共创</strong>：针对跨平台信息交互负担（聚餐、好友推荐场景）。在“美食地图共创”基础上增加“同好”地图，在圈层内共创，促进信息流转与 GMV 转化。</li>
+                <li><strong>单项推荐 + 推荐理由</strong>：提升用户对“今天吃啥”结果的接受度。推荐结果下方附简短理由——明星同款贴明星海报、减脂给店铺均餐卡路里、时间维度给行程 + 等餐时间预估。</li>
+                <li><strong>其他痛点覆盖</strong>：供需不匹配、行程时间成本、预算约束，通过减脂餐一二级目录关联、高分/优惠餐厅一级目录标签与地图 API 调用来体现。</li>
+              </ul>
+            </section>
+          </div>
+          <div class="gm-panel" data-gallery="law">
+            <div class="gm-head">
+              <h2>法律 AI 助手</h2>
+              <span class="gm-subtitle">AI 合同拟制助手 · 产学研合作</span>
+              <a class="gm-link" href="https://github.com/Umia888/Project2"
+                 target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+
+            <section class="gm-block">
+              <h3>项目概述</h3>
+              <p>产学研合作项目：合作企业提供技术平台，团队负责法律知识工程与产品验证。
+              产品定位为 BC 端相互导流的 AI 合同拟制助手，服务个人、律所及企业。（API 已过期，架构仍保留）</p>
+            </section>
+
+            <section class="gm-block">
+              <h3>商务拓展与产学研合作</h3>
+              <p>主动对接法律科技企业，赴深圳实地调研并完成合作谈判，签署技术授权书明确双方权责；
+              后自主运用 vibe coding 从零搭建网页端项目，并通过角色注入、CoT 与分块策略
+              （递归字符分块 + 语义分块）提升 LLM 回答专业性与 RAG 检索效率。</p>
+            </section>
+
+            <section class="gm-block">
+              <h3>团队组建与项目管理</h3>
+              <p>组建 10 人跨职能团队，与 50 人初创科技企业合作；制定 4 版商业计划书迭代计划，
+              统筹市场调研、产品设计、数据运营、财务建模全流程；通过甘特图与周会机制，
+              2 个月内完成从定题到省赛申报的全部工作。</p>
+            </section>
+
+            <section class="gm-block">
+              <h3>法律知识库构建与模型调优</h3>
+              <p>主导法律知识工程，整理并录入 300+ 份现行有效法律文件与案例，设计 200+ 个典型法律咨询场景进行模型测试。
+              通过“提问—评估—修改”闭环，将回答可用率从约 65% 提升至 87%（内部测试集）；
+              邀请用户试用，收集 1200+ 条有效反馈用于迭代。</p>
+            </section>
+
+            <section class="gm-block">
+              <h3>商业计划与路演答辩</h3>
+              <p>独立撰写 8 大模块商业计划书（项目背景、产品服务、市场分析、商业模式、运营计划、
+              财务计划、风险管理、里程碑），累计修改 4 版；主导校赛初赛、决赛、省赛申报及双创展览会全部路演，
+              制作 20+ 页 PPT 及答辩稿，现场应对评委提问。</p>
+            </section>
+
+            <section class="gm-block">
+              <h3>项目成果</h3>
+              <ul class="gm-list">
+                <li>产品完成真实场景验证，模型在法律咨询准确率、文书格式规范性上达成行业初期认可标准</li>
+                <li>荣获第十四届“挑战杯”广东省省赛铜奖（获奖率低于 15%）、校内赛三等奖、校级双创展览会优秀奖</li>
+                <li>积累 1200+ 条用户反馈与调优经验，为合作企业后续迭代提供数据支撑，项目进入孵化阶段</li>
+              </ul>
+            </section>
+          </div>
+          <div class="gm-panel" data-gallery="alex">
+            <div class="gm-head">
+              <h2>点点 Skills · Alex 星骰</h2>
+              <span class="gm-subtitle">博主内容 AI 化 · Cowork 平台</span>
+              <a class="gm-link" href="https://cowork.xiaohongshu.com/app/NWEzY2M3MTk"
+                 target="_blank" rel="noopener">Cowork 平台 ↗</a>
+            </div>
+
+            <section class="gm-block">
+              <h3>项目目标</h3>
+              <p>Alex 大叔星骰是点点 Skills 中探索“博主内容 AI 化”的项目。目标是爬取博主语料与垂类知识，
+              让回答在保持专业性的同时，更像 Alex 本人。我主要负责 Knowledge 工程与 Skill 搭建
+              （项目无需交互效果 debug）。</p>
+            </section>
+
+            <section class="gm-block">
+              <h3>主要工作</h3>
+              <p>整理 Alex 的博主笔记与占星理论资料，搭建知识库结构，编写 Skill 规则，并对回答质量进行优化；
+              最终在 Cowork 平台发布，并积极寻找测评建议。</p>
+            </section>
+
+            <section class="gm-block">
+              <h3>主要产出</h3>
+              <ul class="gm-list">
+                <li>搭建了 Alex 项目的 Knowledge 体系</li>
+                <li>将博主语料与占星理论区分、分块，并给各 chunk 打标签，避免风格混乱同时提升回复效率</li>
+                <li>编写了主 Skill 与多个方向的子 Skill</li>
+                <li>设置约束条件与 QA 范例优化回答质量，让回答更具体、准确，也更像博主本人</li>
+              </ul>
+            </section>
+          </div>
+          <div class="gm-panel" data-gallery="wenfeng">
+            <div class="gm-head">
+              <h2>文风模拟器 · peter_tingle</h2>
+              <span class="gm-subtitle">彼得一激灵</span>
+              <a class="gm-link" href="https://github.com/Umia888/peter_tingle/blob/main/README.md"
+                 target="_blank" rel="noopener">GitHub · README ↗</a>
+            </div>
+
+            <section class="gm-block">
+              <h3>它是什么</h3>
+              <p>“灵光一现”写出来的工具。可以学习任何文章的写作风格与架构，
+              尤其擅长外语论文的表达方式与“祛 AI”，帮你更好地读文章、写文章。</p>
+            </section>
+
+            <section class="gm-block">
+              <h3>它有什么用</h3>
+              <ul class="gm-list">
+                <li>可作为 #skill，支持 Cursor、VS Code、Claude Code 直接调用</li>
+                <li>提供可视化指南，帮助理解使用步骤（与 #obsidian 结合更高效）</li>
+                <li>可叠加多个 API、文献管理器（如 Obsidian），按使用方式呈现不同程度能力</li>
+                <li>让 AI “说人话、做人事”，真正给人增效而非添堵</li>
+              </ul>
+            </section>
+
+            <section class="gm-block">
+              <h3>经典使用场景</h3>
+              <ul class="gm-list gm-list--num">
+                <li>学习雅思写作 / 托福写作</li>
+                <li>学习论文写作风格与结构</li>
+                <li>直接导出带格式的文章（内置论文格式，也可自行上传任意格式）</li>
+                <li>了解大量文献的表达共同点与差异点</li>
+                <li>整理文献观点，形成文献目录及原文定位清单</li>
+              </ul>
+            </section>
+
+            <section class="gm-block gm-note">
+              <h3>使用提醒</h3>
+              <p>虽然能教你写外文文献，但 AI 率仍约 20%–30%（以英文论文为样本、非直译、两章文风调整测试）。
+              请把它作为学习文章架构与文风的工具，而非论文代写工具，不要过分依赖。</p>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </main>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       PAGE 4：Blog
+  ══════════════════════════════════════════ -->
+  <div class="page" id="page-4">
+    <main class="hero" id="hero-4" aria-label="Blog">
+
+      <video class="hero__video" id="video-4" src="4.mp4"
+        muted playsinline preload="auto" aria-hidden="true"></video>
+
+      <!-- 引导点击电脑屏幕：video-4 结束后显示 -->
+      <button class="blog-trigger" id="blog-trigger" type="button"
+        style="top: 25%; left: 47%;" aria-label="点击电脑屏幕阅读 Blog">
+        <span class="marker__dot"></span>
+        <span class="marker__label">点击屏幕阅读</span>
+      </button>
+
+      <!-- Blog 文章弹窗（限制在 21:9 画幅内） -->
+      <div class="blog-modal" id="blog-modal" aria-hidden="true">
+        <div class="blog-modal__backdrop" data-blog-close="1"></div>
+
+        <article class="blog-modal__panel" role="dialog" aria-modal="true" aria-label="Blog 文章">
+          <button class="blog-modal__close" type="button" data-blog-close="1" aria-label="关闭">×</button>
+
+          <header class="blog-author">
+            <img class="blog-author__avatar" src="头像.png" alt="雷雨苗头像" draggable="false" />
+            <div class="blog-author__meta">
+              <span class="blog-author__name">雷雨苗（Mia）</span>
+              <span class="blog-author__id">小红书号：88888888Richy</span>
+            </div>
+          </header>
+
+          <div class="blog-body">
+
+            <!-- 第一条 -->
+            <article class="blog-post">
+              <h3 class="blog-post__topic">#喜鹊谋杀案 <span class="blog-post__note">画面 100% AI 创作</span></h3>
+              <div class="blog-media">
+                <div class="blog-media__row">
+                  <button class="media-item media-item--video" type="button"
+                    data-media-type="video" data-media-src="喜鹊谋杀案.mp4">
+                    <video src="喜鹊谋杀案.mp4#t=0.5" muted preload="metadata" playsinline></video>
+                    <span class="media-item__play" aria-hidden="true">▶</span>
+                  </button>
+                </div>
+              </div>
+              <div class="blog-post__stats">
+                <span>♡ 19414</span>
+                <span>💬 135</span>
+                <span>↗ 158</span>
+              </div>
+            </article>
+
+            <!-- 第二条 -->
+            <article class="blog-post">
+              <h3 class="blog-post__topic">#欢愉的艺术 <span class="blog-post__note">画面 100% AI 创作</span></h3>
+              <div class="blog-media">
+                <div class="blog-media__row">
+                  <button class="media-item media-item--video" type="button"
+                    data-media-type="video" data-media-src="欢愉的艺术.mp4">
+                    <video src="欢愉的艺术.mp4#t=0.5" muted preload="metadata" playsinline></video>
+                    <span class="media-item__play" aria-hidden="true">▶</span>
+                  </button>
+                </div>
+              </div>
+              <h4 class="blog-post__title">献祭爱人的身躯，留下最真挚的灵魂</h4>
+              <div class="blog-post__text">
+                <p>⚠️视频仅为虚拟娱乐，文案仅为视频故事解读⚠️<br>⚠️请勿模仿⚠️</p>
+                <p class="blog-placeholder">（配文含歌曲相关内容，请自行补充）</p>
+                <p class="blog-post__bgm">BGM：Burn your village — Kiki Rockwell</p>
+              </div>
+            </article>
+
+            <!-- 第三条 -->
+            <article class="blog-post">
+              <h3 class="blog-post__topic">#弗兰肯斯坦（科学怪人） <span class="blog-post__note">100% 拼贴</span></h3>
+              <div class="blog-media">
+                <div class="blog-media__row">
+                  <button class="media-item media-item--video" type="button"
+                    data-media-type="video" data-media-src="弗兰肯斯坦.mp4">
+                    <video src="弗兰肯斯坦.mp4#t=0.5" muted preload="metadata" playsinline></video>
+                    <span class="media-item__play" aria-hidden="true">▶</span>
+                  </button>
+                </div>
+                <div class="blog-media__row">
+                  <button class="media-item" type="button" data-media-type="image" data-media-src="弗兰肯斯坦1.jpg">
+                    <img src="弗兰肯斯坦1.jpg" alt="弗兰肯斯坦1" loading="lazy" />
+                  </button>
+                  <button class="media-item" type="button" data-media-type="image" data-media-src="弗兰肯斯坦2.jpg">
+                    <img src="弗兰肯斯坦2.jpg" alt="弗兰肯斯坦2" loading="lazy" />
+                  </button>
+                  <button class="media-item" type="button" data-media-type="image" data-media-src="弗兰肯斯坦3.jpg">
+                    <img src="弗兰肯斯坦3.jpg" alt="弗兰肯斯坦3" loading="lazy" />
+                  </button>
+                  <button class="media-item" type="button" data-media-type="image" data-media-src="弗兰肯斯坦4.jpg">
+                    <img src="弗兰肯斯坦4.jpg" alt="弗兰肯斯坦4" loading="lazy" />
+                  </button>
+                </div>
+              </div>
+              <h4 class="blog-post__title">于我生命之碑长出的，是自我</h4>
+              <div class="blog-post__text">
+                <p>在看过弗兰肯斯坦系列影视作品后，我最大的感触就是“我”之所以为“人”的独特性。</p>
+                <p>无论是自然人还是人造人，在社会议题下都会被统一地塑造为“社会人”，被成为有/无道德观念、群居属性、社会意识的人。</p>
+                <p>“社会人”是再造的，而非原生的。</p>
+                <p>无论是作为“人造人”还是“自然人”的我们，在独一无二的生命归途中，我们唯一能够确认的，即“我是我”。</p>
+                <p>即使现在的自己，否定了过去的自己；即使未来的自己，怨恨现在的自己；没关系，一切都没关系。</p>
+                <p>等到草木盘旋在砖石之上，等到尘土被风雨掀起、冲走，未来的你、现在的你、过去的你，会紧紧拥抱着彼此——只有自己会永远抓住自己。</p>
+              </div>
+            </article>
+
+            <!-- 第四条 -->
+            <article class="blog-post">
+              <h3 class="blog-post__topic">#锈湖 <span class="blog-post__note">90% 拼贴 + 10% AI</span></h3>
+              <div class="blog-media">
+                <div class="blog-media__row">
+                  <button class="media-item media-item--video" type="button"
+                    data-media-type="video" data-media-src="锈湖.mp4">
+                    <video src="锈湖.mp4#t=0.5" muted preload="metadata" playsinline></video>
+                    <span class="media-item__play" aria-hidden="true">▶</span>
+                  </button>
+                </div>
+                <div class="blog-media__row">
+                  <button class="media-item" type="button" data-media-type="image" data-media-src="锈湖1.jpg">
+                    <img src="锈湖1.jpg" alt="锈湖1" loading="lazy" />
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- 第五条 -->
+            <article class="blog-post">
+              <h3 class="blog-post__topic">#圣母之泪 <span class="blog-post__note">创作中</span></h3>
+              <div class="blog-media">
+                <div class="blog-media__row">
+                  <button class="media-item" type="button" data-media-type="image" data-media-src="圣母之泪1.jpg">
+                    <img src="圣母之泪1.jpg" alt="圣母之泪1" loading="lazy" />
+                  </button>
+                  <button class="media-item" type="button" data-media-type="image" data-media-src="圣母之泪2.jpg">
+                    <img src="圣母之泪2.jpg" alt="圣母之泪2" loading="lazy" />
+                  </button>
+                </div>
+              </div>
+              <h4 class="blog-post__title">神会不会在看到牛奶河与红酒池后落泪</h4>
+              <div class="blog-post__text">
+                <p>洛可可艺术作为 18 世纪贵族奢靡生活的镜像，其甜腻的美感在推动洛可可油画行至巅峰的同时，也记录了沉溺于享乐的贵族豪强被启蒙思想家批评的原因。</p>
+                <p>这套设计是让被洛可可和启蒙派双双抛弃的对象（神），画上洛可可风格的油画感妆容，却又以冷清的眼神看着贵族们在法国大革命中没落。</p>
+                <p>银色的眼泪属于理性的启蒙思想，金色的眼泪属于辉煌的洛可可式享乐主义。</p>
+              </div>
+            </article>
+
+          </div>
+        </article>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Contact 联系方式小窗：固定在顶栏下方，任意页面点击 Contact 均可弹出 -->
+  <div class="contact-popup" id="contact-popup" aria-hidden="true">
+    <button class="contact-popup__close" type="button" data-contact-close="1" aria-label="关闭">×</button>
+    <h4>联系我</h4>
+    <ul>
+      <li><span>小红书</span><a href="https://xhslink.com/m/101Dl9hMgH" target="_blank" rel="noopener">猫狗家 ↗</a></li>
+      <li><span>Hi</span><a id="contact-hi" href="mailto:leiyumiao@xiaohongshu.com">leiyumiao@xiaohongshu.com（雷雨苗）</a></li>
+      <li><span>邮箱</span><a href="mailto:Lym16816888@126.com">Lym16816888@126.com</a></li>
+    </ul>
+  </div>
+
+  <!-- 媒体灯箱：放大观看图片 / 播放视频，支持上一个/下一个循环、下载 -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox__backdrop" data-lightbox-close="1"></div>
+
+    <div class="lightbox__toolbar">
+      <a class="lightbox__btn" id="lightbox-download" download aria-label="下载">⤓ 下载</a>
+      <button class="lightbox__btn lightbox__close" type="button" data-lightbox-close="1" aria-label="关闭">× 关闭</button>
+    </div>
+
+    <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" type="button" aria-label="上一个">‹</button>
+    <div class="lightbox__stage" id="lightbox-stage"></div>
+    <button class="lightbox__nav lightbox__nav--next" id="lightbox-next" type="button" aria-label="下一个">›</button>
+
+    <div class="lightbox__counter" id="lightbox-counter"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
