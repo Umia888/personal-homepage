@@ -1,4 +1,51 @@
 // ─────────────────────────────────────────
+// 骨架屏管理：首屏视频就绪或超时后淡出
+// - 保底最短显示 400ms 避免闪烁
+// - 兜底最长 10 秒（防止 video 加载卡住时用户永远看不到内容）
+// ─────────────────────────────────────────
+(function initSiteLoader() {
+  const loader = document.getElementById('site-loader');
+  if (!loader) return;
+
+  const MIN_SHOW = 400;
+  const MAX_WAIT = 10000;
+  const startedAt = performance.now();
+
+  let hidden = false;
+  const hide = () => {
+    if (hidden) return;
+    hidden = true;
+
+    const elapsed = performance.now() - startedAt;
+    const wait = Math.max(0, MIN_SHOW - elapsed);
+
+    setTimeout(() => {
+      loader.classList.add('is-hidden');
+      // 淡出动画结束后从 DOM 中移除，彻底释放层级
+      setTimeout(() => {
+        if (loader.parentNode) loader.parentNode.removeChild(loader);
+      }, 600);
+    }, wait);
+  };
+
+  const video = document.getElementById('video-1');
+  if (video) {
+    // loadeddata：首帧数据到位（最早可能触发的信号）
+    video.addEventListener('loadeddata', hide, { once: true });
+    // canplay：已缓冲足够开始播放
+    video.addEventListener('canplay', hide, { once: true });
+    // 若脚本执行时视频已经就绪
+    if (video.readyState >= 2) hide();
+  }
+
+  // 兜底：window load（所有资源）
+  window.addEventListener('load', hide, { once: true });
+
+  // 极限兜底：超时强制释放，防止用户永远看不到主内容
+  setTimeout(hide, MAX_WAIT);
+})();
+
+// ─────────────────────────────────────────
 // 精确尺寸计算：把 hero 锁定为"整数像素" 21:9 画幅
 // aspect-ratio + 100vw + max-height 的自适应布局会产生浮点尺寸，
 // 亚像素渲染下四周边缘每帧微微浮动 → 视觉上就是"越靠近四周越明显的抖动"

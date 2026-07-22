@@ -9,6 +9,51 @@
 <body>
 
   <!-- ══════════════════════════════════════════
+       骨架加载屏：首屏视频加载完成前显示
+       - 纯 CSS 绘制、无外部资源依赖，保证首帧即可显示
+       - JS 在 video-1 canplay/loadeddata 或 window load 后淡出
+  ══════════════════════════════════════════ -->
+  <div class="site-loader" id="site-loader" role="status" aria-live="polite" aria-label="正在加载个人主页">
+
+    <!-- 顶部导航骨架 -->
+    <div class="loader__nav" aria-hidden="true">
+      <div class="skl skl--brand"></div>
+      <div class="skl-group">
+        <div class="skl skl--link"></div>
+        <div class="skl skl--link"></div>
+        <div class="skl skl--link"></div>
+        <div class="skl skl--link"></div>
+        <div class="skl skl--link"></div>
+      </div>
+    </div>
+
+    <!-- 中央主舞台（模拟视频区） -->
+    <div class="loader__stage" aria-hidden="true">
+      <div class="loader__hero-skl">
+        <div class="shimmer"></div>
+      </div>
+
+      <!-- 品牌标识：与全局 nav 同调性 -->
+      <div class="loader__brand">
+        <span class="loader__brand-text">My World</span>
+        <span class="loader__rose" aria-hidden="true">❀</span>
+      </div>
+
+      <!-- 底部加载提示 + 进度条 -->
+      <div class="loader__hint">
+        <p class="loader__title">首屏加载中</p>
+        <p class="loader__sub">正在为你渲染首屏视频，稍等片刻</p>
+        <div class="loader__bar"><div class="loader__bar-fill"></div></div>
+      </div>
+    </div>
+
+    <!-- 底部页脚骨架 -->
+    <div class="loader__foot" aria-hidden="true">
+      <div class="skl skl--foot"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
        全局导航：始终置顶，跨页面保持可见
   ══════════════════════════════════════════ -->
   <nav class="global-nav" id="global-nav" aria-label="全局导航">
