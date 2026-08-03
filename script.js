@@ -1,327 +1,215 @@
-// ─────────────────────────────────────────
-// 骨架屏管理：首屏视频就绪或超时后淡出
-// - 保底最短显示 400ms 避免闪烁
-// - 兜底最长 10 秒（防止 video 加载卡住时用户永远看不到内容）
-// ─────────────────────────────────────────
-(function initSiteLoader() {
-  const loader = document.getElementById('site-loader');
-  if (!loader) return;
+/* ═══════════════════════════════════════════════════════════
+   Mia World · Supabase 骨架版 · 交互脚本
+   - 顶栏 scroll shadow / 章节高亮
+   - 能力矩阵 Tab
+   - 作品集 Tab
+   - FAQ 分类过滤 + 手风琴
+   - 内容墙 分类过滤 + 点赞
+   - Timeline 侧边抽屉
+   - 灯箱（图片放大 / 视频播放 / 上下张切换 / 下载）
+═══════════════════════════════════════════════════════════ */
 
-  const MIN_SHOW = 400;
-  const MAX_WAIT = 10000;
-  const startedAt = performance.now();
+'use strict';
 
-  let hidden = false;
-  const hide = () => {
-    if (hidden) return;
-    hidden = true;
+/* ─────────────────────────────────────────
+   0. 通用工具
+───────────────────────────────────────── */
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-    const elapsed = performance.now() - startedAt;
-    const wait = Math.max(0, MIN_SHOW - elapsed);
+/* ─────────────────────────────────────────
+   1. 顶栏 · 滚动时加阴影 & 章节高亮
+───────────────────────────────────────── */
+(function initTopbar() {
+  const topbar = $('#topbar');
+  if (!topbar) return;
 
-    setTimeout(() => {
-      loader.classList.add('is-hidden');
-      // 淡出动画结束后从 DOM 中移除，彻底释放层级
-      setTimeout(() => {
-        if (loader.parentNode) loader.parentNode.removeChild(loader);
-      }, 600);
-    }, wait);
+  const onScroll = () => {
+    topbar.classList.toggle('topbar--scrolled', window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // 章节高亮
+  const sections = ['#capabilities', '#portfolio', '#faq', '#wall', '#updates']
+    .map(id => document.querySelector(id))
+    .filter(Boolean);
+  const links = $$('.topnav__link');
+
+  const setActive = (hash) => {
+    links.forEach(a => {
+      a.classList.toggle('topnav__link--active', a.getAttribute('href') === hash);
+    });
   };
 
-  const video = document.getElementById('video-1');
-  if (video) {
-    // loadeddata：首帧数据到位（最早可能触发的信号）
-    video.addEventListener('loadeddata', hide, { once: true });
-    // canplay：已缓冲足够开始播放
-    video.addEventListener('canplay', hide, { once: true });
-    // 若脚本执行时视频已经就绪
-    if (video.readyState >= 2) hide();
+  if ('IntersectionObserver' in window && sections.length) {
+    const io = new IntersectionObserver((entries) => {
+      // 找出可见度最高、距离顶部最近的一个 section
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible[0]) setActive('#' + visible[0].target.id);
+    }, {
+      rootMargin: '-30% 0px -55% 0px',
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+    });
+    sections.forEach(s => io.observe(s));
   }
-
-  // 兜底：window load（所有资源）
-  window.addEventListener('load', hide, { once: true });
-
-  // 极限兜底：超时强制释放，防止用户永远看不到主内容
-  setTimeout(hide, MAX_WAIT);
 })();
 
-// ─────────────────────────────────────────
-// 精确尺寸计算：把 hero 锁定为"整数像素" 21:9 画幅
-// aspect-ratio + 100vw + max-height 的自适应布局会产生浮点尺寸，
-// 亚像素渲染下四周边缘每帧微微浮动 → 视觉上就是"越靠近四周越明显的抖动"
-// 通过 JS 在 resize 时算出整数像素并写入 CSS 变量彻底消除
-// ─────────────────────────────────────────
-const NAV_H = 52; // 与 CSS --nav-h 保持一致
+/* 给 topbar 加一个 scrolled 样式（延续 border 视觉） */
+(function injectTopbarScrolledStyle() {
+  const css = `
+    .topbar--scrolled { background: rgba(10,10,10,0.9) !important; }
+    .topnav__link--active { color: var(--text) !important; background: var(--bg-hover) !important; }
+  `;
+  const style = document.createElement('style');
+  style.textContent = css;
+  document.head.appendChild(style);
+})();
 
-function fitHero() {
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
-  const maxH = vh - NAV_H * 2;
-  const dpr = window.devicePixelRatio || 1;
+/* ─────────────────────────────────────────
+   2. 能力矩阵 Tab（01 · About Me）
+───────────────────────────────────────── */
+(function initFeatureTabs() {
+  const cards = $$('.feature-card');
+  const panels = $$('.fdetail-panel');
+  if (!cards.length) return;
 
-  let heroW, heroH;
-  // 判断视口是"高瘦"还是"矮扁"（相对 21:9 而言）
-  if (vw * 9 <= maxH * 21) {
-    // 视口更瘦，按宽度算：宽度 = 100vw，高度 = 宽 × 9/21
-    heroW = vw;
-    heroH = vw * 9 / 21;
-  } else {
-    // 视口更宽，按高度算：高度 = maxH，宽度 = 高 × 21/9
-    heroH = maxH;
-    heroW = maxH * 21 / 9;
-  }
-
-  // 关键：把 CSS 像素对齐到设备物理像素的整数倍（消除亚像素舍入抖动）
-  heroW = Math.floor(heroW * dpr) / dpr;
-  heroH = Math.floor(heroH * dpr) / dpr;
-
-  const root = document.documentElement;
-  root.style.setProperty('--hero-w', heroW + 'px');
-  root.style.setProperty('--hero-h', heroH + 'px');
-}
-
-fitHero();
-window.addEventListener('resize', fitHero);
-
-// ─────────────────────────────────────────
-// 视频结束时显式 pause，让画面停留在真正的最终帧
-// （之前会 seek 回退 0.04s 试图避开异常末帧，
-//  但会让画面停在稍早的帧上，Home 页 ui-overlay 移除后能明显看到）
-// ─────────────────────────────────────────
-function freezeAtEnd(video) {
-  try {
-    video.pause();
-  } catch (_) { /* noop */ }
-}
-
-function onVideoNearEnd(video, hero, cb) {
-  // 用 hero--ended 类作为幂等标志（而非一次性闭包），
-  // 这样视频被重播（replay）时，播放结束后仍能重新触发回调。
-  let hasEnded = false;
-  
-  video.addEventListener('ended', () => {
-    if (!hasEnded && !hero.classList.contains('hero--ended')) {
-      hasEnded = true;
-      cb();
-    }
-    freezeAtEnd(video);
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const key = card.dataset.feature;
+      cards.forEach(c => c.classList.toggle('active', c === card));
+      panels.forEach(p => p.classList.toggle('active', p.dataset.feature === key));
+    });
   });
-  
-  // 视频重播时重置标志
-  video.addEventListener('play', () => {
-    if (video.currentTime < video.duration - 0.1) {
-      hasEnded = false;
-    }
+})();
+
+/* ─────────────────────────────────────────
+   3. 作品集 Tab（02 · Portfolio）
+───────────────────────────────────────── */
+(function initEntryTabs() {
+  const cards = $$('.entry-card');
+  const panels = $$('.entry-panel');
+  if (!cards.length) return;
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const key = card.dataset.entry;
+      cards.forEach(c => c.classList.toggle('active', c === card));
+      panels.forEach(p => p.classList.toggle('active', p.dataset.entry === key));
+      // 切换 tab 时把详情区滚到视口内（避免右侧内容一屏都在下面）
+      const detail = card.closest('.split-layout')?.querySelector('.entry-detail');
+      if (detail && window.innerWidth <= 1024) {
+        detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   });
-}
+})();
 
-// ─────────────────────────────────────────
-// 各页视频：结束后显示叠层 / 引导层
-// ─────────────────────────────────────────
-const hero1  = document.getElementById('hero-1');
-const video1 = document.getElementById('video-1');
-onVideoNearEnd(video1, hero1, () => hero1.classList.add('hero--ended'));
+/* ─────────────────────────────────────────
+   4. FAQ 分类过滤 + 手风琴（03 · FAQ）
+───────────────────────────────────────── */
+(function initFAQ() {
+  const filters = $$('.faq-filters button');
+  const items   = $$('.faq-item');
+  if (!filters.length) return;
 
-const hero2  = document.getElementById('hero-2');
-const video2 = document.getElementById('video-2');
-onVideoNearEnd(video2, hero2, () => hero2.classList.add('hero--ended'));
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.faq;
+      filters.forEach(b => b.classList.toggle('active', b === btn));
 
-const hero3  = document.getElementById('hero-3');
-const video3 = document.getElementById('video-3');
-onVideoNearEnd(video3, hero3, () => hero3.classList.add('hero--ended'));
-
-const hero4  = document.getElementById('hero-4');
-const video4 = document.getElementById('video-4');
-onVideoNearEnd(video4, hero4, () => hero4.classList.add('hero--ended'));
-
-// ─────────────────────────────────────────
-// 全局导航：激活态更新（Contact 单独标识）
-// ─────────────────────────────────────────
-function updateNavActive(pageId, isContact = false) {
-  document.querySelectorAll('.gnav__link').forEach(l => {
-    const isContactLink = !!l.dataset.contact;
-    const match = isContact
-      ? isContactLink
-      : (l.dataset.to === pageId && !isContactLink);
-    l.classList.toggle('active', match);
+      let firstShown = null;
+      items.forEach(item => {
+        const match = item.dataset.faq === key;
+        item.hidden = !match;
+        item.open   = false;              // 切换分类时先全部收起
+        if (match && !firstShown) firstShown = item;
+      });
+      // 默认展开分类中的第一个
+      if (firstShown) firstShown.open = true;
+    });
   });
+})();
+
+/* ─────────────────────────────────────────
+   5. 内容墙 分类过滤 + 点赞（04 · Wall）
+───────────────────────────────────────── */
+(function initWall() {
+  const tabs  = $$('.wall-tabs button');
+  const cards = $$('.wall-grid .msg-card');
+  if (!tabs.length) return;
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.wall;
+      tabs.forEach(b => b.classList.toggle('active', b === btn));
+      cards.forEach(c => {
+        const show = (key === 'all') || (c.dataset.wall === key);
+        c.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  // 点赞
+  $$('.wall-grid .like').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const num = btn.querySelector('span');
+      const liked = btn.classList.toggle('liked');
+      const cur = parseInt(num?.textContent || '0', 10) || 0;
+      if (num) num.textContent = String(liked ? cur + 1 : Math.max(0, cur - 1));
+    });
+  });
+})();
+
+/* ─────────────────────────────────────────
+   6. 侧边抽屉 · Timeline
+───────────────────────────────────────── */
+const drawer = $('#drawer');
+
+function openDrawer()  {
+  if (!drawer) return;
+  drawer.classList.add('open');
+  drawer.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  if (!drawer) return;
+  drawer.classList.remove('open');
+  drawer.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
 }
 
-// ─────────────────────────────────────────
-// 页面跳转
-//   replay=true  : 重置并重播视频（用于 Explore Now → About）
-//   autoplay=false: 不自动播放（用于 Contact，需手动 seek 到最后一帧）
-// ─────────────────────────────────────────
-function navigateTo(targetPageId, { replay = false, contact = false, autoplay = true } = {}) {
-  const target = document.getElementById(targetPageId);
-  if (!target) return;
-
-  // 切换页面时关闭联系方式小窗，避免其残留状态影响后续热区点击
-  if (typeof closeContactPopup === 'function') closeContactPopup();
-
-  document.querySelectorAll('.page--active').forEach(p => p.classList.remove('page--active'));
-  target.classList.add('page--active');
-  updateNavActive(targetPageId, contact);
-
-  const hero = target.querySelector('.hero');
-  const vid  = target.querySelector('video');
-  if (!vid || !hero) return;
-
-  if (targetPageId === 'page-1') {
-    // 通过导航回到 Home：直接进入结束态，叠层 / 热区立即可用（不重播、不需等视频）
-    hero.classList.add('hero--ended');
-    try { vid.pause(); } catch (_) {}
-  } else if (replay) {
-    // 重置并重播（叠层重新触发）
-    hero.classList.remove('hero--ended');
-    try { vid.currentTime = 0; } catch (_) {}
-    vid.play().catch(() => {});
-  } else if (autoplay && !hero.classList.contains('hero--ended')) {
-    // 首次进入才播放；已看完的保持最后一帧 + 叠层
-    vid.play().catch(() => {});
-  }
-}
-
-// ─────────────────────────────────────────
-// Contact：切到 Blog 最后一帧 + 电脑区域弹出联系方式小窗
-// ─────────────────────────────────────────
-const contactPopup = document.getElementById('contact-popup');
-
-function openContactPopup() {
-  contactPopup.classList.add('open');
-  contactPopup.setAttribute('aria-hidden', 'false');
-}
-function closeContactPopup() {
-  contactPopup.classList.remove('open');
-  contactPopup.setAttribute('aria-hidden', 'true');
-}
-
-contactPopup.addEventListener('click', (e) => {
-  if (e.target.closest('[data-contact-close]')) closeContactPopup();
+['#btn-open-drawer', '#btn-open-drawer-2'].forEach(sel => {
+  const el = $(sel);
+  if (el) el.addEventListener('click', openDrawer);
 });
 
-// 点击弹窗外部区域关闭（点到导航 Contact 本身不算）
-document.addEventListener('click', (e) => {
-  if (!contactPopup.classList.contains('open')) return;
-  if (e.target.closest('#contact-popup')) return;
-  if (e.target.closest('[data-contact]')) return;
-  closeContactPopup();
-});
-
-// ─────────────────────────────────────────
-// 全局导航栏点击
-// ─────────────────────────────────────────
-const globalNav = document.getElementById('global-nav');
-
-globalNav.addEventListener('click', (e) => {
-  const link = e.target.closest('[data-to]');
-  if (!link) return;
-  e.preventDefault();
-  if (link.dataset.contact) {
-    // 任意页面点击 Contact：在顶栏下方弹出/收起联系方式小窗，不切换页面
-    if (contactPopup.classList.contains('open')) closeContactPopup();
-    else openContactPopup();
-  } else {
-    navigateTo(link.dataset.to);
-  }
-});
-
-// 顶栏三横线：点击收起 / 展开导航栏
-const gnavToggle = document.querySelector('.gnav__toggle');
-if (gnavToggle) {
-  gnavToggle.addEventListener('click', () => {
-    globalNav.classList.toggle('global-nav--collapsed');
+if (drawer) {
+  drawer.addEventListener('click', (e) => {
+    if (e.target.closest('[data-drawer-close]')) closeDrawer();
   });
 }
 
-// ─────────────────────────────────────────
-// 首页内部热区点击：Explore Now（content-area）→ 重播 About 视频
-// ─────────────────────────────────────────
-hero1.addEventListener('click', (e) => {
-  const hotzone = e.target.closest('[data-to]');
-  if (!hotzone) return;
-  e.preventDefault();
-  const replay = hotzone.classList.contains('content-area'); // Explore Now → 重播 About
-  navigateTo(hotzone.dataset.to, { replay });
-});
+/* ─────────────────────────────────────────
+   7. 灯箱：图片放大 / 视频播放 / 切换 / 下载
+   - 缩略图作用域：msg-card / entry-panel / 全局
+───────────────────────────────────────── */
+const lightbox         = $('#lightbox');
+const lightboxStage    = $('#lightbox-stage');
+const lightboxPrev     = $('#lightbox-prev');
+const lightboxNext     = $('#lightbox-next');
+const lightboxDownload = $('#lightbox-download');
+const lightboxCounter  = $('#lightbox-counter');
 
-// ─────────────────────────────────────────
-// Gallery 弹窗交互
-// ─────────────────────────────────────────
-const galleryModal = document.getElementById('gallery-modal');
-
-function showGalleryItem(key) {
-  document.querySelectorAll('.gm-item').forEach(item => {
-    item.classList.toggle('active', item.dataset.gallery === key);
-  });
-  document.querySelectorAll('.gm-panel').forEach(panel => {
-    panel.classList.toggle('active', panel.dataset.gallery === key);
-  });
-}
-
-function openGallery(key) {
-  showGalleryItem(key);
-  galleryModal.classList.add('open');
-  galleryModal.setAttribute('aria-hidden', 'false');
-}
-
-function closeGallery() {
-  galleryModal.classList.remove('open');
-  galleryModal.setAttribute('aria-hidden', 'true');
-}
-
-document.querySelectorAll('.marker').forEach(marker => {
-  marker.addEventListener('click', () => openGallery(marker.dataset.gallery));
-});
-
-galleryModal.addEventListener('click', (e) => {
-  if (e.target.closest('[data-close]')) {
-    closeGallery();
-    return;
-  }
-  const item = e.target.closest('.gm-item');
-  if (item) showGalleryItem(item.dataset.gallery);
-});
-
-// ─────────────────────────────────────────
-// Blog 文章弹窗交互
-// ─────────────────────────────────────────
-const blogModal   = document.getElementById('blog-modal');
-const blogTrigger = document.getElementById('blog-trigger');
-
-function openBlog() {
-  blogModal.classList.add('open');
-  blogModal.setAttribute('aria-hidden', 'false');
-}
-function closeBlog() {
-  blogModal.classList.remove('open');
-  blogModal.setAttribute('aria-hidden', 'true');
-}
-
-blogTrigger.addEventListener('click', openBlog);
-blogModal.addEventListener('click', (e) => {
-  if (e.target.closest('[data-blog-close]')) closeBlog();
-});
-
-// ─────────────────────────────────────────
-// 媒体灯箱：缩略图点击 → 放大/播放
-// 视频「上一集/下一集」、图片「上一张/下一张」，各自列表循环
-// Blog 与 Gallery 列表按作用域独立
-// ─────────────────────────────────────────
-const lightbox         = document.getElementById('lightbox');
-const lightboxStage    = document.getElementById('lightbox-stage');
-const lightboxPrev     = document.getElementById('lightbox-prev');
-const lightboxNext     = document.getElementById('lightbox-next');
-const lightboxDownload = document.getElementById('lightbox-download');
-const lightboxCounter  = document.getElementById('lightbox-counter');
-
-const allMediaItems = [...document.querySelectorAll('.media-item')];
-let currentList = [];
-let currentType = 'image';
-let currentIndex = 0;
+let lbList   = [];
+let lbType   = 'image';
+let lbIndex  = 0;
 
 function buildMediaList(scopeEl, type) {
-  return [...scopeEl.querySelectorAll('.media-item')]
+  return $$('.media-item', scopeEl)
     .filter(i => (i.dataset.mediaType === 'video' ? 'video' : 'image') === type)
     .map(i => i.dataset.mediaSrc);
 }
@@ -332,19 +220,18 @@ function fileNameFromSrc(src) {
 }
 
 function renderLightbox() {
-  const list = currentList;
-  if (!list || list.length === 0) return;
-  const src = list[currentIndex];
+  if (!lbList.length) return;
+  const src = lbList[lbIndex];
 
   lightboxStage.innerHTML = '';
-  if (currentType === 'video') {
+  if (lbType === 'video') {
     const v = document.createElement('video');
     v.src = src;
-    v.controls = true;      // 暂停 / 进度 / 音量
+    v.controls = true;
     v.playsInline = true;
-    v.muted = false;        // 放大观看带声音
+    v.muted = false;
     lightboxStage.appendChild(v);
-    v.play().catch(() => {});  // 用户手势上下文中播放，允许有声
+    v.play().catch(() => {});
   } else {
     const img = document.createElement('img');
     img.src = src;
@@ -355,75 +242,109 @@ function renderLightbox() {
   lightboxDownload.href = src;
   lightboxDownload.setAttribute('download', fileNameFromSrc(src));
 
-  const multi = list.length > 1;
+  const multi = lbList.length > 1;
   lightboxPrev.style.display = multi ? '' : 'none';
   lightboxNext.style.display = multi ? '' : 'none';
-  lightboxCounter.textContent = multi ? `${currentIndex + 1} / ${list.length}` : '';
+  lightboxCounter.textContent = multi ? `${lbIndex + 1} / ${lbList.length}` : '';
 }
 
 function openLightbox(item) {
-  currentType = (item.dataset.mediaType === 'video') ? 'video' : 'image';
-  const scope = item.closest('.blog-body, .gm-panel') || document;
-  currentList = buildMediaList(scope, currentType);
-  currentIndex = Math.max(0, currentList.indexOf(item.dataset.mediaSrc));
+  lbType = (item.dataset.mediaType === 'video') ? 'video' : 'image';
+  // 作用域优先：卡片 -> 面板 -> 全局
+  const scope = item.closest('.msg-card, .entry-panel') || document;
+  lbList = buildMediaList(scope, lbType);
+  lbIndex = Math.max(0, lbList.indexOf(item.dataset.mediaSrc));
   renderLightbox();
   lightbox.classList.add('open');
   lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeLightbox() {
   lightbox.classList.remove('open');
   lightbox.setAttribute('aria-hidden', 'true');
   lightboxStage.innerHTML = '';   // 清空以停止视频
+  document.body.style.overflow = '';
 }
 
 function stepLightbox(delta) {
-  const list = currentList;
-  if (!list || list.length === 0) return;
-  currentIndex = (currentIndex + delta + list.length) % list.length;
+  if (!lbList.length) return;
+  lbIndex = (lbIndex + delta + lbList.length) % lbList.length;
   renderLightbox();
 }
 
-allMediaItems.forEach(item => {
-  item.addEventListener('click', () => openLightbox(item));
+// 事件委托：所有 .media-item 点击 -> 打开灯箱
+document.addEventListener('click', (e) => {
+  const item = e.target.closest('.media-item');
+  if (item) {
+    e.preventDefault();
+    openLightbox(item);
+    return;
+  }
 });
 
-lightboxPrev.addEventListener('click', () => stepLightbox(-1));
-lightboxNext.addEventListener('click', () => stepLightbox(1));
-
-lightbox.addEventListener('click', (e) => {
-  if (e.target.closest('[data-lightbox-close]')) closeLightbox();
-});
-
-// ─────────────────────────────────────────
-// Blog 头像点击 → 放大观看（单张）
-// ─────────────────────────────────────────
-const blogAvatar = document.querySelector('.blog-author__avatar');
-if (blogAvatar) {
-  blogAvatar.style.cursor = 'zoom-in';
-  blogAvatar.addEventListener('click', () => {
-    currentType = 'image';
-    currentList = [blogAvatar.getAttribute('src')];
-    currentIndex = 0;
-    renderLightbox();
-    lightbox.classList.add('open');
-    lightbox.setAttribute('aria-hidden', 'false');
+if (lightboxPrev) lightboxPrev.addEventListener('click', () => stepLightbox(-1));
+if (lightboxNext) lightboxNext.addEventListener('click', () => stepLightbox(1));
+if (lightbox) {
+  lightbox.addEventListener('click', (e) => {
+    if (e.target.closest('[data-lightbox-close]')) closeLightbox();
   });
 }
 
-// ─────────────────────────────────────────
-// 键盘：灯箱优先（Esc 关闭 / ←→ 切换）；否则 Esc 关闭其他弹窗
-// ─────────────────────────────────────────
+/* 头像点击 → 放大 */
+$$('.user img, .msg-card__author img, .site-footer__brand .logo__mark').forEach(el => {
+  el.style.cursor = 'zoom-in';
+});
+const userAvatar = $('.user img');
+if (userAvatar) {
+  userAvatar.addEventListener('click', (e) => {
+    e.preventDefault(); e.stopPropagation();
+    lbType = 'image';
+    lbList = [userAvatar.getAttribute('src')];
+    lbIndex = 0;
+    renderLightbox();
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  });
+}
+
+/* ─────────────────────────────────────────
+   8. 键盘：Esc 关闭 / ←→ 灯箱切换
+───────────────────────────────────────── */
 document.addEventListener('keydown', (e) => {
-  if (lightbox.classList.contains('open')) {
+  if (lightbox && lightbox.classList.contains('open')) {
     if (e.key === 'Escape')          closeLightbox();
     else if (e.key === 'ArrowLeft')  stepLightbox(-1);
     else if (e.key === 'ArrowRight') stepLightbox(1);
     return;
   }
-  if (e.key === 'Escape') {
-    if (blogModal.classList.contains('open'))    closeBlog();
-    if (galleryModal.classList.contains('open')) closeGallery();
-    if (contactPopup.classList.contains('open')) closeContactPopup();
+  if (e.key === 'Escape' && drawer && drawer.classList.contains('open')) {
+    closeDrawer();
   }
 });
+
+/* ─────────────────────────────────────────
+   9. Hero 背景视频：可见性变化时暂停 / 恢复
+───────────────────────────────────────── */
+(function initHeroBg() {
+  const bg = document.querySelector('.hero__bg');
+  if (!bg) return;
+
+  bg.playbackRate = 0.9;                              // 背景稍慢
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) bg.pause();
+    else bg.play().catch(() => {});
+  });
+
+  // 视口滚出 Hero 时暂停，减少资源
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) bg.play().catch(() => {});
+        else bg.pause();
+      });
+    }, { threshold: 0.05 });
+    io.observe(bg);
+  }
+})();
