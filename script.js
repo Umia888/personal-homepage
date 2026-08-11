@@ -184,21 +184,19 @@ const isTouch = () => matchMedia('(hover: none)').matches;
 })();
 
 /* ─────────────────────────────────────────
-   6. Aceternity · Expandable Card
+   6. Aceternity · Expandable Card + Blog article Modal
+   （小卡片模仿 magicui blog-card，展开后是 blog article 布局：
+    大标题 + cover + 左正文 + 右 aside(author/TOC)）
 ───────────────────────────────────────── */
 (function initExpandable() {
-  const cards = $$('.exp-card');
+  // 触发源：blog-card 内的 button（有 data-key）
+  const cards = $$('.blog-card__link[data-key]');
   const modal = $('#exp-modal');
   const body  = $('#exp-modal-body');
   if (!cards.length || !modal || !body) return;
 
   cards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      // 若正在 tilting，恢复默认再打开
-      card.classList.remove('is-tilting');
-      card.style.transform = '';
-      openExp(card.dataset.key);
-    });
+    card.addEventListener('click', () => openExp(card.dataset.key));
   });
 
   modal.addEventListener('click', (e) => {
@@ -215,18 +213,18 @@ const isTouch = () => matchMedia('(hover: none)').matches;
     body.innerHTML = '';
     body.appendChild(tpl.content.cloneNode(true));
 
-    // 先显示，双 rAF 触发过渡
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
 
-    // 初始化 modal 内的 book slider（如仍有）+ moving cards（点点生图）
+    // 初始化 modal 内的 book-slider（若有）+ moving-cards + TOC
     requestAnimationFrame(() => {
       $$('.book-track', modal).forEach(track => {
         setupBookTrack(track);
         updateBookTrack(track);
       });
       $$('.moving-cards-wrap', modal).forEach(setupMovingCards);
+      setupBlogToc(modal);
     });
   }
 
@@ -297,6 +295,61 @@ function setupBookTrack(track) {
    7.5 Aceternity · Infinite Moving Cards
    - 把 track 内容克隆一份，形成无缝循环
 ───────────────────────────────────────── */
+/* ─────────────────────────────────────────
+   6.5 Blog Article TOC · 点击滚动到 heading + 当前段高亮
+   （在 modal 内工作：modal 是滚动容器 overflow-y auto）
+───────────────────────────────────────── */
+function setupBlogToc(scope) {
+  const links = scope.querySelectorAll('.blog-toc a[data-scroll-to]');
+  const modal = scope.querySelector('.exp-modal__card') || scope;
+  if (!links.length) return;
+
+  // 点击：滚动 modal 内容到对应 heading
+  links.forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = a.dataset.scrollTo;
+      const target = scope.querySelector('#' + CSS.escape(id));
+      if (!target) return;
+      // exp-modal 本身是 scroll 容器，所以 scroll 到 heading 相对 modal 顶部
+      const container = document.getElementById('exp-modal');
+      if (!container) return;
+      const cRect = container.getBoundingClientRect();
+      const tRect = target.getBoundingClientRect();
+      const y = container.scrollTop + (tRect.top - cRect.top) - 24;
+      container.scrollTo({ top: y, behavior: 'smooth' });
+      links.forEach(l => l.removeAttribute('data-active'));
+      a.setAttribute('data-active', 'true');
+    });
+  });
+
+  // 滚动时自动高亮当前段
+  const container = document.getElementById('exp-modal');
+  if (!container) return;
+  const headings = Array.from(links).map(a => {
+    const id = a.dataset.scrollTo;
+    return { id, el: scope.querySelector('#' + CSS.escape(id)), link: a };
+  }).filter(h => h.el);
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      const cTop = container.getBoundingClientRect().top;
+      let current = headings[0];
+      for (const h of headings) {
+        const t = h.el.getBoundingClientRect().top - cTop;
+        if (t <= 120) current = h;
+      }
+      headings.forEach(h => h.link.removeAttribute('data-active'));
+      if (current) current.link.setAttribute('data-active', 'true');
+    });
+  }
+  container.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
 function setupMovingCards(wrap) {
   if (!wrap || wrap._mcInit) return;
   const track = wrap.querySelector('.moving-cards-track');

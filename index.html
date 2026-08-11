@@ -414,226 +414,449 @@
     <div class="container">
       <header class="section-head blur-fade">
         <div class="section-head__meta"><span class="no">03</span><span>Portfolio</span></div>
-        <h2 class="section-title">五个作品，<em>点开展开</em></h2>
+        <h2 class="section-title">五个作品，<em>点开阅读</em></h2>
         <p class="section-lead">
           从内容产品到法律科技，从 AIGC 模板到独立 Skill。<br />
           <b>以下项目中，我主要承担需求定义、方案设计与落地跟进的部分。</b>
         </p>
       </header>
 
-      <div class="exp-cards blur-fade">
+      <div class="blog-list blur-fade">
 
-        <button type="button" class="exp-card tilt" data-key="ditu">
-          <div class="exp-card__cover">
-            <img src="templates/graduation/gen-1784147732673.jpg" alt="点点生图代表模板" loading="lazy" />
-          </div>
-          <div class="exp-card__body">
-            <span class="exp-card__no">A</span>
-            <h3>点点生图</h3>
-            <p>小红书 · AI 视觉内容 · 76 组节点模板 · 数据看板 5H 自动刷新</p>
-          </div>
-          <span class="exp-card__cta">展开详情 <span class="arrow">→</span></span>
-        </button>
+        <article class="blog-card">
+          <button type="button" class="blog-card__link" data-key="ditu">
+            <div class="blog-card__cover">
+              <img src="templates/graduation/gen-1784147732673.jpg" alt="点点生图代表模板" loading="lazy" />
+            </div>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__tag">AI 视觉</span>
+                <span class="blog-card__tag">小红书</span>
+                <time class="blog-card__date">2026 · 08</time>
+              </div>
+              <h3 class="blog-card__title">点点生图 · AI 视觉在小红书场景的落地</h3>
+              <p class="blog-card__desc">小红书 · AI 视觉内容 · 76 组节点模板 · 数据看板 5H 自动刷新</p>
+              <div class="blog-card__author">
+                <img src="avatar.png" alt="Mia" />
+                <div>
+                  <b>Mia · 雷雨苗</b>
+                  <span>作品 A / 5 · 阅读约 4 分钟</span>
+                </div>
+              </div>
+            </div>
+          </button>
+        </article>
 
-        <button type="button" class="exp-card tilt" data-key="alex">
-          <div class="exp-card__cover exp-card__cover--gradient" style="--g1:#c084fc;--g2:#818cf8;">
-            <span class="exp-card__cover-mark">✨</span>
-          </div>
-          <div class="exp-card__body">
-            <span class="exp-card__no">B</span>
-            <h3>点点 Skills · Alex 星骰</h3>
-            <p>让 AI 回答"更像博主本人" · 内部平台发布 · Knowledge 体系 + 多方向子 Skill</p>
-          </div>
-          <span class="exp-card__cta">展开详情 <span class="arrow">→</span></span>
-        </button>
+        <article class="blog-card blog-card--gradient" style="--g1:#c084fc;--g2:#818cf8;">
+          <button type="button" class="blog-card__link" data-key="alex">
+            <div class="blog-card__cover blog-card__cover--gradient">
+              <span class="blog-card__cover-mark">✨</span>
+            </div>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__tag">Skill 工程</span>
+                <span class="blog-card__tag">内部平台</span>
+                <time class="blog-card__date">2026 · 07</time>
+              </div>
+              <h3 class="blog-card__title">点点 Skills · Alex 星骰</h3>
+              <p class="blog-card__desc">让 AI 回答"更像博主本人" · 内部平台发布 · Knowledge 体系 + 多方向子 Skill</p>
+              <div class="blog-card__author">
+                <img src="avatar.png" alt="Mia" />
+                <div>
+                  <b>Mia · 雷雨苗</b>
+                  <span>作品 B / 5 · 阅读约 3 分钟</span>
+                </div>
+              </div>
+            </div>
+          </button>
+        </article>
 
-        <button type="button" class="exp-card tilt" data-key="law">
-          <div class="exp-card__cover exp-card__cover--gradient" style="--g1:#f59e0b;--g2:#ea580c;">
-            <span class="exp-card__cover-mark">⚖️</span>
-          </div>
-          <div class="exp-card__body">
-            <span class="exp-card__no">C</span>
-            <h3>法律 AI 合同拟制助手</h3>
-            <p>产学研合作 · 已交付企业独立运营 · 回答可用率 65% → 87%</p>
-          </div>
-          <span class="exp-card__cta">展开详情 <span class="arrow">→</span></span>
-        </button>
+        <article class="blog-card blog-card--gradient" style="--g1:#f59e0b;--g2:#ea580c;">
+          <button type="button" class="blog-card__link" data-key="law">
+            <div class="blog-card__cover blog-card__cover--gradient">
+              <span class="blog-card__cover-mark">⚖️</span>
+            </div>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__tag">产学研</span>
+                <span class="blog-card__tag">RAG</span>
+                <time class="blog-card__date">2023 · 12</time>
+              </div>
+              <h3 class="blog-card__title">法律 AI 合同拟制助手</h3>
+              <p class="blog-card__desc">产学研合作 · 已交付企业独立运营 · 回答可用率 65% → 87%</p>
+              <div class="blog-card__author">
+                <img src="avatar.png" alt="Mia" />
+                <div>
+                  <b>Mia · 雷雨苗</b>
+                  <span>作品 C / 5 · 阅读约 5 分钟</span>
+                </div>
+              </div>
+            </div>
+          </button>
+        </article>
 
-        <button type="button" class="exp-card tilt" data-key="wenfeng">
-          <div class="exp-card__cover exp-card__cover--gradient" style="--g1:#0ea5e9;--g2:#06b6d4;">
-            <span class="exp-card__cover-mark">✍️</span>
-          </div>
-          <div class="exp-card__body">
-            <span class="exp-card__no">D</span>
-            <h3>文风模拟器 · peter_tingle</h3>
-            <p>灵光一现写出来的独立 Skill · 支持 Cursor / VS Code / Claude Code</p>
-          </div>
-          <span class="exp-card__cta">展开详情 <span class="arrow">→</span></span>
-        </button>
+        <article class="blog-card blog-card--gradient" style="--g1:#0ea5e9;--g2:#06b6d4;">
+          <button type="button" class="blog-card__link" data-key="wenfeng">
+            <div class="blog-card__cover blog-card__cover--gradient">
+              <span class="blog-card__cover-mark">✍️</span>
+            </div>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__tag">开源 Skill</span>
+                <span class="blog-card__tag">GitHub</span>
+                <time class="blog-card__date">2025 · 12</time>
+              </div>
+              <h3 class="blog-card__title">文风模拟器 · peter_tingle</h3>
+              <p class="blog-card__desc">灵光一现写出来的独立 Skill · 支持 Cursor / VS Code / Claude Code</p>
+              <div class="blog-card__author">
+                <img src="avatar.png" alt="Mia" />
+                <div>
+                  <b>Mia · 雷雨苗</b>
+                  <span>作品 D / 5 · 阅读约 3 分钟</span>
+                </div>
+              </div>
+            </div>
+          </button>
+        </article>
 
-        <button type="button" class="exp-card tilt" data-key="meituan">
-          <div class="exp-card__cover exp-card__cover--gradient" style="--g1:#22c55e;--g2:#84cc16;">
-            <span class="exp-card__cover-mark">🍜</span>
-          </div>
-          <div class="exp-card__body">
-            <span class="exp-card__no">E</span>
-            <h3>美团大学城美食地图</h3>
-            <p>大学城场景 · 用户用研 · 5 类痛点根源拆解与功能对应</p>
-          </div>
-          <span class="exp-card__cta">展开详情 <span class="arrow">→</span></span>
-        </button>
+        <article class="blog-card blog-card--gradient" style="--g1:#22c55e;--g2:#84cc16;">
+          <button type="button" class="blog-card__link" data-key="meituan">
+            <div class="blog-card__cover blog-card__cover--gradient">
+              <span class="blog-card__cover-mark">🍜</span>
+            </div>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__tag">用户用研</span>
+                <span class="blog-card__tag">内部平台</span>
+                <time class="blog-card__date">2024 · 06</time>
+              </div>
+              <h3 class="blog-card__title">美团大学城美食地图</h3>
+              <p class="blog-card__desc">大学城场景 · 用户用研 · 5 类痛点根源拆解与功能对应</p>
+              <div class="blog-card__author">
+                <img src="avatar.png" alt="Mia" />
+                <div>
+                  <b>Mia · 雷雨苗</b>
+                  <span>作品 E / 5 · 阅读约 3 分钟</span>
+                </div>
+              </div>
+            </div>
+          </button>
+        </article>
 
       </div>
 
-      <!-- 展开详情模板（对应点击后 modal 大卡内容） -->
+      <!-- 展开详情模板（点击 blog-card → 注入 modal 内，采用 blog article 版式） -->
       <template id="exp-tpl-ditu">
-        <div class="exp-detail__head">
-          <span class="exp-card__no">A</span>
-          <h3>点点生图 · AI 视觉在小红书场景的落地</h3>
-          <span class="entry-panel__sub">博主同款 / 任意门 / 大师镜头</span>
-        </div>
-        <ol class="steps">
-          <li><b>模型测评</b>：跑批测评 → 问题归因 → 输出上线建议</li>
-          <li><b>模板设计</b>：用户兴趣 + 传播潜力 + 竞品参考 → 出模板</li>
-          <li><b>运营闭环</b>：设计自动化数据看板，指导下一批模板方向</li>
-        </ol>
-        <div class="chat-demo">
-          <div class="bubble bot">
-            <span class="bubble__label">Prompt / Brief</span>
-            大师镜头 · 毕业季主题，需求：真实感、可传播、支持多身材
+        <article class="blog-article">
+          <header class="blog-article__head">
+            <button type="button" class="blog-article__back" data-exp-close="1">← 返回作品集</button>
+            <div class="blog-article__tags">
+              <span class="tag">AI 视觉</span>
+              <span class="tag">小红书</span>
+              <time>2026 · 08</time>
+            </div>
+            <h1 class="blog-article__title">点点生图 · AI 视觉在小红书场景的落地</h1>
+            <p class="blog-article__desc">博主同款 / 任意门 / 大师镜头</p>
+          </header>
+          <div class="blog-article__cover">
+            <img src="templates/graduation/gen-1784147732673.jpg" alt="点点生图代表模板" />
           </div>
-          <div class="bubble user">
-            <span class="bubble__label">Output</span>
-            ✅ 已完成 12 张代表模板 · 已经过一致性 &amp; 稳定性测评 · 已进入排期
+          <div class="blog-article__grid">
+            <main class="blog-article__main">
+              <h2 id="ditu-steps">三步流程</h2>
+              <ol class="steps">
+                <li><b>模型测评</b>：跑批测评 → 问题归因 → 输出上线建议</li>
+                <li><b>模板设计</b>：用户兴趣 + 传播潜力 + 竞品参考 → 出模板</li>
+                <li><b>运营闭环</b>：设计自动化数据看板，指导下一批模板方向</li>
+              </ol>
+              <h2 id="ditu-demo">效果演示</h2>
+              <div class="chat-demo">
+                <div class="bubble bot">
+                  <span class="bubble__label">Prompt / Brief</span>
+                  大师镜头 · 毕业季主题，需求：真实感、可传播、支持多身材
+                </div>
+                <div class="bubble user">
+                  <span class="bubble__label">Output</span>
+                  ✅ 已完成 12 张代表模板 · 已经过一致性 &amp; 稳定性测评 · 已进入排期
+                </div>
+              </div>
+              <h2 id="ditu-templates">代表模板</h2>
+              <h4 class="mc-head">100% AI · 毕业季 + 写真风 · 30 张展示</h4>
+              <div class="moving-cards-wrap" data-direction="right" data-speed="slow">
+                <div class="moving-cards-track">
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147732673.jpg"><img src="templates/graduation/gen-1784147732673.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147723124.jpg"><img src="templates/graduation/gen-1784147723124.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147741203.jpg"><img src="templates/graduation/gen-1784147741203.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/img-1784147462578.jpg"><img src="templates/graduation/img-1784147462578.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147458826.jpg"><img src="templates/graduation/gen-1784147458826.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1779249480283-1784148074657.jpg"><img src="templates/portrait/gen-1779249480283-1784148074657.jpg" alt="写真风模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147645180.jpg"><img src="templates/graduation/gen-1784147645180.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784148044905.jpg"><img src="templates/portrait/gen-1784148044905.jpg" alt="写真风模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147639314.jpg"><img src="templates/graduation/gen-1784147639314.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148107383.jpg"><img src="templates/portrait/img-1784148107383.jpg" alt="写真风模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147665530.jpg"><img src="templates/graduation/gen-1784147665530.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148103392.jpg"><img src="templates/portrait/img-1784148103392.jpg" alt="写真风模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147678036.jpg"><img src="templates/graduation/gen-1784147678036.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147344534.jpg"><img src="templates/portrait/gen-1784147344534.jpg" alt="写真风模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147683144.jpg"><img src="templates/graduation/gen-1784147683144.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147340035.jpg"><img src="templates/portrait/gen-1784147340035.jpg" alt="写真风模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147706074.jpg"><img src="templates/graduation/gen-1784147706074.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147358748.jpg"><img src="templates/portrait/gen-1784147358748.jpg" alt="写真风模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147718706.jpg"><img src="templates/graduation/gen-1784147718706.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147366213.jpg"><img src="templates/portrait/gen-1784147366213.jpg" alt="写真风模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147761489.jpg"><img src="templates/graduation/gen-1784147761489.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147379183.jpg"><img src="templates/portrait/gen-1784147379183.jpg" alt="写真风模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147784549.jpg"><img src="templates/graduation/gen-1784147784549.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147576076.jpg"><img src="templates/portrait/gen-1784147576076.jpg" alt="写真风模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147793729.jpg"><img src="templates/graduation/gen-1784147793729.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147817367.jpg"><img src="templates/graduation/gen-1784147817367.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147824964.jpg"><img src="templates/graduation/gen-1784147824964.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147992182.jpg"><img src="templates/graduation/gen-1784147992182.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147995102.jpg"><img src="templates/graduation/gen-1784147995102.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784148002490.jpg"><img src="templates/graduation/gen-1784148002490.jpg" alt="毕业季模板" loading="lazy" /></button>
+                </div>
+              </div>
+            </main>
+            <aside class="blog-article__aside">
+              <div class="author-card">
+                <img src="avatar.png" alt="Mia" />
+                <div>
+                  <b>Mia · 雷雨苗</b>
+                  <span>2027 届 · AI 方向实习</span>
+                </div>
+              </div>
+              <div class="blog-toc">
+                <h4>On this page</h4>
+                <ul>
+                  <li><a data-scroll-to="ditu-steps">三步流程</a></li>
+                  <li><a data-scroll-to="ditu-demo">效果演示</a></li>
+                  <li><a data-scroll-to="ditu-templates">代表模板</a></li>
+                </ul>
+              </div>
+            </aside>
           </div>
-        </div>
-        <h4 class="mc-head">代表模板 <span class="gm-tag-inline">100% AI · 毕业季 + 写真风 · 30 张展示</span></h4>
-        <div class="moving-cards-wrap" data-direction="right" data-speed="slow">
-          <div class="moving-cards-track">
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147732673.jpg"><img src="templates/graduation/gen-1784147732673.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147723124.jpg"><img src="templates/graduation/gen-1784147723124.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147741203.jpg"><img src="templates/graduation/gen-1784147741203.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/img-1784147462578.jpg"><img src="templates/graduation/img-1784147462578.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147458826.jpg"><img src="templates/graduation/gen-1784147458826.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1779249480283-1784148074657.jpg"><img src="templates/portrait/gen-1779249480283-1784148074657.jpg" alt="写真风模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147645180.jpg"><img src="templates/graduation/gen-1784147645180.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784148044905.jpg"><img src="templates/portrait/gen-1784148044905.jpg" alt="写真风模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147639314.jpg"><img src="templates/graduation/gen-1784147639314.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148107383.jpg"><img src="templates/portrait/img-1784148107383.jpg" alt="写真风模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147665530.jpg"><img src="templates/graduation/gen-1784147665530.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148103392.jpg"><img src="templates/portrait/img-1784148103392.jpg" alt="写真风模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147678036.jpg"><img src="templates/graduation/gen-1784147678036.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147344534.jpg"><img src="templates/portrait/gen-1784147344534.jpg" alt="写真风模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147683144.jpg"><img src="templates/graduation/gen-1784147683144.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147340035.jpg"><img src="templates/portrait/gen-1784147340035.jpg" alt="写真风模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147706074.jpg"><img src="templates/graduation/gen-1784147706074.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147358748.jpg"><img src="templates/portrait/gen-1784147358748.jpg" alt="写真风模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147718706.jpg"><img src="templates/graduation/gen-1784147718706.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147366213.jpg"><img src="templates/portrait/gen-1784147366213.jpg" alt="写真风模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147761489.jpg"><img src="templates/graduation/gen-1784147761489.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147379183.jpg"><img src="templates/portrait/gen-1784147379183.jpg" alt="写真风模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147784549.jpg"><img src="templates/graduation/gen-1784147784549.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147576076.jpg"><img src="templates/portrait/gen-1784147576076.jpg" alt="写真风模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147793729.jpg"><img src="templates/graduation/gen-1784147793729.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147817367.jpg"><img src="templates/graduation/gen-1784147817367.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147824964.jpg"><img src="templates/graduation/gen-1784147824964.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147992182.jpg"><img src="templates/graduation/gen-1784147992182.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147995102.jpg"><img src="templates/graduation/gen-1784147995102.jpg" alt="毕业季模板" loading="lazy" /></button>
-            <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784148002490.jpg"><img src="templates/graduation/gen-1784148002490.jpg" alt="毕业季模板" loading="lazy" /></button>
-          </div>
-        </div>
+        </article>
       </template>
 
       <template id="exp-tpl-alex">
-        <div class="exp-detail__head">
-          <span class="exp-card__no">B</span>
-          <h3>点点 Skills · Alex 星骰</h3>
-          <span class="entry-panel__sub">让 AI 回答"更像博主本人" · 链接在小红书内部平台 · 无法分享</span>
-        </div>
-        <ol class="steps">
-          <li><b>知识分层</b>：博主语料 vs 占星理论分块，各 chunk 打标签</li>
-          <li><b>Skill 编写</b>：主 Skill + 多方向子 Skill</li>
-          <li><b>回答优化</b>：约束条件 + QA 范例 → 让回答"具体、准确、像本人"</li>
-        </ol>
-        <div class="chat-demo">
-          <div class="bubble bot">
-            <span class="bubble__label">User</span>
-            Alex 大叔，最近水逆我要不要跳槽？
+        <article class="blog-article">
+          <header class="blog-article__head">
+            <button type="button" class="blog-article__back" data-exp-close="1">← 返回作品集</button>
+            <div class="blog-article__tags">
+              <span class="tag">Skill 工程</span>
+              <span class="tag">内部平台</span>
+              <time>2026 · 07</time>
+            </div>
+            <h1 class="blog-article__title">点点 Skills · Alex 星骰</h1>
+            <p class="blog-article__desc">让 AI 回答"更像博主本人" · 链接在小红书内部平台 · 无法分享</p>
+          </header>
+          <div class="blog-article__cover blog-article__cover--gradient" style="--g1:#c084fc;--g2:#818cf8;">
+            <span class="blog-article__cover-mark">✨</span>
           </div>
-          <div class="bubble user">
-            <span class="bubble__label">Alex 星骰</span>
-            宝，水逆的时候动大盘，回头一定会拍大腿。这周把简历改好、把人脉打点好，等出逆再发出去，正合适。
+          <div class="blog-article__grid">
+            <main class="blog-article__main">
+              <h2 id="alex-steps">三步流程</h2>
+              <ol class="steps">
+                <li><b>知识分层</b>：博主语料 vs 占星理论分块，各 chunk 打标签</li>
+                <li><b>Skill 编写</b>：主 Skill + 多方向子 Skill</li>
+                <li><b>回答优化</b>：约束条件 + QA 范例 → 让回答"具体、准确、像本人"</li>
+              </ol>
+              <h2 id="alex-demo">对话演示</h2>
+              <div class="chat-demo">
+                <div class="bubble bot">
+                  <span class="bubble__label">User</span>
+                  Alex 大叔，最近水逆我要不要跳槽？
+                </div>
+                <div class="bubble user">
+                  <span class="bubble__label">Alex 星骰</span>
+                  宝，水逆的时候动大盘，回头一定会拍大腿。这周把简历改好、把人脉打点好，等出逆再发出去，正合适。
+                </div>
+              </div>
+              <h2 id="alex-output">主要产出</h2>
+              <div class="detail-card">
+                <ul class="pill-list">
+                  <li>Alex 项目 Knowledge 体系</li>
+                  <li>语料 &amp; 占星理论分块 + 打标签</li>
+                  <li>主 Skill + 多方向子 Skill</li>
+                  <li>发布内部平台并主动收集反馈</li>
+                </ul>
+              </div>
+            </main>
+            <aside class="blog-article__aside">
+              <div class="author-card">
+                <img src="avatar.png" alt="Mia" />
+                <div>
+                  <b>Mia · 雷雨苗</b>
+                  <span>2027 届 · AI 方向实习</span>
+                </div>
+              </div>
+              <div class="blog-toc">
+                <h4>On this page</h4>
+                <ul>
+                  <li><a data-scroll-to="alex-steps">三步流程</a></li>
+                  <li><a data-scroll-to="alex-demo">对话演示</a></li>
+                  <li><a data-scroll-to="alex-output">主要产出</a></li>
+                </ul>
+              </div>
+            </aside>
           </div>
-        </div>
-        <div class="detail-card">
-          <h4>主要产出</h4>
-          <ul class="pill-list">
-            <li>Alex 项目 Knowledge 体系</li>
-            <li>语料 &amp; 占星理论分块 + 打标签</li>
-            <li>主 Skill + 多方向子 Skill</li>
-            <li>发布内部平台并主动收集反馈</li>
-          </ul>
-        </div>
+        </article>
       </template>
 
       <template id="exp-tpl-law">
-        <div class="exp-detail__head">
-          <span class="exp-card__no">C</span>
-          <h3>法律 AI 合同拟制助手</h3>
-          <span class="entry-panel__sub">产学研合作 · 已交付企业独立运营</span>
-        </div>
-        <ol class="steps">
-          <li><b>商务对接</b>：深圳实地调研 · 签署技术授权书</li>
-          <li><b>技术搭建</b>：Vibe Coding 从零搭网页端 · 角色注入 + CoT + 分块</li>
-          <li><b>知识闭环</b>：300+ 份法律文件 · 200+ 咨询场景 · 1200+ 用户反馈</li>
-        </ol>
-        <div class="detail-card">
-          <h4>项目成果</h4>
-          <ul class="pill-list">
-            <li>回答可用率 65% → 87%（内部测试集）</li>
-            <li>"挑战杯" 广东省铜奖（获奖率 &lt; 15%）</li>
-            <li>校赛三等奖 · 双创展览会优秀奖</li>
-            <li>项目已交付合作企业运营</li>
-          </ul>
-        </div>
+        <article class="blog-article">
+          <header class="blog-article__head">
+            <button type="button" class="blog-article__back" data-exp-close="1">← 返回作品集</button>
+            <div class="blog-article__tags">
+              <span class="tag">产学研</span>
+              <span class="tag">RAG</span>
+              <time>2023 · 12</time>
+            </div>
+            <h1 class="blog-article__title">法律 AI 合同拟制助手</h1>
+            <p class="blog-article__desc">产学研合作 · 已交付企业独立运营</p>
+          </header>
+          <div class="blog-article__cover blog-article__cover--gradient" style="--g1:#f59e0b;--g2:#ea580c;">
+            <span class="blog-article__cover-mark">⚖️</span>
+          </div>
+          <div class="blog-article__grid">
+            <main class="blog-article__main">
+              <h2 id="law-steps">三步流程</h2>
+              <ol class="steps">
+                <li><b>商务对接</b>：深圳实地调研 · 签署技术授权书</li>
+                <li><b>技术搭建</b>：Vibe Coding 从零搭网页端 · 角色注入 + CoT + 分块</li>
+                <li><b>知识闭环</b>：300+ 份法律文件 · 200+ 咨询场景 · 1200+ 用户反馈</li>
+              </ol>
+              <h2 id="law-results">项目成果</h2>
+              <div class="detail-card">
+                <ul class="pill-list">
+                  <li>回答可用率 65% → 87%（内部测试集）</li>
+                  <li>"挑战杯" 广东省铜奖（获奖率 &lt; 15%）</li>
+                  <li>校赛三等奖 · 双创展览会优秀奖</li>
+                  <li>项目已交付合作企业运营</li>
+                </ul>
+              </div>
+            </main>
+            <aside class="blog-article__aside">
+              <div class="author-card">
+                <img src="avatar.png" alt="Mia" />
+                <div>
+                  <b>Mia · 雷雨苗</b>
+                  <span>校企合作 · 项目负责人</span>
+                </div>
+              </div>
+              <div class="blog-toc">
+                <h4>On this page</h4>
+                <ul>
+                  <li><a data-scroll-to="law-steps">三步流程</a></li>
+                  <li><a data-scroll-to="law-results">项目成果</a></li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </article>
       </template>
 
       <template id="exp-tpl-wenfeng">
-        <div class="exp-detail__head">
-          <span class="exp-card__no">D</span>
-          <h3>文风模拟器 · peter_tingle（彼得一激灵）</h3>
-          <span class="entry-panel__sub">灵光一现写出来的独立 Skill <a class="entry-panel__link" href="https://github.com/Umia888/peter_tingle/blob/main/README.md" target="_blank" rel="noopener">GitHub README ↗</a></span>
-        </div>
-        <ol class="steps">
-          <li><b>喂样本</b>：任意文章 → 学习其结构与语言风格</li>
-          <li><b>调用</b>：支持 Cursor / VS Code / Claude Code 直接 #skill 调用</li>
-          <li><b>输出</b>：可导出带格式文章（内置论文格式，也可自定义）</li>
-        </ol>
-        <div class="detail-card">
-          <h4>典型使用场景</h4>
-          <ul class="pill-list">
-            <li>雅思 / 托福写作学习</li>
-            <li>论文写作风格与结构模仿</li>
-            <li>大量文献表达共同点 &amp; 差异点</li>
-            <li>文献观点整理 + 原文定位清单</li>
-          </ul>
-        </div>
-        <div class="fallback-tip">⚠️ 温馨提醒：AI 率仍约 20%–30%，请当作学习工具，不要当代写工具用。</div>
+        <article class="blog-article">
+          <header class="blog-article__head">
+            <button type="button" class="blog-article__back" data-exp-close="1">← 返回作品集</button>
+            <div class="blog-article__tags">
+              <span class="tag">开源 Skill</span>
+              <span class="tag">GitHub</span>
+              <time>2025 · 12</time>
+            </div>
+            <h1 class="blog-article__title">文风模拟器 · peter_tingle（彼得一激灵）</h1>
+            <p class="blog-article__desc">灵光一现写出来的独立 Skill · <a class="entry-panel__link" href="https://github.com/Umia888/peter_tingle/blob/main/README.md" target="_blank" rel="noopener">GitHub README ↗</a></p>
+          </header>
+          <div class="blog-article__cover blog-article__cover--gradient" style="--g1:#0ea5e9;--g2:#06b6d4;">
+            <span class="blog-article__cover-mark">✍️</span>
+          </div>
+          <div class="blog-article__grid">
+            <main class="blog-article__main">
+              <h2 id="wenfeng-steps">三步流程</h2>
+              <ol class="steps">
+                <li><b>喂样本</b>：任意文章 → 学习其结构与语言风格</li>
+                <li><b>调用</b>：支持 Cursor / VS Code / Claude Code 直接 #skill 调用</li>
+                <li><b>输出</b>：可导出带格式文章（内置论文格式，也可自定义）</li>
+              </ol>
+              <h2 id="wenfeng-scene">典型使用场景</h2>
+              <div class="detail-card">
+                <ul class="pill-list">
+                  <li>雅思 / 托福写作学习</li>
+                  <li>论文写作风格与结构模仿</li>
+                  <li>大量文献表达共同点 &amp; 差异点</li>
+                  <li>文献观点整理 + 原文定位清单</li>
+                </ul>
+              </div>
+              <h2 id="wenfeng-tip">使用提醒</h2>
+              <div class="fallback-tip">⚠️ 温馨提醒：AI 率仍约 20%–30%，请当作学习工具，不要当代写工具用。</div>
+            </main>
+            <aside class="blog-article__aside">
+              <div class="author-card">
+                <img src="avatar.png" alt="Mia" />
+                <div>
+                  <b>Mia · 雷雨苗</b>
+                  <span>独立开源 · GitHub</span>
+                </div>
+              </div>
+              <div class="blog-toc">
+                <h4>On this page</h4>
+                <ul>
+                  <li><a data-scroll-to="wenfeng-steps">三步流程</a></li>
+                  <li><a data-scroll-to="wenfeng-scene">典型使用场景</a></li>
+                  <li><a data-scroll-to="wenfeng-tip">使用提醒</a></li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </article>
       </template>
 
       <template id="exp-tpl-meituan">
-        <div class="exp-detail__head">
-          <span class="exp-card__no">E</span>
-          <h3>美团大学城美食地图</h3>
-          <span class="entry-panel__sub">链接在美团内部平台 · 无法分享</span>
-        </div>
-        <p class="desc">目标用户：大学生。核心痛点是"吃什么"的决策困境。经用户观察，痛点根源包括：平台认知负荷过高、商家供需不匹配、评价真实性存疑、行程时间成本、跨平台交互负担与预算约束。</p>
-        <ol class="steps">
-          <li><b>个性化推荐</b>：不粗暴减推送，而是按用户偏好优先级降序</li>
-          <li><b>即时评价 + 当地人评价</b>：按 IP 划分本地/外地 → 提升可信度</li>
-          <li><b>好友 / 圈层美食地图共创</b>：促进圈层信息流转与 GMV 转化</li>
-          <li><b>单项推荐 + 推荐理由</b>：明星同款、减脂卡路里、时间预估</li>
-        </ol>
+        <article class="blog-article">
+          <header class="blog-article__head">
+            <button type="button" class="blog-article__back" data-exp-close="1">← 返回作品集</button>
+            <div class="blog-article__tags">
+              <span class="tag">用户用研</span>
+              <span class="tag">内部平台</span>
+              <time>2024 · 06</time>
+            </div>
+            <h1 class="blog-article__title">美团大学城美食地图</h1>
+            <p class="blog-article__desc">链接在美团内部平台 · 无法分享</p>
+          </header>
+          <div class="blog-article__cover blog-article__cover--gradient" style="--g1:#22c55e;--g2:#84cc16;">
+            <span class="blog-article__cover-mark">🍜</span>
+          </div>
+          <div class="blog-article__grid">
+            <main class="blog-article__main">
+              <h2 id="meituan-pain">痛点根源</h2>
+              <p class="desc">目标用户：大学生。核心痛点是"吃什么"的决策困境。经用户观察，痛点根源包括：平台认知负荷过高、商家供需不匹配、评价真实性存疑、行程时间成本、跨平台交互负担与预算约束。</p>
+              <h2 id="meituan-design">功能设计</h2>
+              <ol class="steps">
+                <li><b>个性化推荐</b>：不粗暴减推送，而是按用户偏好优先级降序</li>
+                <li><b>即时评价 + 当地人评价</b>：按 IP 划分本地/外地 → 提升可信度</li>
+                <li><b>好友 / 圈层美食地图共创</b>：促进圈层信息流转与 GMV 转化</li>
+                <li><b>单项推荐 + 推荐理由</b>：明星同款、减脂卡路里、时间预估</li>
+              </ol>
+            </main>
+            <aside class="blog-article__aside">
+              <div class="author-card">
+                <img src="avatar.png" alt="Mia" />
+                <div>
+                  <b>Mia · 雷雨苗</b>
+                  <span>墨大硕士 · 独立设计</span>
+                </div>
+              </div>
+              <div class="blog-toc">
+                <h4>On this page</h4>
+                <ul>
+                  <li><a data-scroll-to="meituan-pain">痛点根源</a></li>
+                  <li><a data-scroll-to="meituan-design">功能设计</a></li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </article>
       </template>
 
     </div>
@@ -821,7 +1044,7 @@
           <div class="marquee-grid">
 
             <div class="marquee-col marquee-col--down">
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="frankenstein-1.jpg"><img src="frankenstein-1.jpg" alt="#弗兰肯斯坦 · 拼贴 1" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147467118.jpg"><img src="templates/graduation/gen-1784147467118.jpg" alt="" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147458826.jpg"><img src="templates/graduation/gen-1784147458826.jpg" alt="" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147340035.jpg"><img src="templates/portrait/gen-1784147340035.jpg" alt="" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147499970.jpg"><img src="templates/graduation/gen-1784147499970.jpg" alt="" loading="lazy" /></button>
@@ -834,9 +1057,9 @@
             </div>
 
             <div class="marquee-col marquee-col--up">
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="rusty-lake-1.jpg"><img src="rusty-lake-1.jpg" alt="#锈湖 · 拼贴" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147467118.jpg"><img src="templates/graduation/gen-1784147467118.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147344534.jpg"><img src="templates/portrait/gen-1784147344534.jpg" alt="" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1779249480283-1784148074657.jpg"><img src="templates/portrait/gen-1779249480283-1784148074657.jpg" alt="" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="frankenstein-1.jpg"><img src="frankenstein-1.jpg" alt="#弗兰肯斯坦 · 拼贴 1" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="frankenstein-3.jpg"><img src="frankenstein-3.jpg" alt="#弗兰肯斯坦 · 拼贴 3" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147629990.jpg"><img src="templates/graduation/gen-1784147629990.jpg" alt="" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147366213.jpg"><img src="templates/portrait/gen-1784147366213.jpg" alt="" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147645180.jpg"><img src="templates/graduation/gen-1784147645180.jpg" alt="" loading="lazy" /></button>
@@ -848,19 +1071,19 @@
 
             <div class="marquee-col marquee-col--down">
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147634931.jpg"><img src="templates/graduation/gen-1784147634931.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1779249480283-1784148074657.jpg"><img src="templates/portrait/gen-1779249480283-1784148074657.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147684506.jpg"><img src="templates/graduation/gen-1784147684506.jpg" alt="" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="rusty-lake-1.jpg"><img src="rusty-lake-1.jpg" alt="#锈湖 · 拼贴" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="frankenstein-2.jpg"><img src="frankenstein-2.jpg" alt="#弗兰肯斯坦 · 拼贴 2" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147706074.jpg"><img src="templates/graduation/gen-1784147706074.jpg" alt="" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147741203.jpg"><img src="templates/graduation/gen-1784147741203.jpg" alt="" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148103392.jpg"><img src="templates/portrait/img-1784148103392.jpg" alt="" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147784549.jpg"><img src="templates/graduation/gen-1784147784549.jpg" alt="" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147820857.jpg"><img src="templates/graduation/gen-1784147820857.jpg" alt="" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784148002490.jpg"><img src="templates/graduation/gen-1784148002490.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="frankenstein-2.jpg"><img src="frankenstein-2.jpg" alt="" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147684506.jpg"><img src="templates/graduation/gen-1784147684506.jpg" alt="" loading="lazy" /></button>
             </div>
 
             <div class="marquee-col marquee-col--up">
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="frankenstein-3.jpg"><img src="frankenstein-3.jpg" alt="#弗兰肯斯坦 · 拼贴 3" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147344534.jpg"><img src="templates/portrait/gen-1784147344534.jpg" alt="" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147656187.jpg"><img src="templates/graduation/gen-1784147656187.jpg" alt="" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147665530.jpg"><img src="templates/graduation/gen-1784147665530.jpg" alt="" loading="lazy" /></button>
               <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147379183.jpg"><img src="templates/portrait/gen-1784147379183.jpg" alt="" loading="lazy" /></button>
