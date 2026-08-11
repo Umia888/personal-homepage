@@ -293,64 +293,22 @@ function setupBookTrack(track) {
 })();
 
 /* ─────────────────────────────────────────
-   8. Aceternity · Draggable Card
+   8. Aceternity · 3D Marquee
+   （纯 CSS 动画驱动，无需 JS；此处仅暴露一个可选的
+    "视口不可见时暂停动画" 优化）
 ───────────────────────────────────────── */
-(function initDraggable() {
-  const board = $('#drag-board');
-  if (!board) return;
-  const cards = $$('.drag-card', board);
-  if (!cards.length) return;
-
-  // 移动端 fallback（CSS 已经处理）
-  const mq = matchMedia('(max-width: 720px)');
-  if (mq.matches) return;
-
-  cards.forEach(card => attachDrag(card));
-
-  $('#btn-reset-drag')?.addEventListener('click', () => {
-    cards.forEach(card => {
-      card.style.removeProperty('--tx');
-      card.style.removeProperty('--ty');
+(function initMarquee() {
+  const wrap = document.querySelector('.marquee-wrap');
+  if (!wrap) return;
+  if (!('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      wrap.querySelectorAll('.marquee-col').forEach(col => {
+        col.style.animationPlayState = e.isIntersecting ? 'running' : 'paused';
+      });
     });
-  });
-
-  function attachDrag(card) {
-    let startX, startY, tx0, ty0, moved;
-
-    const isInteractive = (el) => !!el.closest('.media-item, .like');
-
-    card.addEventListener('pointerdown', (e) => {
-      if (isInteractive(e.target)) return;
-      // 不阻止默认，允许原生 click 事件（否则灯箱触发失败）
-      startX = e.clientX; startY = e.clientY; moved = false;
-      tx0 = parseFloat(card.style.getPropertyValue('--tx')) || 0;
-      ty0 = parseFloat(card.style.getPropertyValue('--ty')) || 0;
-      try { card.setPointerCapture(e.pointerId); } catch (_) {}
-    });
-
-    card.addEventListener('pointermove', (e) => {
-      if (startX == null) return;
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
-      if (!moved && (Math.abs(dx) > 3 || Math.abs(dy) > 3)) {
-        moved = true;
-        card.classList.add('is-dragging');
-      }
-      if (moved) {
-        card.style.setProperty('--tx', (tx0 + dx) + 'px');
-        card.style.setProperty('--ty', (ty0 + dy) + 'px');
-        e.preventDefault();
-      }
-    });
-
-    const end = (e) => {
-      if (moved) card.classList.remove('is-dragging');
-      startX = startY = null; moved = false;
-      try { card.releasePointerCapture(e.pointerId); } catch (_) {}
-    };
-    card.addEventListener('pointerup', end);
-    card.addEventListener('pointercancel', end);
-  }
+  }, { threshold: 0 });
+  io.observe(wrap);
 })();
 
 /* ─────────────────────────────────────────
@@ -377,37 +335,7 @@ function setupBookTrack(track) {
 })();
 
 /* ─────────────────────────────────────────
-   10. 内容墙分类 + 点赞
-───────────────────────────────────────── */
-(function initWall() {
-  const tabs  = $$('.wall-tabs button');
-  const cards = $$('.drag-board .drag-card');
-  if (!tabs.length) return;
-
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const key = btn.dataset.wall;
-      tabs.forEach(b => b.classList.toggle('active', b === btn));
-      cards.forEach(c => {
-        const show = (key === 'all') || (c.dataset.wall === key);
-        c.style.display = show ? '' : 'none';
-      });
-    });
-  });
-
-  $$('.drag-board .like').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const num = btn.querySelector('span');
-      const liked = btn.classList.toggle('liked');
-      const cur = parseInt(num?.textContent || '0', 10) || 0;
-      if (num) num.textContent = String(liked ? cur + 1 : Math.max(0, cur - 1));
-    });
-  });
-})();
-
-/* ─────────────────────────────────────────
-   11. Timeline 抽屉
+   10. Timeline 抽屉
 ───────────────────────────────────────── */
 const drawer = $('#drawer');
 function openDrawer()  {
@@ -477,7 +405,7 @@ function renderLightbox() {
 }
 function openLightbox(item) {
   lbType = (item.dataset.mediaType === 'video') ? 'video' : 'image';
-  const scope = item.closest('.exp-modal, .drag-card, .msg-card') || document;
+  const scope = item.closest('.exp-modal, .marquee-wrap, .msg-card') || document;
   lbList = buildMediaList(scope, lbType);
   lbIndex = Math.max(0, lbList.indexOf(item.dataset.mediaSrc));
   renderLightbox();
