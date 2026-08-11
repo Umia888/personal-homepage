@@ -150,13 +150,19 @@ em         { font-style: normal; color: var(--brand); }
 }
 
 .hero__bg {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  z-index: -3;
-  opacity: 0.35;
-  filter: saturate(120%) contrast(105%);
+  position: absolute; inset: 0; z-index: -3;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(62,207,142,0.22), transparent 45%),
+    radial-gradient(circle at 82% 68%, rgba(62,207,142,0.14), transparent 50%),
+    radial-gradient(circle at 50% 120%, rgba(120,180,255,0.10), transparent 55%);
+  filter: blur(30px);
+  animation: heroDrift 22s ease-in-out infinite alternate;
 }
+@keyframes heroDrift {
+  from { transform: translate3d(-2%, -1%, 0) scale(1.05); }
+  to   { transform: translate3d( 2%,  1%, 0) scale(1.12); }
+}
+@media (prefers-reduced-motion: reduce) { .hero__bg { animation: none; } }
 .hero__bg-mask {
   position: absolute; inset: 0; z-index: -2;
   background:
@@ -283,6 +289,8 @@ em         { font-style: normal; color: var(--brand); }
   margin-bottom: 6px;
 }
 .stat span { font-size: 13px; color: var(--text-3); }
+.hero__meta { display:inline-block; margin-top:10px; font-size:13px; opacity:.55; }
+.stat-note  { display:block; margin-top:3px; font-size:11px; font-style:normal; opacity:.5; }
 
 /* Scroll 提示 */
 .hero__scroll {
@@ -380,6 +388,17 @@ em         { font-style: normal; color: var(--brand); }
   align-items: start;
 }
 
+/* Why / What / How 三卡 */
+.wwh { display:grid; gap:14px; margin:0 0 44px; grid-template-columns:repeat(3,1fr); }
+@media (max-width:900px){ .wwh{ grid-template-columns:1fr; } }
+.wwh__item { padding:22px 20px 20px; background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.08); border-radius:14px; }
+.wwh__item--accent { background:rgba(62,207,142,.055); border-color:rgba(62,207,142,.30); }
+.wwh__k { display:inline-block; margin-bottom:10px; font-size:11px; font-weight:700;
+  letter-spacing:.12em; text-transform:uppercase; color:#3ecf8e; opacity:.9; }
+.wwh__item h3 { margin:0 0 8px; font-size:16px; line-height:1.45; }
+.wwh__item p  { margin:0; font-size:13.5px; line-height:1.8; opacity:.72; }
+
 /* ═══════════════════════════════════════════════════════════
    01 · 能力矩阵
 ═══════════════════════════════════════════════════════════ */
@@ -416,6 +435,10 @@ em         { font-style: normal; color: var(--brand); }
 .feature-card__icon { font-size: 20px; margin-bottom: 4px; }
 .feature-card__title { font-size: 14.5px; font-weight: 500; color: var(--text); }
 .feature-card__hint { font-size: 12.5px; color: var(--text-3); }
+.feature-card.is-primary { border-color: rgba(62,207,142,.45); }
+.chip-main { display:inline-block; margin-left:6px; padding:1px 7px; font-size:10px;
+  font-style:normal; font-weight:600; color:#0a0a0a; background:#3ecf8e;
+  border-radius:999px; vertical-align:middle; }
 
 .feature-detail {
   background: var(--bg-2);
@@ -470,6 +493,24 @@ em         { font-style: normal; color: var(--brand); }
 .link-out .arrow { transition: transform 0.2s; }
 .link-out:hover .arrow { transform: translateX(3px); }
 
+/* 编号阶梯组件（ux / eval / prompt 三处使用） */
+.ladder { list-style:none; margin:12px 0 0; padding:0; counter-reset:lad; }
+.ladder li { counter-increment:lad; position:relative; padding:10px 12px 10px 42px;
+  margin-bottom:8px; background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07); border-left:2px solid rgba(62,207,142,.55);
+  border-radius:8px; }
+.ladder li::before { content:counter(lad); position:absolute; left:12px; top:50%;
+  transform:translateY(-50%); width:20px; height:20px; border-radius:50%;
+  display:grid; place-items:center; font-size:11px; font-weight:700;
+  color:#0a0a0a; background:#3ecf8e; }
+.ladder li b { display:block; font-size:14px; }
+.ladder li span { display:block; font-size:12.5px; opacity:.68; margin-top:2px; }
+.desc--tight { margin:10px 0 0; font-size:13.5px; line-height:1.75; }
+.detail-card--accent { background:rgba(62,207,142,.05); border-color:rgba(62,207,142,.28); }
+
+/* 详情卡里嵌套多张卡时，加点上下间距 */
+.fdetail-panel .detail-card + .detail-card { margin-top: 16px; }
+
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -513,6 +554,19 @@ em         { font-style: normal; color: var(--brand); }
 .ops-table tbody tr:last-child td { border-bottom: none; }
 .ops-table td { color: var(--text-2); }
 .ops-table td:first-child { color: var(--text); font-weight: 500; }
+
+/* 经历表脚注 */
+.ops-note { padding:12px 24px; margin:0; font-size:12.5px; color:var(--text-3);
+  line-height:1.75; border-top:1px solid var(--border); }
+
+/* 关于我这个人 · 软素质 */
+.traits { margin-top:18px; padding:18px 20px; background:rgba(62,207,142,.04);
+  border:1px solid rgba(62,207,142,.20); border-radius:12px; }
+.traits__k { display:block; margin-bottom:10px; font-size:11px; font-weight:700;
+  letter-spacing:.12em; text-transform:uppercase; color:#3ecf8e; opacity:.9; }
+.traits ul { margin:0; padding-left:18px; }
+.traits li { margin-bottom:7px; font-size:13.5px; line-height:1.75; opacity:.78; }
+.traits li b { opacity:1; }
 
 /* Live / Soon 徽章 */
 .badge-live, .badge-soon, .badge-new {
@@ -1258,4 +1312,13 @@ em         { font-style: normal; color: var(--brand); }
     transition-duration: 0.01ms !important;
   }
   html { scroll-behavior: auto; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   打印样式（方便对方把主页导出成 PDF）
+═══════════════════════════════════════════════════════════ */
+@media print {
+  .topbar, .hero__scroll, .drawer, .btn-drawer, .faq-fallback { display:none !important; }
+  body { background:#fff !important; color:#111 !important; }
+  .section { page-break-inside: avoid; }
 }

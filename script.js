@@ -324,27 +324,3 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-/* ─────────────────────────────────────────
-   9. Hero 背景视频：可见性变化时暂停 / 恢复
-───────────────────────────────────────── */
-(function initHeroBg() {
-  const bg = document.querySelector('.hero__bg');
-  if (!bg) return;
-
-  bg.playbackRate = 0.9;                              // 背景稍慢
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) bg.pause();
-    else bg.play().catch(() => {});
-  });
-
-  // 视口滚出 Hero 时暂停，减少资源
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(en => {
-        if (en.isIntersecting) bg.play().catch(() => {});
-        else bg.pause();
-      });
-    }, { threshold: 0.05 });
-    io.observe(bg);
-  }
-})();
