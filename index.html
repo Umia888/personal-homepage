@@ -56,7 +56,27 @@
 <body>
 
   <!-- ══════════════════════════════════════════
-       Hero 首屏
+       Floating Dock 顶栏（文字版）· 磁吸放大
+  ══════════════════════════════════════════ -->
+  <nav class="fdock-wrap" aria-label="全站导航">
+    <div class="fdock" id="fdock">
+      <a href="#hero"       class="fdock__item" data-nav="hero">首页</a>
+      <a href="#about"      class="fdock__item" data-nav="about">关于我</a>
+      <a href="#experience" class="fdock__item" data-nav="experience">经历</a>
+      <a href="#portfolio"  class="fdock__item" data-nav="portfolio">作品集</a>
+      <a href="#faq"        class="fdock__item" data-nav="faq">FAQ</a>
+      <a href="#wall"       class="fdock__item" data-nav="wall">内容墙</a>
+      <a href="#updates"    class="fdock__item" data-nav="updates">动态</a>
+      <span class="fdock__sep" aria-hidden="true"></span>
+      <a href="mailto:Lym16816888@126.com" class="fdock__item">Email</a>
+      <a href="https://github.com/Umia888" target="_blank" rel="noopener" class="fdock__item">GitHub</a>
+      <span class="fdock__sep" aria-hidden="true"></span>
+      <button type="button" class="fdock__item fdock__theme" id="btn-theme">Theme</button>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       Hero · 左文字 + 右 ASCII / 头像
   ══════════════════════════════════════════ -->
   <section id="hero" class="hero">
     <div class="hero__bg" aria-hidden="true"></div>
@@ -64,7 +84,7 @@
 
     <div class="container hero__inner">
 
-      <div class="hero__head">
+      <div class="hero__col hero__col--main">
         <div class="blur-fade" style="--fade-delay: 0.04s;">
           <span class="hero__badge">
             <span class="dot"></span>
@@ -77,49 +97,52 @@
           </h1>
         </div>
 
-        <a class="hero__avatar blur-fade" style="--fade-delay: 0.04s;" href="#about" aria-label="头像">
+        <p class="hero__subtitle blur-fade" style="--fade-delay: 0.12s;">
+          用户需求分析 · 数据驱动决策 · 方案设计与落地。<br />
+          我习惯从真实行为数据出发拆解需求，再把它变成能排期、能验收、能上线的方案——而不是停在「用户好像想要」。
+          <span class="hero__meta">小红书（上海）4 个月 · 阿里巴巴淘天（杭州）3 个月｜B / C 端 · 电商 &amp; 社区双平台｜墨尔本大学 法学硕士｜2027 届</span>
+        </p>
+
+        <div class="cta-group blur-fade" style="--fade-delay: 0.20s;">
+          <a href="#portfolio" class="btn btn-primary">立即查看作品 <span class="arrow">→</span></a>
+          <a href="mailto:Lym16816888@126.com" class="btn btn-secondary">联系我 ↗</a>
+        </div>
+
+        <div class="stats blur-fade" role="list" style="--fade-delay: 0.28s;">
+          <div class="stat" role="listitem">
+            <b>19K+</b>
+            <span>单条内容最高点赞</span>
+            <i class="stat-note">小红书 · 个人账号</i>
+          </div>
+          <div class="stat" role="listitem">
+            <b>76</b>
+            <span>上线内容模板</span>
+            <i class="stat-note">从需求定义到上线全流程</i>
+          </div>
+          <div class="stat" role="listitem">
+            <b>100+</b>
+            <span>用户反馈研判</span>
+            <i class="stat-note">真实性 / 影响面 / 优先级定级</i>
+          </div>
+          <div class="stat" role="listitem">
+            <b>5H</b>
+            <span>热点看板刷新频率</span>
+            <i class="stat-note">自动抓取 + 热度分级</i>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__col hero__col--art blur-fade" style="--fade-delay: 0.10s;">
+        <pre class="ascii-art" id="ascii-art" aria-hidden="true"></pre>
+        <a href="#about" class="hero__avatar" aria-label="头像">
           <img src="avatar.png" alt="雷雨苗头像" />
         </a>
-      </div>
-
-      <p class="hero__subtitle blur-fade" style="--fade-delay: 0.12s;">
-        用户需求分析 · 数据驱动决策 · 方案设计与落地。<br />
-        我习惯从真实行为数据出发拆解需求，再把它变成能排期、能验收、能上线的方案——而不是停在「用户好像想要」。
-        <span class="hero__meta">小红书（上海）4 个月 · 阿里巴巴淘天（杭州）3 个月｜B / C 端 · 电商 &amp; 社区双平台｜墨尔本大学 法学硕士｜2027 届</span>
-      </p>
-
-      <div class="cta-group blur-fade" style="--fade-delay: 0.20s;">
-        <a href="#portfolio" class="btn btn-primary">立即查看作品 <span class="arrow">→</span></a>
-        <a href="mailto:Lym16816888@126.com" class="btn btn-secondary">联系我 ↗</a>
-      </div>
-
-      <div class="stats blur-fade" role="list" style="--fade-delay: 0.28s;">
-        <div class="stat" role="listitem">
-          <b>19K+</b>
-          <span>单条内容最高点赞</span>
-          <i class="stat-note">小红书 · 个人账号</i>
-        </div>
-        <div class="stat" role="listitem">
-          <b>76</b>
-          <span>上线内容模板</span>
-          <i class="stat-note">从需求定义到上线全流程</i>
-        </div>
-        <div class="stat" role="listitem">
-          <b>100+</b>
-          <span>用户反馈研判</span>
-          <i class="stat-note">真实性 / 影响面 / 优先级定级</i>
-        </div>
-        <div class="stat" role="listitem">
-          <b>5H</b>
-          <span>热点看板刷新频率</span>
-          <i class="stat-note">自动抓取 + 热度分级</i>
-        </div>
       </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════════
-       01 · 关于我：Why / What / How + 能力矩阵 + 经历 + traits
+       01 · About Me
   ══════════════════════════════════════════ -->
   <section id="about" class="section section--soft">
     <div class="container">
@@ -150,10 +173,7 @@
         </article>
       </div>
 
-      <!-- 能力矩阵：手风琴形式（模仿 magicui accordion 交互） -->
       <div class="capa-list blur-fade">
-
-        <!-- ① ux —— 主线，默认展开 -->
         <details class="capa-item is-primary" data-feature="ux" open>
           <summary>
             <div class="capa-item__icon">🔍</div>
@@ -164,10 +184,7 @@
             <span class="capa-item__caret" aria-hidden="true">+</span>
           </summary>
           <div class="capa-body">
-            <p class="desc">
-              在小红书负责评估用户反馈的真实性与有效性，并结合当期目标判断优先级。<b>反馈从来不缺，缺的是判断哪条值得做。</b>
-            </p>
-
+            <p class="desc">在小红书负责评估用户反馈的真实性与有效性，并结合当期目标判断优先级。<b>反馈从来不缺，缺的是判断哪条值得做。</b></p>
             <div class="detail-card detail-card--accent">
               <h4>⭐ 我的三道筛子</h4>
               <ol class="ladder">
@@ -175,11 +192,8 @@
                 <li><b>是不是普遍问题</b><span>影响多少人，还是个例</span></li>
                 <li><b>做了是否对齐当期目标</b><span>不对齐的先入池，不占排期</span></li>
               </ol>
-              <p class="desc--tight">
-                三条缺一都不进排期。<b>需求不能按声音大小投票</b>——喊得最响的往往是最活跃的用户，不是最多的用户。
-              </p>
+              <p class="desc--tight">三条缺一都不进排期。<b>需求不能按声音大小投票</b>——喊得最响的往往是最活跃的用户，不是最多的用户。</p>
             </div>
-
             <div class="detail-card">
               <h4>找需求的三个入口</h4>
               <ul class="pill-list">
@@ -187,14 +201,11 @@
                 <li>反馈样本研判 · 百人量级</li>
                 <li>竞品链路盘点 · 别人已经解了哪些</li>
               </ul>
-              <p class="desc--tight">
-                我更信<b>行为数据</b>而不是问卷——搜索是已经发生的真实需求。
-              </p>
+              <p class="desc--tight">我更信<b>行为数据</b>而不是问卷——搜索是已经发生的真实需求。</p>
             </div>
           </div>
         </details>
 
-        <!-- ② content -->
         <details class="capa-item" data-feature="content">
           <summary>
             <div class="capa-item__icon">📈</div>
@@ -205,17 +216,11 @@
             <span class="capa-item__caret" aria-hidden="true">+</span>
           </summary>
           <div class="capa-body">
-            <p class="desc">
-              内容侧的判断力来自两头：<b>亲手做过内容并拿到过真实数据</b>；<b>把选题从灵感变成流程</b>。
-            </p>
-
+            <p class="desc">内容侧的判断力来自两头：<b>亲手做过内容并拿到过真实数据</b>；<b>把选题从灵感变成流程</b>。</p>
             <div class="detail-card detail-card--accent">
               <h4>⭐ 我自己发起的一件事：热点看板</h4>
-              <p class="desc--tight">
-                当时选题方向靠人肉刷热点，效率低且不可复现。我做了个自动看板：<b>粘贴链接 → 每 5 小时自动抓取 → 生成登记卡片</b>，含摘要、热度评级、关键词、话题与风险点，按热度分五档排序。<b>它把「灵感」变成了可复用的数据输入</b>——这不是别人派的活，是我发现问题之后自己做的。
-              </p>
+              <p class="desc--tight">当时选题方向靠人肉刷热点，效率低且不可复现。我做了个自动看板：<b>粘贴链接 → 每 5 小时自动抓取 → 生成登记卡片</b>，含摘要、热度评级、关键词、话题与风险点，按热度分五档排序。<b>它把「灵感」变成了可复用的数据输入</b>——这不是别人派的活，是我发现问题之后自己做的。</p>
             </div>
-
             <div class="detail-card">
               <h4>内容实践</h4>
               <ul class="pill-list">
@@ -224,14 +229,11 @@
                 <li>H5 玩法与节点设计</li>
                 <li>个人账号创作 · 单条最高 19K+ 赞</li>
               </ul>
-              <p class="desc--tight">
-                做过爆款和分析爆款是两回事。<b>亲手拿到过数据，才知道哪些指标是虚的。</b>
-              </p>
+              <p class="desc--tight">做过爆款和分析爆款是两回事。<b>亲手拿到过数据，才知道哪些指标是虚的。</b></p>
             </div>
           </div>
         </details>
 
-        <!-- ③ eval -->
         <details class="capa-item" data-feature="eval">
           <summary>
             <div class="capa-item__icon">🎯</div>
@@ -242,10 +244,7 @@
             <span class="capa-item__caret" aria-hidden="true">+</span>
           </summary>
           <div class="capa-body">
-            <p class="desc">
-              一堆问题摆在面前，凭什么说先做这个？<b>业务侧要的是排序依据，不是问题清单。</b>
-            </p>
-
+            <p class="desc">一堆问题摆在面前，凭什么说先做这个？<b>业务侧要的是排序依据，不是问题清单。</b></p>
             <div class="detail-card detail-card--accent">
               <h4>先建立用户心理的递进模型</h4>
               <ol class="ladder">
@@ -253,11 +252,8 @@
                 <li><b>体验达标</b><span>要明显好过用户自己能得到的</span></li>
                 <li><b>愿意分享</b><span>过得了自己这关，才会传播</span></li>
               </ol>
-              <p class="desc--tight">
-                三层<b>递进且不可跳跃</b>，底层不成立时上层做得再好也没意义。<b>优先级由此自然推导，不需要靠资历或嗓门争论。</b>
-              </p>
+              <p class="desc--tight">三层<b>递进且不可跳跃</b>，底层不成立时上层做得再好也没意义。<b>优先级由此自然推导，不需要靠资历或嗓门争论。</b></p>
             </div>
-
             <div class="detail-card">
               <h4>再用三轴定级</h4>
               <ul class="pill-list">
@@ -265,14 +261,11 @@
                 <li>频次 · 抽样中的出现比例</li>
                 <li>可解决性 · 是能力问题还是执行侧可解</li>
               </ul>
-              <p class="desc--tight">
-                三轴交叉后问题清单会自动收敛成<b>一份可以直接排期的优先级表</b>。好的排序框架，标准是<b>不同角色看完能得出同一个结论</b>。
-              </p>
+              <p class="desc--tight">三轴交叉后问题清单会自动收敛成<b>一份可以直接排期的优先级表</b>。好的排序框架，标准是<b>不同角色看完能得出同一个结论</b>。</p>
             </div>
           </div>
         </details>
 
-        <!-- ④ prompt -->
         <details class="capa-item" data-feature="prompt">
           <summary>
             <div class="capa-item__icon">🛠</div>
@@ -283,21 +276,15 @@
             <span class="capa-item__caret" aria-hidden="true">+</span>
           </summary>
           <div class="capa-body">
-            <p class="desc">
-              需求判断完不算完。<b>得变成方案、推给对的人、跟到上线。</b>
-            </p>
-
+            <p class="desc">需求判断完不算完。<b>得变成方案、推给对的人、跟到上线。</b></p>
             <div class="detail-card detail-card--accent">
               <h4>B 端和 C 端我都做过</h4>
               <ol class="ladder">
                 <li><b>C 端</b><span>AI 功能的模板方向定义、H5 玩法设计、用户体验问题定级</span></li>
                 <li><b>B 端</b><span>内部反馈流转工具、找人地图、数据看板；用户是同事，需求同样要调研、同样要排优先级</span></li>
               </ol>
-              <p class="desc--tight">
-                两端的差别不在方法，<b>在验收标准</b>。C 端看用户愿不愿意用，B 端看流程是不是真的变快了。
-              </p>
+              <p class="desc--tight">两端的差别不在方法，<b>在验收标准</b>。C 端看用户愿不愿意用，B 端看流程是不是真的变快了。</p>
             </div>
-
             <div class="detail-card">
               <h4>跨职能协作</h4>
               <ul class="pill-list">
@@ -306,11 +293,8 @@
                 <li>和工程对齐可行性与排期成本</li>
                 <li>对外访谈创作者、对接合作企业</li>
               </ul>
-              <p class="desc--tight">
-                推动落地最难的不是说服，<b>是让对方能用自己的语言复述我的需求</b>。所以我给出的东西尽量可判定——不说「效果不好」，而说「哪一项、多少比例、卡在哪一层」。
-              </p>
+              <p class="desc--tight">推动落地最难的不是说服，<b>是让对方能用自己的语言复述我的需求</b>。所以我给出的东西尽量可判定——不说「效果不好」，而说「哪一项、多少比例、卡在哪一层」。</p>
             </div>
-
             <div class="detail-card">
               <h4>完整跑过的链路</h4>
               <ul class="pill-list">
@@ -320,7 +304,6 @@
           </div>
         </details>
 
-        <!-- ⑤ vibe -->
         <details class="capa-item" data-feature="vibe">
           <summary>
             <div class="capa-item__icon">⚡</div>
@@ -331,17 +314,11 @@
             <span class="capa-item__caret" aria-hidden="true">+</span>
           </summary>
           <div class="capa-body">
-            <p class="desc">
-              从 2022 年起用 Vibe Coding 搭可运行的原型：网页工具、内部效率助手、数据看板，以及这个站本身。
-            </p>
-
+            <p class="desc">从 2022 年起用 Vibe Coding 搭可运行的原型：网页工具、内部效率助手、数据看板，以及这个站本身。</p>
             <div class="detail-card detail-card--accent">
               <h4>⭐ 它的真实价值</h4>
-              <p class="desc--tight">
-                不是「我会写代码」，而是<b>不用等排期就能验证想法</b>。一个判断对不对，做出来跑一遍最快；<b>能自己做原型的人，提需求时更清楚什么可行、代价有多大。</b>
-              </p>
+              <p class="desc--tight">不是「我会写代码」，而是<b>不用等排期就能验证想法</b>。一个判断对不对，做出来跑一遍最快；<b>能自己做原型的人，提需求时更清楚什么可行、代价有多大。</b></p>
             </div>
-
             <div class="detail-card">
               <h4>跑通的东西我会做成工具</h4>
               <ul class="pill-list">
@@ -349,20 +326,17 @@
                 <li>反馈流转助手 · 自动定位对接人</li>
                 <li>质量评估 SOP · 提问-评估-修改闭环</li>
               </ul>
-              <p class="desc--tight">
-                反馈助手解决的是一个<b>没人负责但所有人都在受苦</b>的问题——群里收到反馈不知道该找谁，这个映射关系原本只存在于少数老员工脑子里，<b>我把它显性化了。</b>
-              </p>
+              <p class="desc--tight">反馈助手解决的是一个<b>没人负责但所有人都在受苦</b>的问题——群里收到反馈不知道该找谁，这个映射关系原本只存在于少数老员工脑子里，<b>我把它显性化了。</b></p>
               <a class="link-out" href="#portfolio">前往作品集 <span class="arrow">→</span></a>
             </div>
           </div>
         </details>
-
       </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════════
-       02 · 经历 & 角色
+       02 · Experience
   ══════════════════════════════════════════ -->
   <section id="experience" class="section">
     <div class="container">
@@ -381,7 +355,6 @@
           </div>
           <div class="expr-item__time">2026.05 – 2026.08<br /><span style="opacity:.6">4 个月</span></div>
         </div>
-
         <div class="expr-item">
           <div class="expr-item__logo">阿</div>
           <div class="expr-item__body">
@@ -391,7 +364,6 @@
           </div>
           <div class="expr-item__time">2025.12 – 2026.02<br /><span style="opacity:.6">3 个月</span></div>
         </div>
-
         <div class="expr-item">
           <div class="expr-item__logo">校</div>
           <div class="expr-item__body">
@@ -423,190 +395,234 @@
   </section>
 
   <!-- ══════════════════════════════════════════
-       03 · 作品集
+       03 · Portfolio · Expandable Cards（点击展开）
   ══════════════════════════════════════════ -->
   <section id="portfolio" class="section section--soft">
     <div class="container">
       <header class="section-head blur-fade">
         <div class="section-head__meta"><span class="no">03</span><span>Portfolio</span></div>
-        <h2 class="section-title">五个作品，<em>按方向</em>浏览</h2>
+        <h2 class="section-title">五个作品，<em>点开展开</em></h2>
         <p class="section-lead">
           从内容产品到法律科技，从 AIGC 模板到独立 Skill。<br />
           <b>以下项目中，我主要承担需求定义、方案设计与落地跟进的部分。</b>
         </p>
       </header>
 
-      <div class="entry-tabs blur-fade" role="tablist" aria-label="作品入口">
-        <button class="active" role="tab" data-entry="ditu"><b>A</b>点点生图</button>
-        <button role="tab" data-entry="alex"><b>B</b>Alex 星骰</button>
-        <button role="tab" data-entry="law"><b>C</b>法律 AI</button>
-        <button role="tab" data-entry="wenfeng"><b>D</b>文风模拟器</button>
-        <button role="tab" data-entry="meituan"><b>E</b>美食地图</button>
-      </div>
+      <div class="exp-cards blur-fade">
 
-      <div class="entry-detail blur-fade">
-
-        <!-- A · 点点生图 -->
-        <article class="entry-panel active" data-entry="ditu">
-          <div class="entry-panel__head">
-            <h3>点点生图 · AI 视觉在小红书场景的落地</h3>
-            <span class="entry-panel__sub">博主同款 / 任意门 / 大师镜头</span>
+        <button type="button" class="exp-card tilt" data-key="ditu">
+          <div class="exp-card__cover">
+            <img src="templates/graduation/gen-1784147732673.jpg" alt="点点生图代表模板" loading="lazy" />
           </div>
-
-          <ol class="steps">
-            <li><b>模型测评</b>：跑批测评 → 问题归因 → 输出上线建议</li>
-            <li><b>模板设计</b>：用户兴趣 + 传播潜力 + 竞品参考 → 出模板</li>
-            <li><b>运营闭环</b>：设计自动化数据看板，指导下一批模板方向</li>
-          </ol>
-
-          <div class="chat-demo" aria-label="效果演示">
-            <div class="bubble bot">
-              <span class="bubble__label">Prompt / Brief</span>
-              大师镜头 · 毕业季主题，需求：真实感、可传播、支持多身材
-            </div>
-            <div class="bubble user">
-              <span class="bubble__label">Output</span>
-              ✅ 已完成 12 张代表模板 · 已经过一致性 &amp; 稳定性测评 · 已进入排期
-            </div>
+          <div class="exp-card__body">
+            <span class="exp-card__no">A</span>
+            <h3>点点生图</h3>
+            <p>小红书 · AI 视觉内容 · 76 组节点模板 · 数据看板 5H 自动刷新</p>
           </div>
+          <span class="exp-card__cta">展开详情 <span class="arrow">→</span></span>
+        </button>
 
-          <h4 class="book-gallery-title">代表模板 · 毕业季 <span class="gm-tag-inline">100% AI 创作</span></h4>
-          <div class="book-gallery">
-            <div class="book-track">
-              <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147732673.jpg"><img src="templates/graduation/gen-1784147732673.jpg" alt="毕业季模板" loading="lazy" /></button>
-              <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147723124.jpg"><img src="templates/graduation/gen-1784147723124.jpg" alt="毕业季模板" loading="lazy" /></button>
-              <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147741203.jpg"><img src="templates/graduation/gen-1784147741203.jpg" alt="毕业季模板" loading="lazy" /></button>
-              <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/img-1784147462578.jpg"><img src="templates/graduation/img-1784147462578.jpg" alt="毕业季模板" loading="lazy" /></button>
-              <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147458826.jpg"><img src="templates/graduation/gen-1784147458826.jpg" alt="毕业季模板" loading="lazy" /></button>
-              <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147645180.jpg"><img src="templates/graduation/gen-1784147645180.jpg" alt="毕业季模板" loading="lazy" /></button>
-              <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147639314.jpg"><img src="templates/graduation/gen-1784147639314.jpg" alt="毕业季模板" loading="lazy" /></button>
-              <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147665530.jpg"><img src="templates/graduation/gen-1784147665530.jpg" alt="毕业季模板" loading="lazy" /></button>
-            </div>
+        <button type="button" class="exp-card tilt" data-key="alex">
+          <div class="exp-card__cover exp-card__cover--gradient" style="--g1:#c084fc;--g2:#818cf8;">
+            <span class="exp-card__cover-mark">✨</span>
           </div>
-
-          <h4 class="book-gallery-title">代表模板 · 写真风 <span class="gm-tag-inline">100% AI 创作</span></h4>
-          <div class="book-gallery">
-            <div class="book-track">
-              <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1779249480283-1784148074657.jpg"><img src="templates/portrait/gen-1779249480283-1784148074657.jpg" alt="写真风模板" loading="lazy" /></button>
-              <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784148044905.jpg"><img src="templates/portrait/gen-1784148044905.jpg" alt="写真风模板" loading="lazy" /></button>
-              <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148107383.jpg"><img src="templates/portrait/img-1784148107383.jpg" alt="写真风模板" loading="lazy" /></button>
-              <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148103392.jpg"><img src="templates/portrait/img-1784148103392.jpg" alt="写真风模板" loading="lazy" /></button>
-              <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147344534.jpg"><img src="templates/portrait/gen-1784147344534.jpg" alt="写真风模板" loading="lazy" /></button>
-              <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147340035.jpg"><img src="templates/portrait/gen-1784147340035.jpg" alt="写真风模板" loading="lazy" /></button>
-            </div>
-          </div>
-        </article>
-
-        <!-- B · Alex 星骰 -->
-        <article class="entry-panel" data-entry="alex">
-          <div class="entry-panel__head">
+          <div class="exp-card__body">
+            <span class="exp-card__no">B</span>
             <h3>点点 Skills · Alex 星骰</h3>
-            <span class="entry-panel__sub">让 AI 回答"更像博主本人" · 链接在小红书内部平台 · 无法分享</span>
+            <p>让 AI 回答"更像博主本人" · 内部平台发布 · Knowledge 体系 + 多方向子 Skill</p>
           </div>
+          <span class="exp-card__cta">展开详情 <span class="arrow">→</span></span>
+        </button>
 
-          <ol class="steps">
-            <li><b>知识分层</b>：博主语料 vs 占星理论分块，各 chunk 打标签</li>
-            <li><b>Skill 编写</b>：主 Skill + 多方向子 Skill</li>
-            <li><b>回答优化</b>：约束条件 + QA 范例 → 让回答"具体、准确、像本人"</li>
-          </ol>
-
-          <div class="chat-demo">
-            <div class="bubble bot">
-              <span class="bubble__label">User</span>
-              Alex 大叔，最近水逆我要不要跳槽？
-            </div>
-            <div class="bubble user">
-              <span class="bubble__label">Alex 星骰</span>
-              宝，水逆的时候动大盘，回头一定会拍大腿。这周把简历改好、把人脉打点好，等出逆再发出去，正合适。
-            </div>
+        <button type="button" class="exp-card tilt" data-key="law">
+          <div class="exp-card__cover exp-card__cover--gradient" style="--g1:#f59e0b;--g2:#ea580c;">
+            <span class="exp-card__cover-mark">⚖️</span>
           </div>
-
-          <div class="detail-card">
-            <h4>主要产出</h4>
-            <ul class="pill-list">
-              <li>Alex 项目 Knowledge 体系</li>
-              <li>语料 &amp; 占星理论分块 + 打标签</li>
-              <li>主 Skill + 多方向子 Skill</li>
-              <li>发布内部平台并主动收集反馈</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- C · 法律 AI -->
-        <article class="entry-panel" data-entry="law">
-          <div class="entry-panel__head">
+          <div class="exp-card__body">
+            <span class="exp-card__no">C</span>
             <h3>法律 AI 合同拟制助手</h3>
-            <span class="entry-panel__sub">产学研合作 · 已交付企业独立运营</span>
+            <p>产学研合作 · 已交付企业独立运营 · 回答可用率 65% → 87%</p>
           </div>
+          <span class="exp-card__cta">展开详情 <span class="arrow">→</span></span>
+        </button>
 
-          <ol class="steps">
-            <li><b>商务对接</b>：深圳实地调研 · 签署技术授权书</li>
-            <li><b>技术搭建</b>：Vibe Coding 从零搭网页端 · 角色注入 + CoT + 分块</li>
-            <li><b>知识闭环</b>：300+ 份法律文件 · 200+ 咨询场景 · 1200+ 用户反馈</li>
-          </ol>
-
-          <div class="detail-card">
-            <h4>项目成果</h4>
-            <ul class="pill-list">
-              <li>回答可用率 65% → 87%（内部测试集）</li>
-              <li>"挑战杯" 广东省铜奖（获奖率 &lt; 15%）</li>
-              <li>校赛三等奖 · 双创展览会优秀奖</li>
-              <li>项目已交付合作企业运营</li>
-            </ul>
+        <button type="button" class="exp-card tilt" data-key="wenfeng">
+          <div class="exp-card__cover exp-card__cover--gradient" style="--g1:#0ea5e9;--g2:#06b6d4;">
+            <span class="exp-card__cover-mark">✍️</span>
           </div>
-        </article>
-
-        <!-- D · 文风模拟器 -->
-        <article class="entry-panel" data-entry="wenfeng">
-          <div class="entry-panel__head">
-            <h3>文风模拟器 · peter_tingle（彼得一激灵）</h3>
-            <span class="entry-panel__sub">灵光一现写出来的独立 Skill</span>
-            <a class="entry-panel__link" href="https://github.com/Umia888/peter_tingle/blob/main/README.md" target="_blank" rel="noopener">GitHub README ↗</a>
+          <div class="exp-card__body">
+            <span class="exp-card__no">D</span>
+            <h3>文风模拟器 · peter_tingle</h3>
+            <p>灵光一现写出来的独立 Skill · 支持 Cursor / VS Code / Claude Code</p>
           </div>
+          <span class="exp-card__cta">展开详情 <span class="arrow">→</span></span>
+        </button>
 
-          <ol class="steps">
-            <li><b>喂样本</b>：任意文章 → 学习其结构与语言风格</li>
-            <li><b>调用</b>：支持 Cursor / VS Code / Claude Code 直接 #skill 调用</li>
-            <li><b>输出</b>：可导出带格式文章（内置论文格式，也可自定义）</li>
-          </ol>
-
-          <div class="detail-card">
-            <h4>典型使用场景</h4>
-            <ul class="pill-list">
-              <li>雅思 / 托福写作学习</li>
-              <li>论文写作风格与结构模仿</li>
-              <li>大量文献表达共同点 &amp; 差异点</li>
-              <li>文献观点整理 + 原文定位清单</li>
-            </ul>
+        <button type="button" class="exp-card tilt" data-key="meituan">
+          <div class="exp-card__cover exp-card__cover--gradient" style="--g1:#22c55e;--g2:#84cc16;">
+            <span class="exp-card__cover-mark">🍜</span>
           </div>
-
-          <div class="fallback-tip">
-            ⚠️ 温馨提醒：AI 率仍约 20%–30%，请当作学习工具，不要当代写工具用。
-          </div>
-        </article>
-
-        <!-- E · 美团 -->
-        <article class="entry-panel" data-entry="meituan">
-          <div class="entry-panel__head">
+          <div class="exp-card__body">
+            <span class="exp-card__no">E</span>
             <h3>美团大学城美食地图</h3>
-            <span class="entry-panel__sub">链接在美团内部平台 · 无法分享</span>
+            <p>大学城场景 · 用户用研 · 5 类痛点根源拆解与功能对应</p>
           </div>
-
-          <p class="desc">
-            目标用户：大学生。核心痛点是"吃什么"的决策困境。经用户观察，痛点根源包括：平台认知负荷过高、商家供需不匹配、评价真实性存疑、行程时间成本、跨平台交互负担与预算约束。
-          </p>
-
-          <ol class="steps">
-            <li><b>个性化推荐</b>：不粗暴减推送，而是按用户偏好优先级降序</li>
-            <li><b>即时评价 + 当地人评价</b>：按 IP 划分本地/外地 → 提升可信度</li>
-            <li><b>好友 / 圈层美食地图共创</b>：促进圈层信息流转与 GMV 转化</li>
-            <li><b>单项推荐 + 推荐理由</b>：明星同款、减脂卡路里、时间预估</li>
-          </ol>
-        </article>
+          <span class="exp-card__cta">展开详情 <span class="arrow">→</span></span>
+        </button>
 
       </div>
+
+      <!-- 展开详情模板（对应点击后 modal 大卡内容） -->
+      <template id="exp-tpl-ditu">
+        <div class="exp-detail__head">
+          <span class="exp-card__no">A</span>
+          <h3>点点生图 · AI 视觉在小红书场景的落地</h3>
+          <span class="entry-panel__sub">博主同款 / 任意门 / 大师镜头</span>
+        </div>
+        <ol class="steps">
+          <li><b>模型测评</b>：跑批测评 → 问题归因 → 输出上线建议</li>
+          <li><b>模板设计</b>：用户兴趣 + 传播潜力 + 竞品参考 → 出模板</li>
+          <li><b>运营闭环</b>：设计自动化数据看板，指导下一批模板方向</li>
+        </ol>
+        <div class="chat-demo">
+          <div class="bubble bot">
+            <span class="bubble__label">Prompt / Brief</span>
+            大师镜头 · 毕业季主题，需求：真实感、可传播、支持多身材
+          </div>
+          <div class="bubble user">
+            <span class="bubble__label">Output</span>
+            ✅ 已完成 12 张代表模板 · 已经过一致性 &amp; 稳定性测评 · 已进入排期
+          </div>
+        </div>
+        <h4 class="book-gallery-title">代表模板 · 毕业季 <span class="gm-tag-inline">100% AI 创作</span></h4>
+        <div class="book-gallery">
+          <div class="book-track">
+            <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147732673.jpg"><img src="templates/graduation/gen-1784147732673.jpg" alt="毕业季模板" loading="lazy" /></button>
+            <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147723124.jpg"><img src="templates/graduation/gen-1784147723124.jpg" alt="毕业季模板" loading="lazy" /></button>
+            <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147741203.jpg"><img src="templates/graduation/gen-1784147741203.jpg" alt="毕业季模板" loading="lazy" /></button>
+            <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/img-1784147462578.jpg"><img src="templates/graduation/img-1784147462578.jpg" alt="毕业季模板" loading="lazy" /></button>
+            <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147458826.jpg"><img src="templates/graduation/gen-1784147458826.jpg" alt="毕业季模板" loading="lazy" /></button>
+            <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147645180.jpg"><img src="templates/graduation/gen-1784147645180.jpg" alt="毕业季模板" loading="lazy" /></button>
+            <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147639314.jpg"><img src="templates/graduation/gen-1784147639314.jpg" alt="毕业季模板" loading="lazy" /></button>
+            <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147665530.jpg"><img src="templates/graduation/gen-1784147665530.jpg" alt="毕业季模板" loading="lazy" /></button>
+          </div>
+        </div>
+        <h4 class="book-gallery-title">代表模板 · 写真风 <span class="gm-tag-inline">100% AI 创作</span></h4>
+        <div class="book-gallery">
+          <div class="book-track">
+            <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1779249480283-1784148074657.jpg"><img src="templates/portrait/gen-1779249480283-1784148074657.jpg" alt="写真风模板" loading="lazy" /></button>
+            <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784148044905.jpg"><img src="templates/portrait/gen-1784148044905.jpg" alt="写真风模板" loading="lazy" /></button>
+            <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148107383.jpg"><img src="templates/portrait/img-1784148107383.jpg" alt="写真风模板" loading="lazy" /></button>
+            <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148103392.jpg"><img src="templates/portrait/img-1784148103392.jpg" alt="写真风模板" loading="lazy" /></button>
+            <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147344534.jpg"><img src="templates/portrait/gen-1784147344534.jpg" alt="写真风模板" loading="lazy" /></button>
+            <button class="book-page media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147340035.jpg"><img src="templates/portrait/gen-1784147340035.jpg" alt="写真风模板" loading="lazy" /></button>
+          </div>
+        </div>
+      </template>
+
+      <template id="exp-tpl-alex">
+        <div class="exp-detail__head">
+          <span class="exp-card__no">B</span>
+          <h3>点点 Skills · Alex 星骰</h3>
+          <span class="entry-panel__sub">让 AI 回答"更像博主本人" · 链接在小红书内部平台 · 无法分享</span>
+        </div>
+        <ol class="steps">
+          <li><b>知识分层</b>：博主语料 vs 占星理论分块，各 chunk 打标签</li>
+          <li><b>Skill 编写</b>：主 Skill + 多方向子 Skill</li>
+          <li><b>回答优化</b>：约束条件 + QA 范例 → 让回答"具体、准确、像本人"</li>
+        </ol>
+        <div class="chat-demo">
+          <div class="bubble bot">
+            <span class="bubble__label">User</span>
+            Alex 大叔，最近水逆我要不要跳槽？
+          </div>
+          <div class="bubble user">
+            <span class="bubble__label">Alex 星骰</span>
+            宝，水逆的时候动大盘，回头一定会拍大腿。这周把简历改好、把人脉打点好，等出逆再发出去，正合适。
+          </div>
+        </div>
+        <div class="detail-card">
+          <h4>主要产出</h4>
+          <ul class="pill-list">
+            <li>Alex 项目 Knowledge 体系</li>
+            <li>语料 &amp; 占星理论分块 + 打标签</li>
+            <li>主 Skill + 多方向子 Skill</li>
+            <li>发布内部平台并主动收集反馈</li>
+          </ul>
+        </div>
+      </template>
+
+      <template id="exp-tpl-law">
+        <div class="exp-detail__head">
+          <span class="exp-card__no">C</span>
+          <h3>法律 AI 合同拟制助手</h3>
+          <span class="entry-panel__sub">产学研合作 · 已交付企业独立运营</span>
+        </div>
+        <ol class="steps">
+          <li><b>商务对接</b>：深圳实地调研 · 签署技术授权书</li>
+          <li><b>技术搭建</b>：Vibe Coding 从零搭网页端 · 角色注入 + CoT + 分块</li>
+          <li><b>知识闭环</b>：300+ 份法律文件 · 200+ 咨询场景 · 1200+ 用户反馈</li>
+        </ol>
+        <div class="detail-card">
+          <h4>项目成果</h4>
+          <ul class="pill-list">
+            <li>回答可用率 65% → 87%（内部测试集）</li>
+            <li>"挑战杯" 广东省铜奖（获奖率 &lt; 15%）</li>
+            <li>校赛三等奖 · 双创展览会优秀奖</li>
+            <li>项目已交付合作企业运营</li>
+          </ul>
+        </div>
+      </template>
+
+      <template id="exp-tpl-wenfeng">
+        <div class="exp-detail__head">
+          <span class="exp-card__no">D</span>
+          <h3>文风模拟器 · peter_tingle（彼得一激灵）</h3>
+          <span class="entry-panel__sub">灵光一现写出来的独立 Skill <a class="entry-panel__link" href="https://github.com/Umia888/peter_tingle/blob/main/README.md" target="_blank" rel="noopener">GitHub README ↗</a></span>
+        </div>
+        <ol class="steps">
+          <li><b>喂样本</b>：任意文章 → 学习其结构与语言风格</li>
+          <li><b>调用</b>：支持 Cursor / VS Code / Claude Code 直接 #skill 调用</li>
+          <li><b>输出</b>：可导出带格式文章（内置论文格式，也可自定义）</li>
+        </ol>
+        <div class="detail-card">
+          <h4>典型使用场景</h4>
+          <ul class="pill-list">
+            <li>雅思 / 托福写作学习</li>
+            <li>论文写作风格与结构模仿</li>
+            <li>大量文献表达共同点 &amp; 差异点</li>
+            <li>文献观点整理 + 原文定位清单</li>
+          </ul>
+        </div>
+        <div class="fallback-tip">⚠️ 温馨提醒：AI 率仍约 20%–30%，请当作学习工具，不要当代写工具用。</div>
+      </template>
+
+      <template id="exp-tpl-meituan">
+        <div class="exp-detail__head">
+          <span class="exp-card__no">E</span>
+          <h3>美团大学城美食地图</h3>
+          <span class="entry-panel__sub">链接在美团内部平台 · 无法分享</span>
+        </div>
+        <p class="desc">目标用户：大学生。核心痛点是"吃什么"的决策困境。经用户观察，痛点根源包括：平台认知负荷过高、商家供需不匹配、评价真实性存疑、行程时间成本、跨平台交互负担与预算约束。</p>
+        <ol class="steps">
+          <li><b>个性化推荐</b>：不粗暴减推送，而是按用户偏好优先级降序</li>
+          <li><b>即时评价 + 当地人评价</b>：按 IP 划分本地/外地 → 提升可信度</li>
+          <li><b>好友 / 圈层美食地图共创</b>：促进圈层信息流转与 GMV 转化</li>
+          <li><b>单项推荐 + 推荐理由</b>：明星同款、减脂卡路里、时间预估</li>
+        </ol>
+      </template>
+
     </div>
   </section>
+
+  <!-- Expandable Card · Modal 层 -->
+  <div class="exp-modal" id="exp-modal" aria-hidden="true">
+    <div class="exp-modal__backdrop" data-exp-close="1"></div>
+    <article class="exp-modal__card" role="dialog" aria-modal="true">
+      <button type="button" class="exp-modal__close" data-exp-close="1" aria-label="关闭">×</button>
+      <div class="exp-modal__body" id="exp-modal-body"></div>
+    </article>
+  </div>
 
   <!-- ══════════════════════════════════════════
        04 · FAQ
@@ -627,7 +643,6 @@
       </div>
 
       <div class="faq-accordion blur-fade">
-
         <details class="faq-item" data-faq="me" open>
           <summary>你的背景和专业是什么？</summary>
           <div class="faq-body">
@@ -698,7 +713,6 @@
             <p>艺术史（洛可可、启蒙）、影视文学（弗兰肯斯坦、锈湖）、社会议题（人造人 / 自然人的边界）。我更喜欢用视觉去表达一种"感受"，而不是复刻一个"故事"。</p>
           </div>
         </details>
-
       </div>
 
       <div class="faq-fallback blur-fade">
@@ -709,13 +723,14 @@
   </section>
 
   <!-- ══════════════════════════════════════════
-       05 · 内容墙
+       05 · Wall · Draggable Cards
   ══════════════════════════════════════════ -->
   <section id="wall" class="section section--soft">
     <div class="container">
       <header class="section-head blur-fade">
         <div class="section-head__meta"><span class="no">05</span><span>Creations</span></div>
         <h2 class="section-title">留下的，才是<em>真实的我</em></h2>
+        <p class="section-lead">这块可以拖着玩——每张卡片都能拖动到任意位置。点击缩略图会放大。</p>
       </header>
 
       <div class="wall-toolbar blur-fade">
@@ -724,14 +739,14 @@
           <button data-wall="ai">100% AI 创作 <small>2</small></button>
           <button data-wall="collage">拼贴艺术 <small>2</small></button>
         </div>
-        <a class="btn-write" href="https://xhslink.com/m/101Dl9hMgH" target="_blank" rel="noopener">
-          ↗ 去小红书主页
-        </a>
+        <a class="btn-write" href="https://xhslink.com/m/101Dl9hMgH" target="_blank" rel="noopener">↗ 去小红书主页</a>
       </div>
 
-      <div class="wall-grid blur-fade">
+      <div class="drag-board blur-fade" id="drag-board">
 
-        <article class="msg-card" data-wall="ai">
+        <article class="msg-card drag-card" data-wall="ai"
+                 style="--ix:-42%;--iy:-30%;--rot:-6deg;">
+          <div class="drag-card__handle" aria-hidden="true">⋮⋮</div>
           <div class="msg-card__tags">
             <span class="tag--brand">100% AI</span>
             <span>视频</span>
@@ -759,7 +774,9 @@
           </div>
         </article>
 
-        <article class="msg-card" data-wall="ai">
+        <article class="msg-card drag-card" data-wall="ai"
+                 style="--ix:38%;--iy:-24%;--rot:5deg;">
+          <div class="drag-card__handle" aria-hidden="true">⋮⋮</div>
           <div class="msg-card__tags">
             <span class="tag--brand">100% AI</span>
             <span>视频</span>
@@ -787,7 +804,9 @@
           </div>
         </article>
 
-        <article class="msg-card" data-wall="collage">
+        <article class="msg-card drag-card" data-wall="collage"
+                 style="--ix:-36%;--iy:26%;--rot:3deg;">
+          <div class="drag-card__handle" aria-hidden="true">⋮⋮</div>
           <div class="msg-card__tags">
             <span>100% 拼贴</span>
             <span>视频 + 图集</span>
@@ -822,7 +841,9 @@
           </div>
         </article>
 
-        <article class="msg-card" data-wall="collage">
+        <article class="msg-card drag-card" data-wall="collage"
+                 style="--ix:36%;--iy:28%;--rot:-4deg;">
+          <div class="drag-card__handle" aria-hidden="true">⋮⋮</div>
           <div class="msg-card__tags">
             <span>90% 拼贴</span>
             <span>10% AI</span>
@@ -851,11 +872,16 @@
         </article>
 
       </div>
+
+      <div class="drag-hint blur-fade">
+        <button type="button" id="btn-reset-drag" class="btn btn-secondary btn-sm">↺ 重置位置</button>
+        <span class="text-dim">提示：拖动卡片时会跟随光标；点击缩略图看大图</span>
+      </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════════
-       06 · 最新动态
+       06 · Updates
   ══════════════════════════════════════════ -->
   <section id="updates" class="section">
     <div class="container">
@@ -873,8 +899,8 @@
         </div>
         <div class="release-card__body">
           <div class="release-item">
-            <b>本站视觉改版 · magicui 极简白 + Artspace 翻书画廊</b>
-            <p class="text-dim">窄栏居中 · BlurFade 入场动画 · 底部 Dock · 深浅主题</p>
+            <b>Aceternity 组件套装接入</b>
+            <p class="text-dim">Floating Dock 文字版 · ASCII Art · 3D Tilt · Expandable Card · Draggable Card</p>
             <span class="badge-live">已上线</span>
           </div>
           <div class="release-item">
@@ -907,9 +933,7 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════
-       页脚
-  ══════════════════════════════════════════ -->
+  <!-- 页脚 -->
   <footer class="site-footer">
     <div class="container site-footer__inner">
       <div class="site-footer__brand">
@@ -924,68 +948,7 @@
     </div>
   </footer>
 
-  <!-- ══════════════════════════════════════════
-       Dock · 底部悬浮导航
-  ══════════════════════════════════════════ -->
-  <nav class="dock-wrap" aria-label="Dock 导航">
-    <div class="dock">
-      <a href="#hero" data-nav="hero" aria-label="首页">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg>
-        <span class="dock__tip">首页</span>
-      </a>
-      <a href="#about" data-nav="about" aria-label="关于">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
-        <span class="dock__tip">关于我</span>
-      </a>
-      <a href="#experience" data-nav="experience" aria-label="经历">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-        <span class="dock__tip">经历</span>
-      </a>
-      <a href="#portfolio" data-nav="portfolio" aria-label="作品集">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-        <span class="dock__tip">作品集</span>
-      </a>
-      <a href="#faq" data-nav="faq" aria-label="FAQ">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7"/><circle cx="12" cy="17" r="0.6" fill="currentColor" stroke="none"/></svg>
-        <span class="dock__tip">FAQ</span>
-      </a>
-      <a href="#wall" data-nav="wall" aria-label="内容墙">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        <span class="dock__tip">内容墙</span>
-      </a>
-      <a href="#updates" data-nav="updates" aria-label="动态">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>
-        <span class="dock__tip">最新动态</span>
-      </a>
-
-      <span class="dock__sep" aria-hidden="true"></span>
-
-      <a href="mailto:Lym16816888@126.com" aria-label="邮件">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-        <span class="dock__tip">发邮件</span>
-      </a>
-      <a href="https://github.com/Umia888" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.94c.57.1.78-.25.78-.55v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.24 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.14 1.18a10.9 10.9 0 0 1 5.72 0c2.18-1.5 3.14-1.18 3.14-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.09 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
-        <span class="dock__tip">GitHub</span>
-      </a>
-      <a href="https://xhslink.com/m/101Dl9hMgH" target="_blank" rel="noopener" aria-label="小红书">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-5.5-8-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-8 11-8 11z" fill="currentColor" fill-opacity="0.1"/></svg>
-        <span class="dock__tip">小红书</span>
-      </a>
-
-      <span class="dock__sep" aria-hidden="true"></span>
-
-      <button type="button" id="btn-theme" aria-label="切换主题">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-moon" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <span class="dock__tip">切换主题</span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- ══════════════════════════════════════════
-       侧边抽屉：完整 Timeline
-  ══════════════════════════════════════════ -->
+  <!-- 侧边抽屉：Timeline -->
   <aside class="drawer" id="drawer" aria-hidden="true" aria-label="完整 Timeline">
     <div class="drawer__backdrop" data-drawer-close="1"></div>
     <div class="drawer__panel" role="dialog" aria-modal="true">
@@ -996,19 +959,16 @@
         </div>
         <button class="drawer__close" type="button" data-drawer-close="1" aria-label="关闭">×</button>
       </header>
-
       <div class="drawer__body">
-
         <article class="timeline-item">
           <time>2026 · 08</time>
           <span class="author">Mia · 本站</span>
-          <h3>📣 个人主页视觉改版</h3>
+          <h3>📣 Aceternity 组件套装接入</h3>
           <div class="content">
-            <p>切换到 magicui 极简白骨架，作品集画廊换成 Artspace 翻书装饰。窄栏居中、BlurFade 入场、底部 Dock、深浅主题切换一体化。</p>
+            <p>Floating Dock 顶栏文字版 + Hero 右侧 ASCII 头像 + 作品集 Expandable Card + 内容墙 Draggable Card + 作品集小卡 3D tilt hover。</p>
             <a class="link-out" href="#hero">回到首页 →</a>
           </div>
         </article>
-
         <article class="timeline-item">
           <time>2026 · 08</time>
           <span class="author">Mia · 小红书</span>
@@ -1017,7 +977,6 @@
             <p>负责生图模型测评 + AI 模板方向设计。参与并主导所有模板方向，竞品采用部分同风格模板；主动设计自动化热点数据分析看板。</p>
           </div>
         </article>
-
         <article class="timeline-item">
           <time>2026 · 07</time>
           <span class="author">Mia · 内部平台</span>
@@ -1026,7 +985,6 @@
             <p>点点 Skills 的 "博主内容 AI 化" 探索项目。搭建 Knowledge 体系，将博主语料与占星理论分块，主 Skill + 多子 Skill 全部完成。<b>发布于内部平台，无法对外分享。</b></p>
           </div>
         </article>
-
         <article class="timeline-item">
           <time>2026 · 03</time>
           <span class="author">Mia · 内容</span>
@@ -1035,7 +993,6 @@
             <p>画面 100% AI 创作。既是内容表达，也是 AIGC 能力边界的一次公开验证。</p>
           </div>
         </article>
-
         <article class="timeline-item">
           <time>2025 · 12</time>
           <span class="author">Mia · GitHub</span>
@@ -1045,7 +1002,6 @@
             <a class="link-out" href="https://github.com/Umia888/peter_tingle/blob/main/README.md" target="_blank" rel="noopener">README ↗</a>
           </div>
         </article>
-
         <article class="timeline-item">
           <time>2024</time>
           <span class="author">Mia · 墨大</span>
@@ -1054,7 +1010,6 @@
             <p>硕士阶段独立搭建了两个主要作品：美团大学城美食地图、文风模拟器 Skills。</p>
           </div>
         </article>
-
         <article class="timeline-item">
           <time>2023</time>
           <span class="author">Mia · 挑战杯</span>
@@ -1063,7 +1018,6 @@
             <p>产学研合作项目。回答可用率 65% → 87%；1200+ 用户反馈。<b>合作已完成，项目现由企业独立运营。</b></p>
           </div>
         </article>
-
         <article class="timeline-item">
           <time>2022</time>
           <span class="author">Mia · 起点</span>
@@ -1072,26 +1026,20 @@
             <p>与深圳法律科技企业合作，从零搭建法律 AI 工具的第一个网页原型。从这里开始，"法学生"逐渐变成了"用 AI 做产品的人"。</p>
           </div>
         </article>
-
       </div>
     </div>
   </aside>
 
-  <!-- ══════════════════════════════════════════
-       媒体灯箱
-  ══════════════════════════════════════════ -->
+  <!-- 媒体灯箱 -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <div class="lightbox__backdrop" data-lightbox-close="1"></div>
-
     <div class="lightbox__toolbar">
       <a class="lightbox__btn" id="lightbox-download" download aria-label="下载">⤓ 下载</a>
       <button class="lightbox__btn lightbox__close" type="button" data-lightbox-close="1" aria-label="关闭">× 关闭</button>
     </div>
-
     <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" type="button" aria-label="上一个">‹</button>
     <div class="lightbox__stage" id="lightbox-stage"></div>
     <button class="lightbox__nav lightbox__nav--next" id="lightbox-next" type="button" aria-label="下一个">›</button>
-
     <div class="lightbox__counter" id="lightbox-counter"></div>
   </div>
 

@@ -1,40 +1,32 @@
 /* ═══════════════════════════════════════════════════════════
    Mia World · 交互脚本
-   - 主题切换（system → localStorage 覆盖）
-   - BlurFade（IntersectionObserver 一次性 in-view）
-   - Book Slider（作品集画廊 3D 翻页透视）
-   - 作品集 Tab
-   - FAQ 分类过滤 + 手风琴
-   - 内容墙 分类过滤 + 点赞
-   - Dock 底部导航当前区块高亮
-   - Drawer（Timeline）
-   - Lightbox
+   - 主题切换
+   - Floating Dock 磁吸放大 + 当前区块高亮（Aceternity）
+   - BlurFade 入场
+   - ASCII Art 生成（avatar.png → canvas 采样 → pre 字符）
+   - 3D Card Effect · hover tilt（Aceternity）
+   - Expandable Card 开合（Aceternity）
+   - Draggable Card 拖拽（Aceternity）
+   - Book Slider 3D 翻页透视（Artspace）
+   - FAQ / Wall / Drawer / Lightbox
 ═══════════════════════════════════════════════════════════ */
 
 'use strict';
 
-/* ─────────────────────────────────────────
-   0. 工具
-───────────────────────────────────────── */
 const $  = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+const isTouch = () => matchMedia('(hover: none)').matches;
 
 /* ─────────────────────────────────────────
-   1. 主题切换（浅色默认 / 深色可切换）
+   1. 主题切换
 ───────────────────────────────────────── */
 (function initTheme() {
   const KEY = 'mia-theme';
   const root = document.documentElement;
   const btn  = $('#btn-theme');
-  const sun  = btn?.querySelector('.icon-sun');
-  const moon = btn?.querySelector('.icon-moon');
-
   const stored = localStorage.getItem(KEY);
-  const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-  const startDark = stored ? stored === 'dark' : false; // 默认浅色（贴合 magicui）
-
-  applyTheme(startDark);
+  applyTheme(stored === 'dark');
 
   btn?.addEventListener('click', () => {
     const isDark = !root.classList.contains('dark');
@@ -44,147 +36,334 @@ const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
   function applyTheme(isDark) {
     root.classList.toggle('dark', isDark);
-    if (sun && moon) {
-      sun.style.display  = isDark ? 'none' : '';
-      moon.style.display = isDark ? '' : 'none';
-    }
-    // 更新 theme-color
+    if (btn) btn.textContent = isDark ? '☾ Theme' : '☀ Theme';
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', isDark ? '#0a0a0a' : '#ffffff');
   }
 })();
 
 /* ─────────────────────────────────────────
-   2. BlurFade 入场动画
+   2. Floating Dock · 磁吸放大 + 当前区块高亮
+───────────────────────────────────────── */
+(function initFdock() {
+  const dock = $('#fdock');
+  if (!dock) return;
+  const items = $$('.fdock__item', dock);
+
+  // 磁吸放大（桌面端）
+  if (!isTouch()) {
+    dock.addEventListener('mousemove', (e) => {
+      items.forEach(it => {
+        const rect = it.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const dx = Math.abs(e.clientX - cx);
+        const t  = Math.max(0, 1 - dx / 140);
+        const s  = 1 + t * 0.28;
+        it.style.transform = `scale(${s.toFixed(3)})`;
+      });
+    });
+    dock.addEventListener('mouseleave', () => {
+      items.forEach(it => (it.style.transform = ''));
+    });
+  }
+
+  // 当前区块高亮
+  const navLinks = $$('.fdock__item[data-nav]', dock);
+  const map = new Map(navLinks.map(a => [a.dataset.nav, a]));
+  const sections = ['hero','about','experience','portfolio','faq','wall','updates']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  if ('IntersectionObserver' in window && sections.length) {
+    const io = new IntersectionObserver((entries) => {
+      const visible = entries.filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible[0]) {
+        navLinks.forEach(a => a.removeAttribute('data-active'));
+        const target = map.get(visible[0].target.id);
+        if (target) target.setAttribute('data-active', 'true');
+      }
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
+    sections.forEach(s => io.observe(s));
+  }
+})();
+
+/* ─────────────────────────────────────────
+   3. BlurFade
 ───────────────────────────────────────── */
 (function initBlurFade() {
   const els = $$('.blur-fade');
   if (!els.length) return;
-
   if (!('IntersectionObserver' in window)) {
     els.forEach(el => el.classList.add('in-view'));
     return;
   }
-
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in-view');
-        io.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
     });
   }, { rootMargin: '-40px 0px -40px 0px', threshold: 0.02 });
-
   els.forEach(el => io.observe(el));
 })();
 
 /* ─────────────────────────────────────────
-   3. 作品集 Tab
+   4. ASCII Art（avatar.png → 字符墙）
 ───────────────────────────────────────── */
-(function initEntryTabs() {
-  const tabs   = $$('.entry-tabs button');
-  const panels = $$('.entry-panel');
-  if (!tabs.length) return;
+(function initAscii() {
+  const target = $('#ascii-art');
+  if (!target) return;
 
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const key = btn.dataset.entry;
-      tabs.forEach(b => b.classList.toggle('active', b === btn));
-      panels.forEach(p => p.classList.toggle('active', p.dataset.entry === key));
+  const CHARS = ' .`\',:;-~+*=%#$@';
+  const cols = 90;
 
-      // 面板切换后：新 book-track 重置到起始位并强制刷新 3D transform
-      requestAnimationFrame(() => {
-        $$('.entry-panel.active .book-track').forEach(track => {
-          track.scrollLeft = 0;
-          updateBookTrack(track);
-        });
+  const img = new Image();
+  img.src = 'avatar.png';
+  img.decoding = 'async';
+
+  img.onload = () => {
+    const aspect = img.width / img.height;
+    // 字符长宽比约 0.5 → 行数 = cols / aspect * 0.5
+    const rows = Math.max(20, Math.round(cols / aspect * 0.5));
+    const cv = document.createElement('canvas');
+    cv.width = cols; cv.height = rows;
+    const ctx = cv.getContext('2d');
+    ctx.drawImage(img, 0, 0, cols, rows);
+    let data;
+    try { data = ctx.getImageData(0, 0, cols, rows).data; }
+    catch (_) { return; }
+
+    let out = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const i = (y * cols + x) * 4;
+        const r = data[i], g = data[i+1], b = data[i+2], a = data[i+3];
+        // 亮度（Rec.601）
+        let bright = 0.299 * r + 0.587 * g + 0.114 * b;
+        // 透明像素当作背景
+        if (a < 30) bright = 255;
+        // 亮 → 稀疏；暗 → 密集
+        const idx = Math.floor(((255 - bright) / 255) * (CHARS.length - 1));
+        out += CHARS[clamp(idx, 0, CHARS.length - 1)];
+      }
+      out += '\n';
+    }
+    target.textContent = out;
+  };
+  img.onerror = () => { target.textContent = ''; };
+})();
+
+/* ─────────────────────────────────────────
+   5. Aceternity · 3D Card Effect（tilt）
+───────────────────────────────────────── */
+(function init3dTilt() {
+  if (isTouch()) return;
+  const cards = $$('.tilt');
+  if (!cards.length) return;
+
+  cards.forEach(card => {
+    let raf = 0;
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;   // 0..1
+      const y = (e.clientY - rect.top)  / rect.height;  // 0..1
+      const rotateX = (0.5 - y) * 14;   // -7 .. 7
+      const rotateY = (x - 0.5) * 14;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        card.classList.add('is-tilting');
+        card.style.transform =
+          `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-2px)`;
       });
+    });
+    card.addEventListener('mouseleave', () => {
+      cancelAnimationFrame(raf);
+      card.classList.remove('is-tilting');
+      card.style.transform = '';
     });
   });
 })();
 
 /* ─────────────────────────────────────────
-   4. Artspace Book Slider · 3D 翻页透视
+   6. Aceternity · Expandable Card
+───────────────────────────────────────── */
+(function initExpandable() {
+  const cards = $$('.exp-card');
+  const modal = $('#exp-modal');
+  const body  = $('#exp-modal-body');
+  if (!cards.length || !modal || !body) return;
+
+  cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      // 若正在 tilting，恢复默认再打开
+      card.classList.remove('is-tilting');
+      card.style.transform = '';
+      openExp(card.dataset.key);
+    });
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target.closest('[data-exp-close]')) closeExp();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeExp();
+  });
+
+  function openExp(key) {
+    const tpl = document.getElementById('exp-tpl-' + key);
+    if (!tpl) return;
+    body.innerHTML = '';
+    body.appendChild(tpl.content.cloneNode(true));
+
+    // 先显示，双 rAF 触发过渡
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    // 初始化 modal 内的 book slider
+    requestAnimationFrame(() => {
+      $$('.book-track', modal).forEach(track => {
+        setupBookTrack(track);
+        updateBookTrack(track);
+      });
+    });
+  }
+
+  function closeExp() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    // 清空内容（在过渡结束后）
+    setTimeout(() => { body.innerHTML = ''; }, 320);
+  }
+})();
+
+/* ─────────────────────────────────────────
+   7. Artspace · Book Slider · 3D 翻页透视
 ───────────────────────────────────────── */
 function updateBookTrack(track) {
   if (!track) return;
   const trackRect = track.getBoundingClientRect();
+  if (trackRect.width === 0) return;
   const centerX = trackRect.left + trackRect.width / 2;
   const pages = track.querySelectorAll('.book-page');
-
   pages.forEach(page => {
     const r = page.getBoundingClientRect();
     const pageCenter = r.left + r.width / 2;
-    // 相对容器中心的归一化距离（可能超出 [-1,1]）
     const dist = (pageCenter - centerX) / (trackRect.width / 2);
     const d = clamp(dist, -1.4, 1.4);
-
-    const rotateY   = -d * 22;                    // 度
-    const translateZ= -Math.abs(d) * 30;          // px（近大远小）
-    const scale     = 1 - Math.min(Math.abs(d) * 0.08, 0.14);
-    const opacity   = 1 - Math.min(Math.abs(d) * 0.15, 0.35);
-
-    page.style.transform = `perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
-    page.style.opacity   = String(opacity);
-    page.style.zIndex    = String(100 - Math.round(Math.abs(d) * 100));
+    const rotateY = -d * 20;
+    const translateZ = -Math.abs(d) * 30;
+    const scale = 1 - Math.min(Math.abs(d) * 0.08, 0.14);
+    const opacity = 1 - Math.min(Math.abs(d) * 0.15, 0.35);
+    page.style.transform =
+      `perspective(1400px) rotateY(${rotateY.toFixed(2)}deg) translateZ(${translateZ.toFixed(2)}px) scale(${scale.toFixed(3)})`;
+    page.style.opacity = String(opacity);
+    page.style.zIndex = String(100 - Math.round(Math.abs(d) * 100));
   });
 }
 
-(function initBookSliders() {
-  const tracks = $$('.book-track');
-  if (!tracks.length) return;
-
-  // 触发时机：DOM 加载完、字体加载、resize、scroll、图片加载
-  const scheduled = new WeakMap();
-  const request = (track) => {
-    if (scheduled.get(track)) return;
-    scheduled.set(track, true);
-    requestAnimationFrame(() => {
-      updateBookTrack(track);
-      scheduled.set(track, false);
-    });
+function setupBookTrack(track) {
+  if (track._setup) return;
+  track._setup = true;
+  const scheduled = { v: false };
+  const req = () => {
+    if (scheduled.v) return;
+    scheduled.v = true;
+    requestAnimationFrame(() => { updateBookTrack(track); scheduled.v = false; });
   };
-
-  tracks.forEach(track => {
-    track.addEventListener('scroll', () => request(track), { passive: true });
-    // 图片加载完成后重算
-    track.querySelectorAll('img').forEach(img => {
-      if (img.complete) return;
-      img.addEventListener('load',  () => request(track), { once: true });
-      img.addEventListener('error', () => request(track), { once: true });
-    });
-    // 初始
-    request(track);
+  track.addEventListener('scroll', req, { passive: true });
+  track.querySelectorAll('img').forEach(img => {
+    if (img.complete) return;
+    img.addEventListener('load', req, { once: true });
+    img.addEventListener('error', req, { once: true });
   });
+  track.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      track.scrollLeft += e.deltaY;
+      e.preventDefault();
+    }
+  }, { passive: false });
+  window.addEventListener('resize', req, { passive: true });
+}
 
-  window.addEventListener('resize', () => tracks.forEach(request), { passive: true });
-  window.addEventListener('load',   () => tracks.forEach(t => updateBookTrack(t)));
-
-  // 鼠标滚轮竖向 → 转横向（增强翻书感）
-  tracks.forEach(track => {
-    track.addEventListener('wheel', (e) => {
-      // 仅当竖向滚动比横向明显时转换
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        track.scrollLeft += e.deltaY;
-        e.preventDefault();
-      }
-    }, { passive: false });
-  });
+(function initInitialBookTracks() {
+  const tracks = $$('.book-track');
+  tracks.forEach(t => { setupBookTrack(t); updateBookTrack(t); });
 })();
 
 /* ─────────────────────────────────────────
-   5. FAQ 分类过滤（保留原逻辑）
+   8. Aceternity · Draggable Card
+───────────────────────────────────────── */
+(function initDraggable() {
+  const board = $('#drag-board');
+  if (!board) return;
+  const cards = $$('.drag-card', board);
+  if (!cards.length) return;
+
+  // 移动端 fallback（CSS 已经处理）
+  const mq = matchMedia('(max-width: 720px)');
+  if (mq.matches) return;
+
+  cards.forEach(card => attachDrag(card));
+
+  $('#btn-reset-drag')?.addEventListener('click', () => {
+    cards.forEach(card => {
+      card.style.removeProperty('--tx');
+      card.style.removeProperty('--ty');
+    });
+  });
+
+  function attachDrag(card) {
+    let startX, startY, tx0, ty0, moved;
+
+    const isInteractive = (el) => !!el.closest('.media-item, .like');
+
+    card.addEventListener('pointerdown', (e) => {
+      if (isInteractive(e.target)) return;
+      // 不阻止默认，允许原生 click 事件（否则灯箱触发失败）
+      startX = e.clientX; startY = e.clientY; moved = false;
+      tx0 = parseFloat(card.style.getPropertyValue('--tx')) || 0;
+      ty0 = parseFloat(card.style.getPropertyValue('--ty')) || 0;
+      try { card.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+
+    card.addEventListener('pointermove', (e) => {
+      if (startX == null) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (!moved && (Math.abs(dx) > 3 || Math.abs(dy) > 3)) {
+        moved = true;
+        card.classList.add('is-dragging');
+      }
+      if (moved) {
+        card.style.setProperty('--tx', (tx0 + dx) + 'px');
+        card.style.setProperty('--ty', (ty0 + dy) + 'px');
+        e.preventDefault();
+      }
+    });
+
+    const end = (e) => {
+      if (moved) card.classList.remove('is-dragging');
+      startX = startY = null; moved = false;
+      try { card.releasePointerCapture(e.pointerId); } catch (_) {}
+    };
+    card.addEventListener('pointerup', end);
+    card.addEventListener('pointercancel', end);
+  }
+})();
+
+/* ─────────────────────────────────────────
+   9. FAQ 分类过滤
 ───────────────────────────────────────── */
 (function initFAQ() {
   const filters = $$('.faq-filters button');
   const items   = $$('.faq-item');
   if (!filters.length) return;
-
   filters.forEach(btn => {
     btn.addEventListener('click', () => {
       const key = btn.dataset.faq;
       filters.forEach(b => b.classList.toggle('active', b === btn));
-
       let firstShown = null;
       items.forEach(item => {
         const match = item.dataset.faq === key;
@@ -198,11 +377,11 @@ function updateBookTrack(track) {
 })();
 
 /* ─────────────────────────────────────────
-   6. 内容墙分类 + 点赞
+   10. 内容墙分类 + 点赞
 ───────────────────────────────────────── */
 (function initWall() {
   const tabs  = $$('.wall-tabs button');
-  const cards = $$('.wall-grid .msg-card');
+  const cards = $$('.drag-board .drag-card');
   if (!tabs.length) return;
 
   tabs.forEach(btn => {
@@ -216,7 +395,7 @@ function updateBookTrack(track) {
     });
   });
 
-  $$('.wall-grid .like').forEach(btn => {
+  $$('.drag-board .like').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const num = btn.querySelector('span');
@@ -228,39 +407,7 @@ function updateBookTrack(track) {
 })();
 
 /* ─────────────────────────────────────────
-   7. Dock 当前区块高亮
-───────────────────────────────────────── */
-(function initDockActive() {
-  const dockLinks = $$('.dock a[data-nav]');
-  if (!dockLinks.length) return;
-  const map = new Map(dockLinks.map(a => [a.dataset.nav, a]));
-
-  const sections = ['hero', 'about', 'experience', 'portfolio', 'faq', 'wall', 'updates']
-    .map(id => ({ id, el: document.getElementById(id) }))
-    .filter(s => s.el);
-
-  if (!('IntersectionObserver' in window)) return;
-
-  const setActive = (id) => {
-    dockLinks.forEach(a => a.removeAttribute('data-active'));
-    const target = map.get(id);
-    if (target) target.setAttribute('data-active', 'true');
-  };
-
-  const io = new IntersectionObserver((entries) => {
-    const visible = entries
-      .filter(e => e.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-    if (visible[0]) setActive(visible[0].target.id);
-  }, {
-    rootMargin: '-40% 0px -50% 0px',
-    threshold: [0, 0.25, 0.5, 0.75, 1],
-  });
-  sections.forEach(s => io.observe(s.el));
-})();
-
-/* ─────────────────────────────────────────
-   8. 侧边抽屉 · Timeline
+   11. Timeline 抽屉
 ───────────────────────────────────────── */
 const drawer = $('#drawer');
 function openDrawer()  {
@@ -283,7 +430,7 @@ if (drawer) {
 }
 
 /* ─────────────────────────────────────────
-   9. 灯箱：图片放大 / 视频播放 / 切换 / 下载
+   12. Lightbox
 ───────────────────────────────────────── */
 const lightbox         = $('#lightbox');
 const lightboxStage    = $('#lightbox-stage');
@@ -292,9 +439,9 @@ const lightboxNext     = $('#lightbox-next');
 const lightboxDownload = $('#lightbox-download');
 const lightboxCounter  = $('#lightbox-counter');
 
-let lbList   = [];
-let lbType   = 'image';
-let lbIndex  = 0;
+let lbList  = [];
+let lbType  = 'image';
+let lbIndex = 0;
 
 function buildMediaList(scopeEl, type) {
   return $$('.media-item', scopeEl)
@@ -311,16 +458,12 @@ function renderLightbox() {
   lightboxStage.innerHTML = '';
   if (lbType === 'video') {
     const v = document.createElement('video');
-    v.src = src;
-    v.controls = true;
-    v.playsInline = true;
-    v.muted = false;
+    v.src = src; v.controls = true; v.playsInline = true;
     lightboxStage.appendChild(v);
     v.play().catch(() => {});
   } else {
     const img = document.createElement('img');
-    img.src = src;
-    img.alt = '';
+    img.src = src; img.alt = '';
     lightboxStage.appendChild(img);
   }
   if (lightboxDownload) {
@@ -334,8 +477,7 @@ function renderLightbox() {
 }
 function openLightbox(item) {
   lbType = (item.dataset.mediaType === 'video') ? 'video' : 'image';
-  // 作用域优先：作品集面板 / 内容墙卡片 / 全局
-  const scope = item.closest('.entry-panel, .msg-card') || document;
+  const scope = item.closest('.exp-modal, .drag-card, .msg-card') || document;
   lbList = buildMediaList(scope, lbType);
   lbIndex = Math.max(0, lbList.indexOf(item.dataset.mediaSrc));
   renderLightbox();
@@ -355,7 +497,7 @@ function stepLightbox(delta) {
   renderLightbox();
 }
 
-// 事件委托：所有 .media-item 点击
+// 事件委托：只在真正 click（非拖动）时触发
 document.addEventListener('click', (e) => {
   const item = e.target.closest('.media-item');
   if (item) {
@@ -363,7 +505,6 @@ document.addEventListener('click', (e) => {
     openLightbox(item);
   }
 });
-
 if (lightboxPrev) lightboxPrev.addEventListener('click', () => stepLightbox(-1));
 if (lightboxNext) lightboxNext.addEventListener('click', () => stepLightbox(1));
 if (lightbox) {
@@ -372,14 +513,15 @@ if (lightbox) {
   });
 }
 
-/* 头像点击 → 放大 */
-const heroAvatarImg = $('.hero__avatar img');
-if (heroAvatarImg) {
-  heroAvatarImg.parentElement?.addEventListener('click', (e) => {
-    // 只在真正点击头像时打开灯箱（不阻断 <a href="#about">）
-    if (!e.target.closest('img')) return;
+/* 头像点击 → 灯箱 */
+const heroAvatar = $('.hero__avatar');
+const heroAvatarImg = heroAvatar?.querySelector('img');
+if (heroAvatar && heroAvatarImg) {
+  heroAvatar.addEventListener('click', (e) => {
+    // 让它继续跳到 #about，但也可选择放大
+    // 这里选择：按住 Alt/Shift 时才放大；普通点击跳链接
+    if (!(e.altKey || e.shiftKey)) return;
     e.preventDefault();
-    e.stopPropagation();
     lbType = 'image';
     lbList = [heroAvatarImg.getAttribute('src')];
     lbIndex = 0;
@@ -391,7 +533,7 @@ if (heroAvatarImg) {
 }
 
 /* ─────────────────────────────────────────
-   10. 键盘：Esc 关闭 / ←→ 灯箱切换
+   13. 键盘
 ───────────────────────────────────────── */
 document.addEventListener('keydown', (e) => {
   if (lightbox && lightbox.classList.contains('open')) {
