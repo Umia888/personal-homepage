@@ -220,12 +220,13 @@ const isTouch = () => matchMedia('(hover: none)').matches;
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
 
-    // 初始化 modal 内的 book slider
+    // 初始化 modal 内的 book slider（如仍有）+ moving cards（点点生图）
     requestAnimationFrame(() => {
       $$('.book-track', modal).forEach(track => {
         setupBookTrack(track);
         updateBookTrack(track);
       });
+      $$('.moving-cards-wrap', modal).forEach(setupMovingCards);
     });
   }
 
@@ -293,9 +294,72 @@ function setupBookTrack(track) {
 })();
 
 /* ─────────────────────────────────────────
+   7.5 Aceternity · Infinite Moving Cards
+   - 把 track 内容克隆一份，形成无缝循环
+───────────────────────────────────────── */
+function setupMovingCards(wrap) {
+  if (!wrap || wrap._mcInit) return;
+  const track = wrap.querySelector('.moving-cards-track');
+  if (!track) return;
+  // 克隆当前所有子节点一份追加到末尾
+  const nodes = Array.from(track.children);
+  nodes.forEach(n => {
+    const c = n.cloneNode(true);
+    c.setAttribute('aria-hidden', 'true');
+    track.appendChild(c);
+  });
+  wrap._mcInit = true;
+}
+(function initMovingCardsOnLoad() {
+  $$('.moving-cards-wrap').forEach(setupMovingCards);
+})();
+
+/* ─────────────────────────────────────────
+   7.6 Aceternity · Container Scroll Animation
+   - 包裹 03/04/06 三个 section 的 wrapper 有 3D 展开效果
+   - 顶部进入视口 → 摆正；离开视口 → 保持原样
+───────────────────────────────────────── */
+(function initContainerScroll() {
+  const el = document.getElementById('cs-content');
+  if (!el) return;
+
+  // 参数：进度从 0 → 1
+  // rect.top 从 winH 变到 winH*0.15 时 progress 从 0 → 1
+  const ROT_MAX = 20;       // deg
+  const SCALE_MIN = 0.90;
+  const Y_MAX = 40;         // px
+
+  let ticking = false;
+  function update() {
+    ticking = false;
+    const rect = el.getBoundingClientRect();
+    const winH = window.innerHeight;
+    const start = winH;
+    const end   = winH * 0.15;
+    let p = 1 - (rect.top - end) / (start - end);
+    p = Math.max(0, Math.min(1, p));
+    // easing (ease-out cubic)
+    const eased = 1 - Math.pow(1 - p, 3);
+    const rot   = (1 - eased) * ROT_MAX;
+    const scale = SCALE_MIN + eased * (1 - SCALE_MIN);
+    const y     = (1 - eased) * Y_MAX;
+    el.style.setProperty('--cs-rot',   rot.toFixed(2) + 'deg');
+    el.style.setProperty('--cs-scale', scale.toFixed(3));
+    el.style.setProperty('--cs-y',     y.toFixed(1) + 'px');
+  }
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  update(); // 初次触发
+})();
+
+/* ─────────────────────────────────────────
    8. Aceternity · 3D Marquee
-   （纯 CSS 动画驱动，无需 JS；此处仅暴露一个可选的
-    "视口不可见时暂停动画" 优化）
+   （纯 CSS 动画驱动；仅暴露"视口外暂停动画"优化）
 ───────────────────────────────────────── */
 (function initMarquee() {
   const wrap = document.querySelector('.marquee-wrap');
