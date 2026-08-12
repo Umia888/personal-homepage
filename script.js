@@ -30,7 +30,7 @@ const isTouch = () => matchMedia('(hover: none)').matches;
 (function initLoader() {
   const loader = document.getElementById('page-loader');
   if (!loader) return;
-  const boxesRoot = document.getElementById('loader-boxes');
+  const boxesRoots = loader.querySelectorAll('.loader__boxes');
   const hintEl = document.getElementById('loader-hint');
   const startBtn = document.getElementById('loader-start');
   const pixelsEl = document.getElementById('loader-pixels');
@@ -45,31 +45,36 @@ const isTouch = () => matchMedia('(hover: none)').matches;
   // 加载期间禁止背景滚动
   document.body.style.overflow = 'hidden';
 
-  /* ---- 1. 生成 Boxes 网格（40 列 × 20 行）---- */
+  /* ---- 1. 生成 Boxes 网格（40 列 × 20 行）· 两个容器都填充 ---- */
   const COLS = 40, ROWS = 20;
-  const frag = document.createDocumentFragment();
-  for (let i = 0; i < COLS; i++) {
-    const col = document.createElement('div');
-    col.className = 'loader__col';
-    for (let j = 0; j < ROWS; j++) {
-      const cell = document.createElement('div');
-      cell.className = 'loader__cell';
-      if (i % 2 === 0 && j % 2 === 0) cell.classList.add('has-plus');
-      col.appendChild(cell);
+  function buildGrid(root) {
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < COLS; i++) {
+      const col = document.createElement('div');
+      col.className = 'loader__col';
+      for (let j = 0; j < ROWS; j++) {
+        const cell = document.createElement('div');
+        cell.className = 'loader__cell';
+        if (i % 2 === 0 && j % 2 === 0) cell.classList.add('has-plus');
+        col.appendChild(cell);
+      }
+      frag.appendChild(col);
     }
-    frag.appendChild(col);
+    root.appendChild(frag);
   }
-  boxesRoot.appendChild(frag);
+  boxesRoots.forEach(buildGrid);
 
-  /* ---- 2. hover / 触摸 → 单格随机变色 ---- */
+  /* ---- 2. hover / 触摸 → 单格随机变色（两个网格都监听）---- */
   const paintCell = (target) => {
     const cell = target.closest && target.closest('.loader__cell');
     if (!cell) return;
     cell.style.setProperty('--rand', rand());
     cell.style.backgroundColor = rand();
   };
-  boxesRoot.addEventListener('mouseover', (e) => paintCell(e.target));
-  boxesRoot.addEventListener('touchstart', (e) => paintCell(e.target), { passive: true });
+  boxesRoots.forEach((root) => {
+    root.addEventListener('mouseover', (e) => paintCell(e.target));
+    root.addEventListener('touchstart', (e) => paintCell(e.target), { passive: true });
+  });
 
   /* ---- 3. START 5×5 像素字模 ---- */
   const LETTERS = {
