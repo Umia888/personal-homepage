@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>雷雨苗 Mia｜用户需求分析 · 数据驱动的方案设计与落地</title>
-  <meta name="description" content="2027 届。用户需求分析与拆解、业务数据分析、方案设计与落地推动。阿里巴巴淘天（电商）· 小红书（社区）实习经历，B / C 端均有实践。墨尔本大学法学硕士。" />
-  <meta name="keywords" content="雷雨苗,Mia,2027届,需求分析,用户洞察,数据分析,方案设计,项目落地,B端,C端,电商,内容,小红书,阿里巴巴" />
+  <title>雷雨苗 Mia｜AI 图像创作工具产品 · 审美洞察 · 全球化体验</title>
+  <meta name="description" content="2027 届。AI 图像创作工具产品方向：审美趋势洞察、图像创作流程设计、用户体验与留存、跨部门推动上线。小红书 AI 视觉（点点生图 · 76 组模板）· 阿里巴巴淘天 AIGC 方向实习。墨尔本大学法学硕士，个人摄影 &amp; 修图作品可查看。" />
+  <meta name="keywords" content="雷雨苗,Mia,2027届,AI产品经理,图像工具,图片创作,AI视觉,AIGC,修图,摄影,审美洞察,用户体验,留存,全球化,剪映,CapCut,小红书,阿里巴巴" />
   <meta name="author" content="雷雨苗 Mia" />
   <link rel="canonical" href="https://personalhomepage-eight.vercel.app/" />
 
   <meta property="og:type" content="profile" />
   <meta property="og:locale" content="zh_CN" />
   <meta property="og:site_name" content="Mia World" />
-  <meta property="og:title" content="雷雨苗 Mia｜用户需求分析 · 数据驱动的方案设计与落地" />
-  <meta property="og:description" content="把用户说不清的需求，变成能落地的方案。" />
+  <meta property="og:title" content="雷雨苗 Mia｜AI 图像创作工具产品 · 审美洞察 · 全球化体验" />
+  <meta property="og:description" content="把说不清的审美，变成能上线的图像功能。" />
   <meta property="og:url" content="https://personalhomepage-eight.vercel.app/" />
   <meta property="og:image" content="https://personalhomepage-eight.vercel.app/avatar.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="雷雨苗 Mia｜用户需求分析 · 数据驱动的方案设计与落地" />
-  <meta name="twitter:description" content="把用户说不清的需求，变成能落地的方案。" />
+  <meta name="twitter:title" content="雷雨苗 Mia｜AI 图像创作工具产品 · 审美洞察 · 全球化体验" />
+  <meta name="twitter:description" content="把说不清的审美，变成能上线的图像功能。" />
   <meta name="twitter:image" content="https://personalhomepage-eight.vercel.app/avatar.png" />
 
   <meta name="theme-color" content="#ffffff" />
@@ -56,6 +56,22 @@
 <body>
 
   <!-- ══════════════════════════════════════════
+       Loader · Aceternity Boxes 网格 + START 拼字
+  ══════════════════════════════════════════ -->
+  <div class="loader" id="page-loader" role="dialog" aria-modal="true" aria-label="Loading">
+    <div class="loader__boxes" id="loader-boxes" aria-hidden="true"></div>
+    <div class="loader__stage">
+      <p class="loader__hint" id="loader-hint">
+        Preparing for Future<span class="loader__dots" aria-hidden="true"><i>.</i><i>.</i><i>.</i></span>
+      </p>
+      <button class="loader__start" id="loader-start" type="button" aria-label="Start · 进入个人主页" hidden>
+        <div class="loader__pixels" id="loader-pixels" aria-hidden="true"></div>
+        <span class="loader__cta">Click to enter <span aria-hidden="true">↗</span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
        Floating Dock 顶栏（文字版）· 磁吸放大
   ══════════════════════════════════════════ -->
   <nav class="fdock-wrap" aria-label="全站导航">
@@ -66,6 +82,8 @@
       <a href="#portfolio"  class="fdock__item" data-nav="portfolio">作品集</a>
       <a href="#faq"        class="fdock__item" data-nav="faq">FAQ</a>
       <a href="#wall"       class="fdock__item" data-nav="wall">内容墙</a>
+      <a href="#life"       class="fdock__item" data-nav="life">生活碎片</a>
+      <a href="#photos"     class="fdock__item" data-nav="photos">摄影作品</a>
       <a href="#updates"    class="fdock__item" data-nav="updates">动态</a>
       <span class="fdock__sep" aria-hidden="true"></span>
       <a href="mailto:Lym16816888@126.com" class="fdock__item">Email</a>
@@ -92,15 +110,15 @@
           </span>
 
           <h1 class="hero__title">
-            把用户说不清的需求，<br />
-            变成<em>能落地的方案</em>。
+            把说不清的审美，<br />
+            变成<em>能上线的图像功能</em>。
           </h1>
         </div>
 
         <p class="hero__subtitle blur-fade" style="--fade-delay: 0.12s;">
-          用户需求分析 · 数据驱动决策 · 方案设计与落地。<br />
-          我习惯从真实行为数据出发拆解需求，再把它变成能排期、能验收、能上线的方案——而不是停在「用户好像想要」。
-          <span class="hero__meta">小红书（上海）4 个月 · 阿里巴巴淘天（杭州）3 个月｜B / C 端 · 电商 &amp; 社区双平台｜墨尔本大学 法学硕士｜2027 届</span>
+          AI 图像创作工具产品 · 审美趋势洞察 · 全球化用户体验与留存。<br />
+          我在小红书做的就是 AI 视觉方向——把用户"想要那种感觉"的画面，拆成模板方向、拆成模型评估口径、拆成排期能落地的功能——而不是停在「这张图看起来不错」。
+          <span class="hero__meta">小红书 AI 视觉（上海）4 个月 · 阿里巴巴淘天 AIGC（杭州）3 个月｜C 端图像工具 · 76 组 AI 模板上线｜墨尔本大学 法学硕士｜2027 届</span>
         </p>
 
         <div class="cta-group blur-fade" style="--fade-delay: 0.20s;">
@@ -133,10 +151,47 @@
       </div>
 
       <div class="hero__col hero__col--art blur-fade" style="--fade-delay: 0.10s;">
-        <pre class="ascii-art" id="ascii-art" aria-hidden="true"></pre>
-        <a href="#about" class="hero__avatar" aria-label="头像">
-          <img src="avatar.png" alt="雷雨苗头像" />
-        </a>
+        <!-- Aceternity · Draggable Cards（可拖拽的生活碎片图卡） -->
+        <div class="draggable-cards" id="draggable-cards" aria-label="生活碎片 · 可拖拽">
+          <p class="draggable-cards__hint" aria-hidden="true">
+            拖我 <em>Drag me</em>
+          </p>
+
+          <div class="draggable-card" data-init-x="-38%" data-init-y="-32%" data-rot="-6" style="transform: translate(-50%, -50%) translate(-38%, -32%) rotate(-6deg);">
+            <img src="gallery/life/melbourne/06f492e38ef1b49a0c13ce00c699ad.JPG" alt="Melbourne" loading="lazy" draggable="false" />
+            <span class="draggable-card__title">Melbourne</span>
+          </div>
+
+          <div class="draggable-card" data-init-x="10%" data-init-y="-38%" data-rot="5" style="transform: translate(-50%, -50%) translate(10%, -38%) rotate(5deg);">
+            <img src="gallery/life/hong-kong/1040g3g8323p01ef07006jul2ot9hcfi55114f6o.jpeg" alt="Hong Kong" loading="lazy" draggable="false" />
+            <span class="draggable-card__title">Hong Kong</span>
+          </div>
+
+          <div class="draggable-card" data-init-x="-20%" data-init-y="-8%" data-rot="-4" style="transform: translate(-50%, -50%) translate(-20%, -8%) rotate(-4deg);">
+            <img src="gallery/life/new-zealand/1040g3g8323p01ef0701mjul2ot9hcfi5v2424b8.jpeg" alt="New Zealand" loading="lazy" draggable="false" />
+            <span class="draggable-card__title">New Zealand</span>
+          </div>
+
+          <div class="draggable-card" data-init-x="26%" data-init-y="-6%" data-rot="7" style="transform: translate(-50%, -50%) translate(26%, -6%) rotate(7deg);">
+            <img src="gallery/life/melbourne/68e957ddeeb6d2f7af1250c6eae73c.JPG" alt="Melbourne" loading="lazy" draggable="false" />
+            <span class="draggable-card__title">Melbourne</span>
+          </div>
+
+          <div class="draggable-card" data-init-x="-8%" data-init-y="22%" data-rot="-3" style="transform: translate(-50%, -50%) translate(-8%, 22%) rotate(-3deg);">
+            <img src="gallery/life/hong-kong/1040g3g8323p01ef07016jul2ot9hcfi5slafbj8.jpeg" alt="Hong Kong" loading="lazy" draggable="false" />
+            <span class="draggable-card__title">Hong Kong</span>
+          </div>
+
+          <div class="draggable-card" data-init-x="28%" data-init-y="26%" data-rot="4" style="transform: translate(-50%, -50%) translate(28%, 26%) rotate(4deg);">
+            <img src="gallery/life/new-zealand/1040g3g8323p01ef07056jul2ot9hcfi5caf6328.jpeg" alt="New Zealand" loading="lazy" draggable="false" />
+            <span class="draggable-card__title">New Zealand</span>
+          </div>
+
+          <div class="draggable-card" data-init-x="-32%" data-init-y="34%" data-rot="6" style="transform: translate(-50%, -50%) translate(-32%, 34%) rotate(6deg);">
+            <img src="gallery/life/melbourne/IMG_0259.jpg" alt="Melbourne" loading="lazy" draggable="false" />
+            <span class="draggable-card__title">Melbourne</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -581,39 +636,30 @@
                 </div>
               </div>
               <h2 id="ditu-templates">代表模板</h2>
-              <h4 class="mc-head">100% AI · 毕业季 + 写真风 · 30 张展示</h4>
+              <h4 class="mc-head">100% AI · 毕业季 + 写真风 · 21 张展示</h4>
               <div class="moving-cards-wrap" data-direction="right" data-speed="slow">
                 <div class="moving-cards-track">
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147732673.jpg"><img src="templates/graduation/gen-1784147732673.jpg" alt="毕业季模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147723124.jpg"><img src="templates/graduation/gen-1784147723124.jpg" alt="毕业季模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147741203.jpg"><img src="templates/graduation/gen-1784147741203.jpg" alt="毕业季模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/img-1784147462578.jpg"><img src="templates/graduation/img-1784147462578.jpg" alt="毕业季模板" loading="lazy" /></button>
                   <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147458826.jpg"><img src="templates/graduation/gen-1784147458826.jpg" alt="毕业季模板" loading="lazy" /></button>
                   <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1779249480283-1784148074657.jpg"><img src="templates/portrait/gen-1779249480283-1784148074657.jpg" alt="写真风模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147645180.jpg"><img src="templates/graduation/gen-1784147645180.jpg" alt="毕业季模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784148044905.jpg"><img src="templates/portrait/gen-1784148044905.jpg" alt="写真风模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147639314.jpg"><img src="templates/graduation/gen-1784147639314.jpg" alt="毕业季模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148107383.jpg"><img src="templates/portrait/img-1784148107383.jpg" alt="写真风模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147665530.jpg"><img src="templates/graduation/gen-1784147665530.jpg" alt="毕业季模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148103392.jpg"><img src="templates/portrait/img-1784148103392.jpg" alt="写真风模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147678036.jpg"><img src="templates/graduation/gen-1784147678036.jpg" alt="毕业季模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147344534.jpg"><img src="templates/portrait/gen-1784147344534.jpg" alt="写真风模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147683144.jpg"><img src="templates/graduation/gen-1784147683144.jpg" alt="毕业季模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147340035.jpg"><img src="templates/portrait/gen-1784147340035.jpg" alt="写真风模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147658615.jpg"><img src="templates/graduation/gen-1784147658615.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147499970.jpg"><img src="templates/graduation/gen-1784147499970.jpg" alt="毕业季模板" loading="lazy" /></button>
                   <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147358748.jpg"><img src="templates/portrait/gen-1784147358748.jpg" alt="写真风模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147718706.jpg"><img src="templates/graduation/gen-1784147718706.jpg" alt="毕业季模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147366213.jpg"><img src="templates/portrait/gen-1784147366213.jpg" alt="写真风模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147761489.jpg"><img src="templates/graduation/gen-1784147761489.jpg" alt="毕业季模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147379183.jpg"><img src="templates/portrait/gen-1784147379183.jpg" alt="写真风模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147784549.jpg"><img src="templates/graduation/gen-1784147784549.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147629990.jpg"><img src="templates/graduation/gen-1784147629990.jpg" alt="毕业季模板" loading="lazy" /></button>
                   <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147576076.jpg"><img src="templates/portrait/gen-1784147576076.jpg" alt="写真风模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147793729.jpg"><img src="templates/graduation/gen-1784147793729.jpg" alt="毕业季模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147817367.jpg"><img src="templates/graduation/gen-1784147817367.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147639314.jpg"><img src="templates/graduation/gen-1784147639314.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784148044905.jpg"><img src="templates/portrait/gen-1784148044905.jpg" alt="写真风模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147683144.jpg"><img src="templates/graduation/gen-1784147683144.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148103392.jpg"><img src="templates/portrait/img-1784148103392.jpg" alt="写真风模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147691956.jpg"><img src="templates/graduation/gen-1784147691956.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147718706.jpg"><img src="templates/graduation/gen-1784147718706.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147723124.jpg"><img src="templates/graduation/gen-1784147723124.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147724153.jpg"><img src="templates/graduation/gen-1784147724153.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147741203.jpg"><img src="templates/graduation/gen-1784147741203.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147761489.jpg"><img src="templates/graduation/gen-1784147761489.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147784549.jpg"><img src="templates/graduation/gen-1784147784549.jpg" alt="毕业季模板" loading="lazy" /></button>
                   <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147824964.jpg"><img src="templates/graduation/gen-1784147824964.jpg" alt="毕业季模板" loading="lazy" /></button>
                   <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147992182.jpg"><img src="templates/graduation/gen-1784147992182.jpg" alt="毕业季模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147995102.jpg"><img src="templates/graduation/gen-1784147995102.jpg" alt="毕业季模板" loading="lazy" /></button>
-                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784148002490.jpg"><img src="templates/graduation/gen-1784148002490.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/img-1784147462578.jpg"><img src="templates/graduation/img-1784147462578.jpg" alt="毕业季模板" loading="lazy" /></button>
+                  <button class="moving-card media-item" type="button" data-media-type="image" data-media-src="templates/graduation/img-1784147482897.jpg"><img src="templates/graduation/img-1784147482897.jpg" alt="毕业季模板" loading="lazy" /></button>
                 </div>
               </div>
             </main>
@@ -870,91 +916,125 @@
       <header class="section-head blur-fade">
         <div class="section-head__meta"><span class="no">04</span><span>FAQ</span></div>
         <h2 class="section-title">你可能想问的<em>那些事</em></h2>
+        <p class="section-lead">
+          围绕<b>AI 图像创作工具</b>这个方向，把你大概率会问的都提前答一次——
+          从我为什么做图像方向、怎么做审美趋势洞察，到摄影 / 修图作品怎么看。
+        </p>
       </header>
 
       <div class="faq-filters blur-fade" role="tablist" aria-label="FAQ 分类">
         <button class="active" data-faq="me">👤 关于我</button>
-        <button data-faq="work">💼 关于工作</button>
+        <button data-faq="work">🖼 关于图像工具方向</button>
         <button data-faq="ai">🤖 关于 AI 与 Vibe Coding</button>
         <button data-faq="collab">🤝 关于合作</button>
-        <button data-faq="create">🎨 关于内容创作</button>
+        <button data-faq="create">📸 关于摄影 &amp; 修图作品</button>
       </div>
 
       <div class="faq-accordion blur-fade">
         <details class="faq-item" data-faq="me" open>
-          <summary>你的背景和专业是什么？</summary>
+          <summary>你的背景和专业是什么？为什么现在做图像方向？</summary>
           <div class="faq-body">
-            <p>本科 &amp; 硕士都是法学方向，硕士是墨尔本大学 Master of Laws。2022 年起接触 Vibe Coding，逐步从"法学生"过渡到"用 AI 做产品的人"，现在在小红书做 AI 方向实习生。</p>
+            <p>本科 &amp; 硕士都是法学，硕士是墨尔本大学 Master of Laws。2022 年起接触 Vibe Coding，逐步从"法学生"过渡到"用 AI 做产品的人"。<b>目前在小红书做 AI 视觉方向</b>——负责 AI 图像模板方向定义、模型效果测评、数据看板，主线就是<em>图像创作工具</em>本身。</p>
           </div>
         </details>
         <details class="faq-item" data-faq="me">
-          <summary>为什么会从法学转到 AI 方向？</summary>
+          <summary>为什么会从法学转到 AI 图像方向？</summary>
           <div class="faq-body">
-            <p>做法律 AI 项目的时候发现：真正把用户痛点变成产品的过程，比法条本身更让我兴奋。我喜欢用户洞察，也喜欢用 Vibe Coding 直接把想法落地——这些放在一起，就是我现在做的事。</p>
+            <p>做法律 AI 项目的时候发现：真正让我兴奋的从来不是法条，是<b>"把用户说不清的感觉变成能用的东西"</b>这件事。图像方向把这件事放大了——用户想要"那种感觉"，我要负责把它拆成模板方向、拆成参数、拆成排期能落地的功能。这跟我一直在做的判断链是同一件事，只是画布从文字换成了画面。</p>
           </div>
         </details>
         <details class="faq-item" data-faq="me">
-          <summary>你最喜欢的作品是哪个？</summary>
+          <summary>你最喜欢自己的哪一个图像作品？</summary>
           <div class="faq-body">
-            <p>#喜鹊谋杀案 和 #弗兰肯斯坦：前者达到过单条 19K+ 赞，后者是我第一次做完整的拼贴叙事——不是最"专业"的作品，但是最像我的作品。</p>
+            <p><b>#弗兰肯斯坦</b> 是我第一次做完整的拼贴叙事，讲人造人 / 自然人边界；<b>#喜鹊谋杀案</b> 单条 19K+ 赞，是我把审美偏好推到"能被大众接住"这条线的一次验证。它们不是最"专业"的，但都是<em>先有画面感受，再倒推怎么做出来</em>——这套思路也是我做模板方向的默认方式。</p>
           </div>
         </details>
 
         <details class="faq-item" data-faq="work" hidden>
-          <summary>你在小红书具体做什么？</summary>
+          <summary>你在小红书具体做的是不是图像工具？</summary>
           <div class="faq-body">
-            <p>两条主线：一是点点生图，负责模型效果测评 + AI 模板方向设计 + 数据看板；二是点点 Skills · Alex 星骰，负责 Knowledge 工程 + Skill 编写 + 回答质量优化。</p>
+            <p>是的，主线就是<b>C 端 AI 图像工具</b>——项目名叫「点点生图」。我负责的部分包括：<em>模型效果测评</em>（判断能不能上线）、<em>AI 模板方向定义</em>（决定下一批做什么风格）、<em>数据看板</em>（5H 自动刷新，指导下一轮方向）。到目前累计上线 <b>76 组</b>节点主题模板，覆盖毕业季、写真风等垂直审美方向。</p>
           </div>
         </details>
         <details class="faq-item" data-faq="work" hidden>
-          <summary>模型测评你怎么做？</summary>
+          <summary>你怎么做「审美趋势洞察」？</summary>
           <div class="faq-body">
-            <p>我会拆成几个维度：人脸一致性、模板契合度、身体比例、画质、稳定性，按维度打分并归因（是 prompt 问题、模型能力问题、还是模板结构问题），再把结论反馈给模型与产品同学，用于判断"能不能上线 / 需不需要再练"。</p>
+            <p>三个入口交叉：<b>搜索词</b>（用户实际在找什么风格）、<b>爆款样本</b>（哪些图正在被大量收藏/转发，回归共性特征）、<b>竞品链路盘点</b>（Pinterest / 海外修图 App 上正在发生什么）。<em>我更信行为数据不信问卷</em>——搜索是已经发生的审美需求，比"你喜欢什么风格"这种问题诚实得多。趋势洞察最后一定要能落成一句话：<b>下一批模板往哪个方向做</b>，否则就是无效洞察。</p>
+          </div>
+        </details>
+        <details class="faq-item" data-faq="work" hidden>
+          <summary>怎么衡量图像工具的用户体验和留存？</summary>
+          <div class="faq-body">
+            <p>我平时用的是一个<b>三层递进模型</b>：<em>基础可用</em>（人脸一致性 / 身体比例 / 画质无硬伤）→ <em>体验达标</em>（明显好过用户自己 P 图或用其他工具）→ <em>愿意分享</em>（过得了用户自己那关才会传播）。三层缺一不可，底层不成立时上层做得再好都没意义。<b>留存的钩子不在功能数量，而在这三层的最上层</b>——用户愿意把图晒出去，才会二次回来做下一张。</p>
+          </div>
+        </details>
+        <details class="faq-item" data-faq="work" hidden>
+          <summary>模型测评你具体怎么做？</summary>
+          <div class="faq-body">
+            <p>拆成 5 个维度：<b>人脸一致性、模板契合度、身体比例、画质、稳定性</b>；跑批打分之后归因——是 prompt 问题、模型能力问题、还是模板结构问题？结论会分成三档给到算法与产品同学：<em>能上线 / 需要再练一版 / 结构层要重做</em>。<b>好的测评结论标准是不同角色看完能得出同一个上线决策</b>，而不是"效果一般"这种没法执行的话。</p>
+          </div>
+        </details>
+        <details class="faq-item" data-faq="work" hidden>
+          <summary>跨部门推动上线怎么做？</summary>
+          <div class="faq-body">
+            <p>图像工具的排期永远同时卡在算法、设计、工程三边。我的做法是<b>提前把口径对齐到可判定</b>：跟算法对齐效果评估维度、跟设计对齐视觉方向与模板结构、跟工程对齐可行性和排期成本。<em>推动落地最难的不是说服，是让对方能用自己的语言复述我的需求</em>。所以我给出的东西尽量具体——不说"效果不好"，而说"哪一维、多少比例、卡在哪一层"。</p>
+          </div>
+        </details>
+        <details class="faq-item" data-faq="work" hidden>
+          <summary>怎么看图像工具做全球化？</summary>
+          <div class="faq-body">
+            <p>审美是<b>本地化最重的一件事</b>——同一张"毕业季"，国内、东南亚、欧美用户想要的画面感差异极大。做法上我会：<em>按市场分层跑测评样本</em>（不是一套模板打天下），<em>让搜索词和爆款样本按区域拉</em>（趋势输入本地化），<em>底层能力对齐一致，但模板方向按市场配</em>。全球化不是翻译，是<b>为每个市场重建一次审美判断</b>。</p>
           </div>
         </details>
 
         <details class="faq-item" data-faq="ai" hidden>
           <summary>什么是 Vibe Coding？你怎么理解？</summary>
           <div class="faq-body">
-            <p>Vibe Coding 就是——不排期，不等资源，把想法用 AI 直接推到可运行的原型。对我来说它是"验证想法的最短路径"，而不是取代工程的手段。</p>
+            <p>Vibe Coding 就是——不排期、不等资源，把想法用 AI 直接推到可运行的原型。对做图像工具的产品来说它特别值：<b>一个模板方向到底行不行，做出来跑一遍最快</b>；一个功能对不对，先自己搭原型走一次流程比开会讨论有效得多。它是"验证想法的最短路径"，不是取代工程的手段。</p>
           </div>
         </details>
         <details class="faq-item" data-faq="ai" hidden>
-          <summary>做 Skill / Prompt 有什么心得？</summary>
+          <summary>做图像方向的 Prompt / 模板有什么心得？</summary>
           <div class="faq-body">
-            <p>三条：<em>分块打标签</em> 比 "写死大 prompt" 好用；<em>QA 范例</em> 比 "描述规则" 见效快；<em>约束条件</em> 是保底，不是主菜。</p>
+            <p>三条我反复验证过的：<em>结构比修辞重要</em>——决定成图的从来不是形容词堆多少，而是构图 / 光线 / 焦段这些结构位；<em>QA 范例比规则好用</em>——给三张"这样是对的、这样是错的"比写十条约束更快对齐；<em>约束条件是保底不是主菜</em>——它防事故，但不带来惊喜，惊喜来自方向选对了没。</p>
           </div>
         </details>
 
         <details class="faq-item" data-faq="collab" hidden>
           <summary>可以找你合作什么？</summary>
           <div class="faq-body">
-            <p>AI 方案咨询、模型测评方法、Prompt / Skill 工程、AIGC 内容制作，以及"把一个想法快速做成能用的原型"这件事。</p>
+            <p>AI 图像方向的方案咨询、模型 / 模板测评方法、审美趋势洞察、Prompt &amp; Skill 工程，以及"把一个图像想法快速做成能用的原型"这件事。有摄影 / 修图 / AI 视觉方向的项目都欢迎聊。</p>
           </div>
         </details>
         <details class="faq-item" data-faq="collab" hidden>
-          <summary>怎么联系你？</summary>
+          <summary>怎么联系你？可以看你的摄影和修图作品吗？</summary>
           <div class="faq-body">
-            <p>邮箱 <a href="mailto:Lym16816888@126.com">Lym16816888@126.com</a>，也可以直接在小红书搜 <b>88888888Richy</b>。</p>
+            <p>邮箱 <a href="mailto:Lym16816888@126.com">Lym16816888@126.com</a>，小红书搜 <b>88888888Richy</b>。个人摄影 &amp; 修图作品可以直接看：作品集里的<b>点点生图</b>展示了 30 张 AI 图像模板成图（毕业季 + 写真风），也可以到我小红书主页翻更多原创视觉内容。需要更完整的图集我可以单独发。</p>
           </div>
         </details>
 
         <details class="faq-item" data-faq="create" hidden>
-          <summary>你的作品都是 100% AI 创作吗？</summary>
+          <summary>你的作品都是 100% AI 生成吗？还是也有真机摄影和后期？</summary>
           <div class="faq-body">
-            <p>不是。每条内容我都会标注创作方式：#喜鹊谋杀案、#欢愉的艺术 是 100% AI；#弗兰肯斯坦 是 100% 拼贴；#锈湖 是 90% 拼贴 + 10% AI。</p>
+            <p>都有，而且我会明确标注每一条内容的创作方式：<b>#喜鹊谋杀案、#欢愉的艺术</b> 是 100% AI；<b>#弗兰肯斯坦</b> 是 100% 拼贴（真实素材 + 后期）；<b>#锈湖</b> 是 90% 拼贴 + 10% AI。我不排斥任何一种路径——<em>能达到那个画面感受的方式就是对的方式</em>。这也是我判断图像工具好不好用的标准：它有没有让"我想要的那种感觉"更容易被做出来。</p>
           </div>
         </details>
         <details class="faq-item" data-faq="create" hidden>
-          <summary>创作灵感一般来自哪？</summary>
+          <summary>创作 &amp; 审美灵感一般来自哪？</summary>
           <div class="faq-body">
-            <p>艺术史（洛可可、启蒙）、影视文学（弗兰肯斯坦、锈湖）、社会议题（人造人 / 自然人的边界）。我更喜欢用视觉去表达一种"感受"，而不是复刻一个"故事"。</p>
+            <p>三个源头：<b>艺术史</b>（洛可可、启蒙、超现实）、<b>影视文学</b>（弗兰肯斯坦、锈湖、电影分镜）、<b>社会议题</b>（人造人 / 自然人的边界、身份、女性视角）。我更喜欢用视觉表达一种"感受"，而不是复刻一个"故事"——这也是我在做模板方向时的默认锚点：<em>先定"要让用户感觉到什么"，再决定构图和风格</em>。</p>
+          </div>
+        </details>
+        <details class="faq-item" data-faq="create" hidden>
+          <summary>你怎么判断一张图 / 一个模板"好"？</summary>
+          <div class="faq-body">
+            <p>四条硬标准：<em>结构是否清晰</em>（主体、层次、留白）、<em>光线是否成立</em>（不假不脏）、<em>细节是否可靠</em>（脸、手、字最容易穿帮）、<em>是否让人有"想拍成自己"的冲动</em>。前三条是<b>底线</b>，第四条是<b>模板能不能上得了台面的分水岭</b>——工具型产品最终要的不是漂亮，是<em>用户愿意套自己进去</em>。</p>
           </div>
         </details>
       </div>
 
       <div class="faq-fallback blur-fade">
-        <span>没找到你想要的答案？</span>
+        <span>想看更多摄影 &amp; 修图作品或聊聊图像工具方向？</span>
         <a href="mailto:Lym16816888@126.com" class="btn btn-primary btn-sm">和我聊聊 ↗</a>
       </div>
     </div>
@@ -1025,18 +1105,18 @@
     <div class="container">
       <header class="section-head blur-fade">
         <div class="section-head__meta"><span class="no">05</span><span>Creations</span></div>
-        <h2 class="section-title">留下的，才是<em>真实的我</em></h2>
+        <h2 class="section-title">点点生图 · <em>AI 图像模板</em></h2>
         <p class="section-lead">
-          写真风 / 毕业季 / 拼贴叙事——每一张都是我做过的东西。
+          写真风 + 毕业季，21 张 AI 图像模板。<b>每一张都来自我在小红书主导的模板方向。</b>
           hover 图墙时会暂停，点击任一张放大看。
         </p>
       </header>
 
       <ul class="creations-note blur-fade">
-        <li><b>#喜鹊谋杀案</b> · 100% AI · 19K+ 赞</li>
-        <li><b>#欢愉的艺术</b> · 100% AI · 视频 + 长文</li>
-        <li><b>#弗兰肯斯坦</b> · 100% 拼贴 · 视频 + 图集</li>
-        <li><b>#锈湖</b> · 90% 拼贴 + 10% AI</li>
+        <li><b>写真风</b> · 5 张 · AI 图像模板</li>
+        <li><b>毕业季</b> · 16 张 · AI 图像模板</li>
+        <li><b>已上线</b> · 面向 C 端用户开放</li>
+        <li><b>模板方向</b> · 从趋势洞察到成图我负责全链路</li>
       </ul>
 
       <div class="marquee-wrap blur-fade">
@@ -1044,67 +1124,399 @@
           <div class="marquee-grid">
 
             <div class="marquee-col marquee-col--down">
-              <div class="marquee-cell marquee-quad" aria-label="拼贴叙事 · 四宫格">
-                <button class="quad-slot media-item" type="button" data-media-type="image" data-media-src="frankenstein-1.jpg"><img src="frankenstein-1.jpg" alt="#弗兰肯斯坦 · 拼贴 1" loading="lazy" /></button>
-                <button class="quad-slot media-item" type="button" data-media-type="image" data-media-src="rusty-lake-1.jpg"><img src="rusty-lake-1.jpg" alt="#锈湖 · 拼贴" loading="lazy" /></button>
-                <button class="quad-slot media-item" type="button" data-media-type="image" data-media-src="frankenstein-2.jpg"><img src="frankenstein-2.jpg" alt="#弗兰肯斯坦 · 拼贴 2" loading="lazy" /></button>
-                <button class="quad-slot media-item" type="button" data-media-type="image" data-media-src="frankenstein-3.jpg"><img src="frankenstein-3.jpg" alt="#弗兰肯斯坦 · 拼贴 3" loading="lazy" /></button>
-              </div>
-              <a class="marquee-cell marquee-cell--link" href="https://www.xiaohongshu.com/discovery/item/69a2f83f000000001a037267?source=webshare&amp;xhsshare=pc_web&amp;xsec_token=AB9wS9NYHd4krF4tJqBWWw9Nw3BVUeDdrcDKLOUOZei2w=&amp;xsec_source=pc_share" target="_blank" rel="noopener" aria-label="#喜鹊谋杀案 · 19K+ 赞 · 点击去小红书">
-                <img src="magpie-murders.png" alt="#喜鹊谋杀案 · 100% AI · 19K+ 赞" loading="lazy" />
-                <span class="marquee-cell__badge">↗ 小红书 · 19K+ 赞</span>
-              </a>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147340035.jpg"><img src="templates/portrait/gen-1784147340035.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147499970.jpg"><img src="templates/graduation/gen-1784147499970.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147639314.jpg"><img src="templates/graduation/gen-1784147639314.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147358748.jpg"><img src="templates/portrait/gen-1784147358748.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147678036.jpg"><img src="templates/graduation/gen-1784147678036.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147723124.jpg"><img src="templates/graduation/gen-1784147723124.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784148044905.jpg"><img src="templates/portrait/gen-1784148044905.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147992182.jpg"><img src="templates/graduation/gen-1784147992182.jpg" alt="" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1779249480283-1784148074657.jpg"><img src="templates/portrait/gen-1779249480283-1784148074657.jpg" alt="写真风模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147499970.jpg"><img src="templates/graduation/gen-1784147499970.jpg" alt="毕业季模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147639314.jpg"><img src="templates/graduation/gen-1784147639314.jpg" alt="毕业季模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147358748.jpg"><img src="templates/portrait/gen-1784147358748.jpg" alt="写真风模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147723124.jpg"><img src="templates/graduation/gen-1784147723124.jpg" alt="毕业季模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784148044905.jpg"><img src="templates/portrait/gen-1784148044905.jpg" alt="写真风模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147992182.jpg"><img src="templates/graduation/gen-1784147992182.jpg" alt="毕业季模板" loading="lazy" /></button>
             </div>
 
             <div class="marquee-col marquee-col--up">
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147458826.jpg"><img src="templates/graduation/gen-1784147458826.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147467118.jpg"><img src="templates/graduation/gen-1784147467118.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/cropped-img-1784147528475.jpg"><img src="templates/graduation/cropped-img-1784147528475.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147629990.jpg"><img src="templates/graduation/gen-1784147629990.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147366213.jpg"><img src="templates/portrait/gen-1784147366213.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147645180.jpg"><img src="templates/graduation/gen-1784147645180.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147683144.jpg"><img src="templates/graduation/gen-1784147683144.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147732673.jpg"><img src="templates/graduation/gen-1784147732673.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784148076912.jpg"><img src="templates/portrait/gen-1784148076912.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147995102.jpg"><img src="templates/graduation/gen-1784147995102.jpg" alt="" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147458826.jpg"><img src="templates/graduation/gen-1784147458826.jpg" alt="毕业季模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147629990.jpg"><img src="templates/graduation/gen-1784147629990.jpg" alt="毕业季模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147683144.jpg"><img src="templates/graduation/gen-1784147683144.jpg" alt="毕业季模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147724153.jpg"><img src="templates/graduation/gen-1784147724153.jpg" alt="毕业季模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147576076.jpg"><img src="templates/portrait/gen-1784147576076.jpg" alt="写真风模板" loading="lazy" /></button>
             </div>
 
             <div class="marquee-col marquee-col--down">
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/img-1784147462578.jpg"><img src="templates/graduation/img-1784147462578.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/img-1784147474823.jpg"><img src="templates/graduation/img-1784147474823.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/img-1784147482897.jpg"><img src="templates/graduation/img-1784147482897.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147669277.jpg"><img src="templates/graduation/gen-1784147669277.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147741203.jpg"><img src="templates/graduation/gen-1784147741203.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148103392.jpg"><img src="templates/portrait/img-1784148103392.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147784549.jpg"><img src="templates/graduation/gen-1784147784549.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147820857.jpg"><img src="templates/graduation/gen-1784147820857.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784148002490.jpg"><img src="templates/graduation/gen-1784148002490.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147684506.jpg"><img src="templates/graduation/gen-1784147684506.jpg" alt="" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/img-1784147462578.jpg"><img src="templates/graduation/img-1784147462578.jpg" alt="毕业季模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/img-1784147482897.jpg"><img src="templates/graduation/img-1784147482897.jpg" alt="毕业季模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147741203.jpg"><img src="templates/graduation/gen-1784147741203.jpg" alt="毕业季模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148103392.jpg"><img src="templates/portrait/img-1784148103392.jpg" alt="写真风模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147784549.jpg"><img src="templates/graduation/gen-1784147784549.jpg" alt="毕业季模板" loading="lazy" /></button>
             </div>
 
             <div class="marquee-col marquee-col--up">
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147344534.jpg"><img src="templates/portrait/gen-1784147344534.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147656187.jpg"><img src="templates/graduation/gen-1784147656187.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147665530.jpg"><img src="templates/graduation/gen-1784147665530.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147379183.jpg"><img src="templates/portrait/gen-1784147379183.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147691956.jpg"><img src="templates/graduation/gen-1784147691956.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147718706.jpg"><img src="templates/graduation/gen-1784147718706.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/img-1784148107383.jpg"><img src="templates/portrait/img-1784148107383.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147761489.jpg"><img src="templates/graduation/gen-1784147761489.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147824964.jpg"><img src="templates/graduation/gen-1784147824964.jpg" alt="" loading="lazy" /></button>
-              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/portrait/gen-1784147576076.jpg"><img src="templates/portrait/gen-1784147576076.jpg" alt="" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147691956.jpg"><img src="templates/graduation/gen-1784147691956.jpg" alt="毕业季模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147718706.jpg"><img src="templates/graduation/gen-1784147718706.jpg" alt="毕业季模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147761489.jpg"><img src="templates/graduation/gen-1784147761489.jpg" alt="毕业季模板" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="templates/graduation/gen-1784147824964.jpg"><img src="templates/graduation/gen-1784147824964.jpg" alt="毕业季模板" loading="lazy" /></button>
             </div>
 
           </div>
         </div>
+      </div>
+
+      <div class="wall-cta blur-fade">
+        <a class="btn-write" href="https://xhslink.com/m/101Dl9hMgH" target="_blank" rel="noopener">↗ 去小红书主页看完整作品</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       07 · Life Fragments · 生活碎片
+       —— 同 wall 的 3D Marquee 组件
+  ══════════════════════════════════════════ -->
+  <section id="life" class="section">
+    <div class="container">
+      <header class="section-head blur-fade">
+        <div class="section-head__meta"><span class="no">07</span><span>Life Fragments</span></div>
+        <h2 class="section-title">生活碎片 · <em>三地散记</em></h2>
+        <p class="section-lead">
+          手机 &amp; 相机随手拍的日常图集：<b>墨尔本 / 香港 / 新西兰</b>。
+          做图像工具产品的人，日常先自己成为一个爱拍的人。
+        </p>
+      </header>
+
+      <ul class="creations-note blur-fade">
+        <li><b>Melbourne</b> · 15 张 · 街景 &amp; 光影</li>
+        <li><b>Hong Kong</b> · 4 张 · 城市速写</li>
+        <li><b>New Zealand</b> · 8 张 · 自然与旅途</li>
+        <li><b>视角</b> · 真实感优先 · 不追大片</li>
+      </ul>
+
+      <div class="marquee-wrap blur-fade">
+        <div class="marquee-stage">
+          <div class="marquee-grid">
+
+            <div class="marquee-col marquee-col--down">
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/06f492e38ef1b49a0c13ce00c699ad.JPG"><img src="gallery/life/melbourne/06f492e38ef1b49a0c13ce00c699ad.JPG" alt="Melbourne" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/hong-kong/1040g3g8323p01ef07006jul2ot9hcfi55114f6o.jpeg"><img src="gallery/life/hong-kong/1040g3g8323p01ef07006jul2ot9hcfi55114f6o.jpeg" alt="Hong Kong" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/new-zealand/1040g3g8323p01ef0701mjul2ot9hcfi5v2424b8.jpeg"><img src="gallery/life/new-zealand/1040g3g8323p01ef0701mjul2ot9hcfi5v2424b8.jpeg" alt="New Zealand" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/1040g3g8323p01ef0705mjul2ot9hcfi51najek0.jpeg"><img src="gallery/life/melbourne/1040g3g8323p01ef0705mjul2ot9hcfi51najek0.jpeg" alt="Melbourne" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/hong-kong/1040g3g8323p01ef0700mjul2ot9hcfi5k68eemg.jpeg"><img src="gallery/life/hong-kong/1040g3g8323p01ef0700mjul2ot9hcfi5k68eemg.jpeg" alt="Hong Kong" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/1040g3g8323p01ef07066jul2ot9hcfi5r2n3ago.jpeg"><img src="gallery/life/melbourne/1040g3g8323p01ef07066jul2ot9hcfi5r2n3ago.jpeg" alt="Melbourne" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/new-zealand/1040g3g8323p01ef07026jul2ot9hcfi5h5je9kg.jpeg"><img src="gallery/life/new-zealand/1040g3g8323p01ef07026jul2ot9hcfi5h5je9kg.jpeg" alt="New Zealand" loading="lazy" /></button>
+            </div>
+
+            <div class="marquee-col marquee-col--up">
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/1040g3g8323p01ef0706mjul2ot9hcfi5agbffgg.jpeg"><img src="gallery/life/melbourne/1040g3g8323p01ef0706mjul2ot9hcfi5agbffgg.jpeg" alt="Melbourne" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/new-zealand/1040g3g8323p01ef0702mjul2ot9hcfi5ff4pv90.jpeg"><img src="gallery/life/new-zealand/1040g3g8323p01ef0702mjul2ot9hcfi5ff4pv90.jpeg" alt="New Zealand" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/1040g3g8323p01ef0gm0mjul2ot9hcfi5ci70ao0.jpeg"><img src="gallery/life/melbourne/1040g3g8323p01ef0gm0mjul2ot9hcfi5ci70ao0.jpeg" alt="Melbourne" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/hong-kong/1040g3g8323p01ef07016jul2ot9hcfi5slafbj8.jpeg"><img src="gallery/life/hong-kong/1040g3g8323p01ef07016jul2ot9hcfi5slafbj8.jpeg" alt="Hong Kong" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/1040g3g8323p01ef0gm16jul2ot9hcfi5oi0fao8.jpeg"><img src="gallery/life/melbourne/1040g3g8323p01ef0gm16jul2ot9hcfi5oi0fao8.jpeg" alt="Melbourne" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/new-zealand/1040g3g8323p01ef07036jul2ot9hcfi5cebv3l8.jpeg"><img src="gallery/life/new-zealand/1040g3g8323p01ef07036jul2ot9hcfi5cebv3l8.jpeg" alt="New Zealand" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/1040g3g8323p01ef0gm1mjul2ot9hcfi5rhsp26o.jpeg"><img src="gallery/life/melbourne/1040g3g8323p01ef0gm1mjul2ot9hcfi5rhsp26o.jpeg" alt="Melbourne" loading="lazy" /></button>
+            </div>
+
+            <div class="marquee-col marquee-col--down">
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/1040g3g8323p01ef0gm26jul2ot9hcfi57cql8p0.jpeg"><img src="gallery/life/melbourne/1040g3g8323p01ef0gm26jul2ot9hcfi57cql8p0.jpeg" alt="Melbourne" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/hong-kong/1040g3g8323p01ef0gm2mjul2ot9hcfi5htsroj0.jpeg"><img src="gallery/life/hong-kong/1040g3g8323p01ef0gm2mjul2ot9hcfi5htsroj0.jpeg" alt="Hong Kong" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/59775d22728796b15b3288d9ccd701.JPG"><img src="gallery/life/melbourne/59775d22728796b15b3288d9ccd701.JPG" alt="Melbourne" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/new-zealand/1040g3g8323p01ef0703mjul2ot9hcfi5gjgviq8.jpeg"><img src="gallery/life/new-zealand/1040g3g8323p01ef0703mjul2ot9hcfi5gjgviq8.jpeg" alt="New Zealand" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/68e957ddeeb6d2f7af1250c6eae73c.JPG"><img src="gallery/life/melbourne/68e957ddeeb6d2f7af1250c6eae73c.JPG" alt="Melbourne" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/8909d353a62f30d85e3a123660b74e.JPG"><img src="gallery/life/melbourne/8909d353a62f30d85e3a123660b74e.JPG" alt="Melbourne" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/new-zealand/1040g3g8323p01ef07046jul2ot9hcfi5pkgqceo.jpeg"><img src="gallery/life/new-zealand/1040g3g8323p01ef07046jul2ot9hcfi5pkgqceo.jpeg" alt="New Zealand" loading="lazy" /></button>
+            </div>
+
+            <div class="marquee-col marquee-col--up">
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/a71d8d44ac7a63db7c86a42671c61c.JPG"><img src="gallery/life/melbourne/a71d8d44ac7a63db7c86a42671c61c.JPG" alt="Melbourne" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/new-zealand/1040g3g8323p01ef0704mjul2ot9hcfi5ngt28g0.jpeg"><img src="gallery/life/new-zealand/1040g3g8323p01ef0704mjul2ot9hcfi5ngt28g0.jpeg" alt="New Zealand" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/df67a0814eb12ce1a937bf6e9e55ee.JPG"><img src="gallery/life/melbourne/df67a0814eb12ce1a937bf6e9e55ee.JPG" alt="Melbourne" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/IMG_0259.jpg"><img src="gallery/life/melbourne/IMG_0259.jpg" alt="Melbourne" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/new-zealand/1040g3g8323p01ef07056jul2ot9hcfi5caf6328.jpeg"><img src="gallery/life/new-zealand/1040g3g8323p01ef07056jul2ot9hcfi5caf6328.jpeg" alt="New Zealand" loading="lazy" /></button>
+              <button class="media-item marquee-cell" type="button" data-media-type="image" data-media-src="gallery/life/melbourne/IMG_0263.JPG"><img src="gallery/life/melbourne/IMG_0263.JPG" alt="Melbourne" loading="lazy" /></button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       08 · Photography · 摄影作品 · Aceternity 3D Card
+  ══════════════════════════════════════════ -->
+  <section id="photos" class="section section--soft">
+    <div class="container">
+      <header class="section-head blur-fade">
+        <div class="section-head__meta"><span class="no">08</span><span>Photography</span></div>
+        <h2 class="section-title">摄影作品 · <em>拼贴与人像</em></h2>
+        <p class="section-lead">
+          #弗兰肯斯坦 拼贴系列 + 其他人像作品。<b>hover 卡片，图像会浮起。</b> 点击任一张放大查看。
+        </p>
+      </header>
+
+      <ul class="creations-note blur-fade">
+        <li><b>#弗兰肯斯坦</b> · 8 张 · 主视觉</li>
+        <li><b>拼贴过程</b> · 4 张 · 幕后</li>
+        <li><b>其他人像</b> · 5 张 · 摄影 + 后期</li>
+        <li><b>主题</b> · 人造人 / 自然人的边界</li>
+      </ul>
+
+      <div class="cards3d-grid blur-fade">
+
+        <!-- 弗兰肯斯坦系列 8 张 -->
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">#弗兰肯斯坦 · 01</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">主视觉 · 628</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">100% 拼贴 · 人造人 / 自然人</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/frankenstein/628.JPG"><img src="gallery/photography/frankenstein/628.JPG" alt="#弗兰肯斯坦 · 628" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">01 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/frankenstein/628.JPG">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">#弗兰肯斯坦 · 02</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">副视觉 · 629</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">对话 / 光影</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/frankenstein/629.JPG"><img src="gallery/photography/frankenstein/629.JPG" alt="#弗兰肯斯坦 · 629" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">02 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/frankenstein/629.JPG">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">#弗兰肯斯坦 · 03</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">情绪 · 630</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">凝视 · 静默</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/frankenstein/630.JPG"><img src="gallery/photography/frankenstein/630.JPG" alt="#弗兰肯斯坦 · 630" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">03 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/frankenstein/630.JPG">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">#弗兰肯斯坦 · 04</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">构图 · 631</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">主体 / 层次 / 留白</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/frankenstein/631.JPG"><img src="gallery/photography/frankenstein/631.JPG" alt="#弗兰肯斯坦 · 631" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">04 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/frankenstein/631.JPG">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">#弗兰肯斯坦 · 05</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">质感 · 632</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">细节 / 后期</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/frankenstein/632.JPG"><img src="gallery/photography/frankenstein/632.JPG" alt="#弗兰肯斯坦 · 632" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">05 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/frankenstein/632.JPG">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">#弗兰肯斯坦 · 06</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">收束 · 634</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">结尾画面</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/frankenstein/634.JPG"><img src="gallery/photography/frankenstein/634.JPG" alt="#弗兰肯斯坦 · 634" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">06 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/frankenstein/634.JPG">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">#弗兰肯斯坦 · 07</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">未收录 · 0867</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">拼贴 · 另一版本</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/frankenstein/IMG_0867.jpg"><img src="gallery/photography/frankenstein/IMG_0867.jpg" alt="#弗兰肯斯坦 · IMG_0867" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">07 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/frankenstein/IMG_0867.jpg">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">#弗兰肯斯坦 · 08</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">场景 · 2264</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">环境 / 氛围</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/frankenstein/IMG_2264.jpg"><img src="gallery/photography/frankenstein/IMG_2264.jpg" alt="#弗兰肯斯坦 · IMG_2264" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">08 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/frankenstein/IMG_2264.jpg">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 拼贴过程 4 张 -->
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">拼贴过程 · 01</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">拼贴 · 2260</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">手动拼贴 · 素材层</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/frankenstein/collage/IMG_2260.JPG"><img src="gallery/photography/frankenstein/collage/IMG_2260.JPG" alt="拼贴过程 · IMG_2260" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">09 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/frankenstein/collage/IMG_2260.JPG">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">拼贴过程 · 02</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">拼贴 · 2258</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">工作台 · 剪影</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/frankenstein/collage/IMG_2258.jpg"><img src="gallery/photography/frankenstein/collage/IMG_2258.jpg" alt="拼贴过程 · IMG_2258" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">10 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/frankenstein/collage/IMG_2258.jpg">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">拼贴过程 · 03</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">拼贴 · 2259</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">素材 · 组合</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/frankenstein/collage/IMG_2259.jpg"><img src="gallery/photography/frankenstein/collage/IMG_2259.jpg" alt="拼贴过程 · IMG_2259" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">11 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/frankenstein/collage/IMG_2259.jpg">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">拼贴过程 · 04</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">拼贴 · 2268</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">收尾 · 定稿</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/frankenstein/collage/IMG_2268.jpg"><img src="gallery/photography/frankenstein/collage/IMG_2268.jpg" alt="拼贴过程 · IMG_2268" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">12 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/frankenstein/collage/IMG_2268.jpg">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 其他人像 5 张 -->
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">人物 · 01</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">肖像 · 647</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">摄影 &amp; 后期</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/portraits/647.JPG"><img src="gallery/photography/portraits/647.JPG" alt="肖像 · 647" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">13 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/portraits/647.JPG">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">人物 · 02</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">肖像 · 2413</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">自然光 / 情绪</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/portraits/IMG_2413.JPG"><img src="gallery/photography/portraits/IMG_2413.JPG" alt="肖像 · 2413" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">14 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/portraits/IMG_2413.JPG">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">人物 · 03</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">肖像 · 2414</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">环境 / 人物关系</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/portraits/IMG_2414.JPG"><img src="gallery/photography/portraits/IMG_2414.JPG" alt="肖像 · 2414" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">15 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/portraits/IMG_2414.JPG">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">人物 · 04</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">肖像 · 2416</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">质感 / 静物感</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/portraits/IMG_2416.JPG"><img src="gallery/photography/portraits/IMG_2416.JPG" alt="肖像 · 2416" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">16 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/portraits/IMG_2416.JPG">放大 →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card3d-container">
+          <div class="card3d-body">
+            <div class="card3d-item" data-tz="20"><span class="card3d-tag">#锈湖</span></div>
+            <h3 class="card3d-item card3d-title" data-tz="50">拼贴 · 锈湖</h3>
+            <p class="card3d-item card3d-desc" data-tz="60">90% 拼贴 + 10% AI</p>
+            <div class="card3d-item card3d-image" data-tz="100">
+              <button class="media-item card3d-imgbtn" type="button" data-media-type="image" data-media-src="gallery/photography/portraits/rusty-lake-1.jpg"><img src="gallery/photography/portraits/rusty-lake-1.jpg" alt="#锈湖" loading="lazy" /></button>
+            </div>
+            <div class="card3d-foot">
+              <span class="card3d-item card3d-index" data-tz="20">17 / 17</span>
+              <button type="button" class="card3d-item card3d-btn media-item" data-tz="20" data-media-type="image" data-media-src="gallery/photography/portraits/rusty-lake-1.jpg">放大 →</button>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="wall-cta blur-fade">

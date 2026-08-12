@@ -1,14 +1,17 @@
 /* ═══════════════════════════════════════════════════════════
    Mia World · 交互脚本
+   - Loader（Boxes 网格 · Preparing for Future → Start）
    - 主题切换
    - Floating Dock 磁吸放大 + 当前区块高亮（Aceternity）
    - BlurFade 入场
-   - ASCII Art 生成（avatar.png → canvas 采样 → pre 字符）
+   - Draggable Cards · Hero 右栏（Aceternity）
    - 3D Card Effect · hover tilt（Aceternity）
+   - 3D Card Effect · Photography 摄影作品（Aceternity）
    - Expandable Card 开合（Aceternity）
-   - Draggable Card 拖拽（Aceternity）
    - Book Slider 3D 翻页透视（Artspace）
-   - FAQ / Wall / Drawer / Lightbox
+   - Container Scroll · 03/04/06 章节包裹（Aceternity）
+   - 3D Marquee · 内容墙 & 生活碎片（Aceternity）
+   - FAQ / Timeline Drawer / Lightbox / 键盘
 ═══════════════════════════════════════════════════════════ */
 
 'use strict';
@@ -17,6 +20,129 @@ const $  = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 const isTouch = () => matchMedia('(hover: none)').matches;
+
+/* ─────────────────────────────────────────
+   0. Loader · Aceternity Boxes 网格 + START 拼字
+   - 全屏覆盖；hover 网格 → 随机变色
+   - 加载完成后：文字变成用彩色方块拼出的 START
+   - 点击 START 后淡出，进入个人页面
+─────────────────────────────────────────── */
+(function initLoader() {
+  const loader = document.getElementById('page-loader');
+  if (!loader) return;
+  const boxesRoot = document.getElementById('loader-boxes');
+  const hintEl = document.getElementById('loader-hint');
+  const startBtn = document.getElementById('loader-start');
+  const pixelsEl = document.getElementById('loader-pixels');
+
+  const COLORS = [
+    'rgb(125, 211, 252)', 'rgb(249, 168, 212)', 'rgb(134, 239, 172)',
+    'rgb(253, 224, 71)',  'rgb(252, 165, 165)', 'rgb(216, 180, 254)',
+    'rgb(147, 197, 253)', 'rgb(165, 180, 252)', 'rgb(196, 181, 253)'
+  ];
+  const rand = () => COLORS[Math.floor(Math.random() * COLORS.length)];
+
+  // 加载期间禁止背景滚动
+  document.body.style.overflow = 'hidden';
+
+  /* ---- 1. 生成 Boxes 网格（40 列 × 20 行）---- */
+  const COLS = 40, ROWS = 20;
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < COLS; i++) {
+    const col = document.createElement('div');
+    col.className = 'loader__col';
+    for (let j = 0; j < ROWS; j++) {
+      const cell = document.createElement('div');
+      cell.className = 'loader__cell';
+      if (i % 2 === 0 && j % 2 === 0) cell.classList.add('has-plus');
+      col.appendChild(cell);
+    }
+    frag.appendChild(col);
+  }
+  boxesRoot.appendChild(frag);
+
+  /* ---- 2. hover / 触摸 → 单格随机变色 ---- */
+  const paintCell = (target) => {
+    const cell = target.closest && target.closest('.loader__cell');
+    if (!cell) return;
+    cell.style.setProperty('--rand', rand());
+    cell.style.backgroundColor = rand();
+  };
+  boxesRoot.addEventListener('mouseover', (e) => paintCell(e.target));
+  boxesRoot.addEventListener('touchstart', (e) => paintCell(e.target), { passive: true });
+
+  /* ---- 3. START 5×5 像素字模 ---- */
+  const LETTERS = {
+    S: ['01110', '10000', '01110', '00001', '01110'],
+    T: ['11111', '00100', '00100', '00100', '00100'],
+    A: ['01110', '10001', '11111', '10001', '10001'],
+    R: ['11110', '10001', '11110', '10010', '10001'],
+  };
+  const WORD = ['S', 'T', 'A', 'R', 'T'];
+  const PAT_ROWS = 5;
+  const PAT_COLS = WORD.length * 5 + (WORD.length - 1); // 5 letters × 5 + 4 gaps = 29
+
+  // 先构建 5 行 × 29 列的暗色像素点阵（初始不亮）
+  const pixels = [];
+  for (let r = 0; r < PAT_ROWS; r++) {
+    const rowEl = document.createElement('div');
+    rowEl.className = 'loader__pixel-row';
+    const rowArr = [];
+    for (let c = 0; c < PAT_COLS; c++) {
+      const p = document.createElement('div');
+      p.className = 'loader__pixel';
+      rowEl.appendChild(p);
+      rowArr.push(p);
+    }
+    pixels.push(rowArr);
+    pixelsEl.appendChild(rowEl);
+  }
+
+  // 逐字母、逐格 stagger 点亮，视觉上像"方块拼出" START
+  function lightStart() {
+    WORD.forEach((letter, wordIdx) => {
+      const startCol = wordIdx * 6; // 5 列字宽 + 1 列间距
+      const glyph = LETTERS[letter];
+      for (let r = 0; r < 5; r++) {
+        for (let c = 0; c < 5; c++) {
+          if (glyph[r][c] !== '1') continue;
+          const px = pixels[r][startCol + c];
+          const color = rand();
+          const delay = wordIdx * 140 + (r * 5 + c) * 14;
+          setTimeout(() => {
+            px.style.setProperty('--lit', color);
+            px.classList.add('is-lit');
+          }, delay);
+        }
+      }
+    });
+  }
+
+  /* ---- 4. 加载完成流程 ---- */
+  function onReady() {
+    // 稍等一小段，让 "Preparing for Future" 有存在感
+    setTimeout(() => {
+      hintEl.hidden = true;
+      startBtn.hidden = false;
+      lightStart();
+    }, 900);
+  }
+
+  function hideLoader() {
+    loader.classList.add('is-hiding');
+    document.body.style.overflow = '';
+    // 一次性移除，释放 DOM
+    setTimeout(() => loader.remove(), 750);
+  }
+
+  startBtn.addEventListener('click', hideLoader);
+
+  if (document.readyState === 'complete') {
+    onReady();
+  } else {
+    window.addEventListener('load', onReady, { once: true });
+  }
+})();
 
 /* ─────────────────────────────────────────
    1. 主题切换
@@ -70,7 +196,7 @@ const isTouch = () => matchMedia('(hover: none)').matches;
   // 当前区块高亮
   const navLinks = $$('.fdock__item[data-nav]', dock);
   const map = new Map(navLinks.map(a => [a.dataset.nav, a]));
-  const sections = ['hero','about','experience','portfolio','faq','wall','updates']
+  const sections = ['hero','about','experience','portfolio','faq','wall','life','photos','updates']
     .map(id => document.getElementById(id))
     .filter(Boolean);
 
@@ -107,49 +233,104 @@ const isTouch = () => matchMedia('(hover: none)').matches;
 })();
 
 /* ─────────────────────────────────────────
-   4. ASCII Art（avatar.png → 字符墙）
+   4. Aceternity · Draggable Cards（Hero 右栏 · 生活碎片图卡）
+   - 每张卡片可鼠标 / 触屏拖拽
+   - 拖动时按水平速度轻微 tilt
+   - 释放后回弹到基准 rotation（位置保留）
 ───────────────────────────────────────── */
-(function initAscii() {
-  const target = $('#ascii-art');
-  if (!target) return;
+(function initDraggableCards() {
+  const container = $('#draggable-cards');
+  if (!container) return;
+  const cards = $$('.draggable-card', container);
+  if (!cards.length) return;
 
-  const CHARS = ' .`\',:;-~+*=%#$@';
-  const cols = 90;
+  cards.forEach((card) => {
+    const baseRot = parseFloat(card.dataset.rot || '0');
+    const initX = card.dataset.initX || '0%';
+    const initY = card.dataset.initY || '0%';
+    // 以像素为单位的当前拖拽偏移（相对于初始 CSS 位置）
+    let dx = 0, dy = 0;
+    let dragging = false;
+    let ptrStartX = 0, ptrStartY = 0;
+    let originDx = 0, originDy = 0;
+    let lastPtrX = 0, lastMoveTime = 0;
+    let velX = 0;
+    let topZ = 20;
 
-  const img = new Image();
-  img.src = 'avatar.png';
-  img.decoding = 'async';
-
-  img.onload = () => {
-    const aspect = img.width / img.height;
-    // 字符长宽比约 0.5 → 行数 = cols / aspect * 0.5
-    const rows = Math.max(20, Math.round(cols / aspect * 0.5));
-    const cv = document.createElement('canvas');
-    cv.width = cols; cv.height = rows;
-    const ctx = cv.getContext('2d');
-    ctx.drawImage(img, 0, 0, cols, rows);
-    let data;
-    try { data = ctx.getImageData(0, 0, cols, rows).data; }
-    catch (_) { return; }
-
-    let out = '';
-    for (let y = 0; y < rows; y++) {
-      for (let x = 0; x < cols; x++) {
-        const i = (y * cols + x) * 4;
-        const r = data[i], g = data[i+1], b = data[i+2], a = data[i+3];
-        // 亮度（Rec.601）
-        let bright = 0.299 * r + 0.587 * g + 0.114 * b;
-        // 透明像素当作背景
-        if (a < 30) bright = 255;
-        // 亮 → 稀疏；暗 → 密集
-        const idx = Math.floor(((255 - bright) / 255) * (CHARS.length - 1));
-        out += CHARS[clamp(idx, 0, CHARS.length - 1)];
-      }
-      out += '\n';
+    function paint(rot) {
+      // 关键顺序：先 translate(-50%,-50%) 让卡片中心对齐 (top:50%, left:50%)
+      // 再叠加：初始偏移(init-x, init-y) + 拖拽偏移(dx, dy) + 旋转
+      card.style.transform =
+        `translate(-50%, -50%) ` +
+        `translate(${initX}, ${initY}) ` +
+        `translate(${dx}px, ${dy}px) ` +
+        `rotate(${rot}deg)`;
     }
-    target.textContent = out;
-  };
-  img.onerror = () => { target.textContent = ''; };
+
+    function onDown(e) {
+      const pt = e.touches ? e.touches[0] : e;
+      dragging = true;
+      ptrStartX = pt.clientX;
+      ptrStartY = pt.clientY;
+      originDx = dx;
+      originDy = dy;
+      lastPtrX = pt.clientX;
+      lastMoveTime = performance.now();
+      velX = 0;
+      // 提升到最上层
+      topZ += 1;
+      card.style.zIndex = String(topZ);
+      card.classList.add('is-dragging');
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseup', onUp);
+      window.addEventListener('touchmove', onMove, { passive: false });
+      window.addEventListener('touchend', onUp);
+      window.addEventListener('touchcancel', onUp);
+      e.preventDefault();
+    }
+
+    function onMove(e) {
+      if (!dragging) return;
+      const pt = e.touches ? e.touches[0] : e;
+      dx = originDx + (pt.clientX - ptrStartX);
+      dy = originDy + (pt.clientY - ptrStartY);
+      // 计算水平方向瞬时速度（决定 tilt 大小）
+      const now = performance.now();
+      const dt = Math.max(1, now - lastMoveTime);
+      velX = ((pt.clientX - lastPtrX) / dt) * 16; // px/frame
+      lastPtrX = pt.clientX;
+      lastMoveTime = now;
+      const dragRot = baseRot + clamp(velX * 0.6, -12, 12);
+      paint(dragRot);
+      if (e.cancelable) e.preventDefault();
+    }
+
+    function onUp() {
+      if (!dragging) return;
+      dragging = false;
+      card.classList.remove('is-dragging');
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+      window.removeEventListener('touchmove', onMove);
+      window.removeEventListener('touchend', onUp);
+      window.removeEventListener('touchcancel', onUp);
+      // 回弹 rotation（位置保留），弹性缓动
+      card.style.transition = 'transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      paint(baseRot);
+      const clear = () => {
+        card.style.transition = '';
+        card.removeEventListener('transitionend', clear);
+      };
+      card.addEventListener('transitionend', clear);
+    }
+
+    card.addEventListener('mousedown', onDown);
+    card.addEventListener('touchstart', onDown, { passive: false });
+    // 阻止 <img> 原生拖拽（避免出现幽灵图）
+    $$('img', card).forEach(img => {
+      img.addEventListener('dragstart', (e) => e.preventDefault());
+    });
+  });
 })();
 
 /* ─────────────────────────────────────────
@@ -179,6 +360,53 @@ const isTouch = () => matchMedia('(hover: none)').matches;
       cancelAnimationFrame(raf);
       card.classList.remove('is-tilting');
       card.style.transform = '';
+    });
+  });
+})();
+
+/* ─────────────────────────────────────────
+   5.5 Aceternity · 3D Card Effect（Photography 摄影作品）
+   - .card3d-container 追踪鼠标 → 给 .card3d-body 设置 --r3d-x/--r3d-y
+   - 内部 .card3d-item 按 data-tz 设置 --tz，hover 时拉开层次
+─────────────────────────────────────────── */
+(function init3dCards() {
+  const cards = $$('.card3d-container');
+  if (!cards.length) return;
+
+  // 先给内部 item 写入 --tz 变量（CSS 里会在 hover 时读取）
+  cards.forEach(container => {
+    $$('.card3d-item', container).forEach(item => {
+      const tz = item.dataset.tz;
+      if (tz) item.style.setProperty('--tz', `${parseFloat(tz)}px`);
+    });
+  });
+
+  // 触屏设备不做鼠标追踪
+  if (isTouch()) return;
+
+  const ROT_MAX = 10; // 最大旋转角度
+  cards.forEach(container => {
+    const body = container.querySelector('.card3d-body');
+    if (!body) return;
+    let raf = 0;
+
+    container.addEventListener('mousemove', (e) => {
+      const rect = container.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;   // 0..1
+      const y = (e.clientY - rect.top)  / rect.height;  // 0..1
+      const rotateX = (0.5 - y) * ROT_MAX * 2;   // -ROT_MAX .. ROT_MAX
+      const rotateY = (x - 0.5) * ROT_MAX * 2;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        body.style.setProperty('--r3d-x', `${rotateX.toFixed(2)}deg`);
+        body.style.setProperty('--r3d-y', `${rotateY.toFixed(2)}deg`);
+      });
+    });
+
+    container.addEventListener('mouseleave', () => {
+      cancelAnimationFrame(raf);
+      body.style.setProperty('--r3d-x', '0deg');
+      body.style.setProperty('--r3d-y', '0deg');
     });
   });
 })();
@@ -489,9 +717,11 @@ let lbType  = 'image';
 let lbIndex = 0;
 
 function buildMediaList(scopeEl, type) {
-  return $$('.media-item', scopeEl)
+  const srcs = $$('.media-item', scopeEl)
     .filter(i => (i.dataset.mediaType === 'video' ? 'video' : 'image') === type)
     .map(i => i.dataset.mediaSrc);
+  // 同一 scope 内同 src 去重（例如摄影 3D 卡里图 + 放大按钮共享 src）
+  return Array.from(new Set(srcs));
 }
 function fileNameFromSrc(src) {
   try { return decodeURIComponent(src.split('/').pop()); }
@@ -522,7 +752,7 @@ function renderLightbox() {
 }
 function openLightbox(item) {
   lbType = (item.dataset.mediaType === 'video') ? 'video' : 'image';
-  const scope = item.closest('.exp-modal, .marquee-wrap, .msg-card') || document;
+  const scope = item.closest('.exp-modal, .marquee-wrap, .msg-card, .cards3d-grid') || document;
   lbList = buildMediaList(scope, lbType);
   lbIndex = Math.max(0, lbList.indexOf(item.dataset.mediaSrc));
   renderLightbox();
@@ -555,25 +785,6 @@ if (lightboxNext) lightboxNext.addEventListener('click', () => stepLightbox(1));
 if (lightbox) {
   lightbox.addEventListener('click', (e) => {
     if (e.target.closest('[data-lightbox-close]')) closeLightbox();
-  });
-}
-
-/* 头像点击 → 灯箱 */
-const heroAvatar = $('.hero__avatar');
-const heroAvatarImg = heroAvatar?.querySelector('img');
-if (heroAvatar && heroAvatarImg) {
-  heroAvatar.addEventListener('click', (e) => {
-    // 让它继续跳到 #about，但也可选择放大
-    // 这里选择：按住 Alt/Shift 时才放大；普通点击跳链接
-    if (!(e.altKey || e.shiftKey)) return;
-    e.preventDefault();
-    lbType = 'image';
-    lbList = [heroAvatarImg.getAttribute('src')];
-    lbIndex = 0;
-    renderLightbox();
-    lightbox.classList.add('open');
-    lightbox.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
   });
 }
 
