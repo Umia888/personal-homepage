@@ -249,6 +249,11 @@ const isTouch = () => matchMedia('(hover: none)').matches;
   const cards = $$('.draggable-card', container);
   if (!cards.length) return;
 
+  // 追踪已被"拖走"的卡片数量：一张卡累积位移超过阈值即视为已拖走
+  const CLEARED_THRESHOLD = 120; // px
+  let clearedCount = 0;
+  const total = cards.length;
+
   cards.forEach((card) => {
     const baseRot = parseFloat(card.dataset.rot || '0');
     const initX = card.dataset.initX || '0%';
@@ -327,6 +332,18 @@ const isTouch = () => matchMedia('(hover: none)').matches;
         card.removeEventListener('transitionend', clear);
       };
       card.addEventListener('transitionend', clear);
+
+      // 判定：本卡是否已被"拖走"（累积位移超过阈值）
+      if (!card.dataset.cleared) {
+        const dist = Math.hypot(dx, dy);
+        if (dist > CLEARED_THRESHOLD) {
+          card.dataset.cleared = '1';
+          clearedCount++;
+          if (clearedCount >= total) {
+            container.classList.add('all-cleared');
+          }
+        }
+      }
     }
 
     card.addEventListener('mousedown', onDown);

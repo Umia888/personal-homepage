@@ -423,6 +423,7 @@ html.dark .hero__grid {
   user-select: none;
   z-index: 0;
   line-height: 1.1;
+  transition: color 0.35s ease;
 }
 .draggable-cards__hint em {
   display: block;
@@ -432,9 +433,36 @@ html.dark .hero__grid {
   font-size: clamp(12px, 1.1vw, 14px);
   letter-spacing: 0.16em;
   color: rgba(0, 0, 0, 0.10);
+  transition: color 0.35s ease;
 }
 html.dark .draggable-cards__hint { color: rgba(255, 255, 255, 0.06); }
 html.dark .draggable-cards__hint em { color: rgba(255, 255, 255, 0.08); }
+
+/* 双状态：默认显示"拖我"；all-cleared 时切换到"更多"链接 */
+.draggable-cards__hint-state { display: none; }
+.draggable-cards__hint-state[data-state="initial"] { display: inline-block; }
+.draggable-cards.all-cleared .draggable-cards__hint-state[data-state="initial"] { display: none; }
+.draggable-cards.all-cleared .draggable-cards__hint-state[data-state="more"] {
+  display: inline-block;
+  pointer-events: auto;
+  position: relative;
+  z-index: 20;
+  color: rgba(0, 0, 0, 0.55);
+  text-decoration: none;
+  cursor: pointer;
+  animation: hintReveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.draggable-cards__hint-state[data-state="more"] em { color: rgba(0, 0, 0, 0.35); }
+.draggable-cards.all-cleared .draggable-cards__hint-state[data-state="more"]:hover { color: var(--accent); transform: scale(1.04); }
+.draggable-cards.all-cleared .draggable-cards__hint-state[data-state="more"]:hover em { color: var(--accent); }
+html.dark .draggable-cards.all-cleared .draggable-cards__hint-state[data-state="more"] { color: rgba(255, 255, 255, 0.7); }
+html.dark .draggable-cards__hint-state[data-state="more"] em { color: rgba(255, 255, 255, 0.45); }
+
+@keyframes hintReveal {
+  from { opacity: 0; transform: translateY(6px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
 
 .draggable-card {
   position: absolute;
